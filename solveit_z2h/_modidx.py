@@ -5,4 +5,6 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://Rahuketu86.github.io',
                 'git_url': 'https://github.com/Rahuketu86/solveit_z2h',
                 'lib_path': 'solveit_z2h'},
-  'syms': {'solveit_z2h.core': {'solveit_z2h.core.foo': ('core.html#foo', 'solveit_z2h/core.py')}}}
+  'syms': { 'solveit_z2h.core': { 'solveit_z2h.core.foo': ('core.html#foo', 'solveit_z2h/core.py'),
+                                  'solveit_z2h.core.hello': ('core.html#hello', 'solveit_z2h/core.py')},
+            'solveit_z2h.micrograd': {}}}
