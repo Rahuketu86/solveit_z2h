@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "solveit_z2h"
+  site-url: "https://Rahuketu86.github.io/solveit_z2h"
+  description: "Zero to hero course done using solveit"
+  repo-branch: main
+  repo-url: "https://github.com/Rahuketu86/solveit_z2h"
