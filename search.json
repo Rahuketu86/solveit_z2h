@@ -1,0 +1,52 @@
+[
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nfoo\n\n foo ()\n\n\nsource\n\n\nhello\n\n hello (name)\n\n\nhello(\"Rahul Saraf\")\n\n'Helloss Rahul Saraf'\n\n\nHow to setup a github token in solveit\n\n🤖Reply🤖\nTo set up a GitHub token in solveit, you’ll need to store it as an environment variable. Here’s how:\nYou can set it in your code using:\nimport os\nos.environ['GITHUB_TOKEN'] = 'your_token_here'\nHowever, for security reasons, you probably don’t want to hardcode your token directly in the notebook.\nDo you already have a GitHub personal access token created, or do you need help creating one first?\nHow to change github remote url from http to ssh\n\n\n🤖Reply🤖\nTo change your GitHub remote URL from HTTPS to SSH, you’ll use the git remote set-url command.\nFirst, you can check your current remote URL:\n!git remote -v\nThen, to change it to SSH, you’ll need to know your repository’s SSH URL (which looks like git@github.com:username/repo.git).\nWould you like me to show you the command to change it, or do you already know your SSH URL and want to try it yourself first?\nShow me entire command\n\n\n🤖Reply🤖\nHere’s the command:\n!git remote set-url origin git@github.com:username/repo.git\nReplace username with your GitHub username and repo with your repository name.\nIf your remote is named something other than origin, replace that too.",
+    "crumbs": [
+      "core"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "solveit_z2h",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "solveit_z2h"
+    ]
+  },
+  {
+    "objectID": "index.html#developer-guide",
+    "href": "index.html#developer-guide",
+    "title": "solveit_z2h",
+    "section": "Developer Guide",
+    "text": "Developer Guide\nIf you are new to using nbdev here are some useful pointers to get you started.\n\nInstall solveit_z2h in Development mode\n# make sure solveit_z2h package is installed in development mode\n$ pip install -e .\n\n# make changes under nbs/ directory\n# ...\n\n# compile to have changes apply to solveit_z2h\n$ nbdev_prepare",
+    "crumbs": [
+      "solveit_z2h"
+    ]
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "solveit_z2h",
+    "section": "Usage",
+    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/Rahuketu86/solveit_z2h.git\nor from conda\n$ conda install -c Rahuketu86 solveit_z2h\nor from pypi\n$ pip install solveit_z2h\n\n\nDocumentation\nDocumentation can be found hosted on this GitHub repository’s pages. Additionally you can find package manager specific guidelines on conda and pypi respectively.",
+    "crumbs": [
+      "solveit_z2h"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "solveit_z2h",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2",
+    "crumbs": [
+      "solveit_z2h"
+    ]
+  }
+]
