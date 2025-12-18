@@ -1,0 +1,218 @@
+# 🧠 Comprehensive Mind‑Map of the “Makemore” Lecture  
+
+*(All points are derived from the transcript.  The hierarchy reflects the logical flow of ideas, concepts, and implementation details.)*  
+
+---  
+
+## 1️⃣ Introduction & Recap  
+- **Previous lecture**  
+  - Implemented a **bigram language model**  
+    - Count‑based version → normalized to probabilities (rows sum to 1)  
+    - Simple neural net with a **single linear layer**  
+  - **Limitation:** only one previous character → poor “name‑like” predictions  
+
+- **Problem with extending the count table**  
+  - Context length *k* → table size grows **exponentially** (`27^k` for characters)  
+  - Too many rows → insufficient counts → model “explodes”  
+
+---  
+
+## 2️⃣ Moving to a Multi‑Layer Perceptron (MLP)  
+- **Goal:** Predict next character using **multiple previous characters** as context.  
+- **Reference paper:** *Bengio et al., 2003* (word‑level, but ideas transfer).  
+
+### 2.1 Core Idea from the Paper  
+- **Word embeddings:** each word → 30‑dimensional vector (random init, learned).  
+- **Neural net:**  
+  1. **Embedding lookup** → concatenate embeddings of previous *n* words.  
+  2. **Hidden layer** (size = hyper‑parameter).  
+  3. **Linear output layer** → logits for all possible next tokens.  
+  4. **Softmax** → probability distribution.  
+- **Training objective:** Maximize log‑likelihood (same as cross‑entropy).  
+
+### 2.2 Adapting to Characters  
+- Vocabulary = **27 characters** (a‑z + “.”).  
+- Embedding dimension initially **2** (for easy visualization).  
+- Context length (block size) = **3** characters (can be changed).  
+
+---  
+
+## 3️⃣ Implementation Details (PyTorch)  
+
+### 3.1 Data Preparation  
+- **Build dataset** (`x`, `y`):  
+  - `x` = list of *block‑size* integer indices (context).  
+  - `y` = integer index of the next character.  
+  - Pad with zeros for the first *block‑size* positions.  
+- Example (word “emma”):  
+  - Context `[0,0, e] → label m`, `[0, e, m] → label m`, …  
+
+### 3.2 Embedding Lookup (`C`)  
+- `C` shape: **27 × 2** (rows = characters, cols = embedding dim).  
+- Two equivalent ways to embed an index `i`:  
+  1. Direct indexing: `C[i]`.  
+  2. One‑hot → matrix multiplication: `one_hot(i) @ C`.  
+- For a batch `x` (shape `B × 3`): `C[x]` → **B × 3 × 2** tensor.  
+
+### 3.3 Flattening the Context  
+- Need shape **B × (3 × 2) = B × 6** to feed the hidden layer.  
+- **Methods:**  
+  - `torch.cat([c0, c1, c2], dim=1)` (naïve, not generic).  
+  - `torch.unbind(x, dim=1)` → tuple of tensors → `torch.cat(..., dim=1)`.  
+  - **Best:** `C[x].view(B, -1)` (uses `view` → no extra memory).  
+
+### 3.4 Hidden Layer  
+- Weight matrix `W1`: **6 × H** (H = hidden size, e.g., 100).  
+- Bias `b1`: **H**.  
+- Activation: **tanh** (`torch.tanh`).  
+
+### 3.5 Output Layer  
+- Weight matrix `W2`: **H × 27**.  
+- Bias `b2`: **27**.  
+- Logits: `h @ W2 + b2` → shape **B × 27**.  
+
+### 3.6 Loss Computation  
+- **Manual:**  
+  - `logits.exp()` → “counts”.  
+  - Normalize → probabilities.  
+  - Pick probability of true class → `-log(p_true)`.  
+- **Preferred:** `torch.nn.functional.cross_entropy(logits, y)`  
+  - Faster (fused kernels).  
+  - Numerically stable (log‑softmax internally).  
+
+### 3.7 Training Loop (Core Steps)  
+1. Zero grads: `p.grad = None` for each parameter.  
+2. Forward pass → loss.  
+3. `loss.backward()` → gradients.  
+4. Parameter update: `p -= lr * p.grad`.  
+
+### 3.8 Mini‑Batch Training  
+- **Why:** Full dataset (~228 k examples) → too slow.  
+- **How:**  
+  - Sample random indices `ix = torch.randint(0, N, (batch_size,))`.  
+  - Use `x[ix]`, `y[ix]` for each iteration.  
+- **Effect:** Noisy gradient → need more steps, but far faster.  
+
+---  
+
+## 4️⃣ Hyper‑Parameter Exploration  
+
+| Hyper‑parameter | Description | Typical Values (used) |
+|----------------|-------------|----------------------|
+| `block_size`   | Number of previous characters | 3 (tried 4, 5, 10) |
+| `embed_dim`    | Dimensionality of character embeddings | 2 (visual), 10 (better) |
+| `hidden_size`  | Neurons in hidden layer | 100 → 200 → 300 |
+| `lr` (learning rate) | Step size for SGD | 0.1 (good), 0.01 (fine‑tune), 0.001 (slow) |
+| `batch_size`   | Mini‑batch size | 32 (default), can increase |
+| `num_steps`    | Training iterations | 10 k → 200 k (long runs) |
+| `lr_decay`     | Reduce LR after N steps | ×0.1 after 100 k steps |
+
+### 4.1 Learning‑Rate Search (Practical Trick)  
+- Sweep **log‑space**: `lr_exps = torch.linspace(-3, 0, steps=1000)` → `lrs = 10**lr_exps`.  
+- Run a few steps for each LR, record loss → plot **LR vs. loss**.  
+- Choose LR in the “valley” (e.g., `10⁻¹ = 0.1`).  
+
+### 4.2 Over‑/Under‑Fitting Diagnosis  
+- **Training loss ≈ validation loss** → **under‑fitting** (model too small).  
+- **Training loss << validation loss** → **over‑fitting** (model too large).  
+- Adjust hidden size, embed dim, or regularization accordingly.  
+
+---  
+
+## 5️⃣ Data Splits & Evaluation  
+
+1. **Training set** – ~80 % of words (≈ 25 k examples).  
+2. **Dev/validation set** – ~10 % (≈ 3 k examples).  
+3. **Test set** – remaining ~10 % (≈ 2 k examples).  
+
+- **Training** uses only the training split.  
+- **Hyper‑parameter tuning** uses the dev set.  
+- **Final performance** reported on the test set **once**.  
+
+---  
+
+## 6️⃣ Embedding Visualization (2‑D case)  
+
+- After training with `embed_dim = 2`, plot each character:  
+  - `x = C[:,0]`, `y = C[:,1]`.  
+  - Annotate with the character symbol.  
+- Observations:  
+  - Vowels cluster together → network learns similarity.  
+  - Rare symbols (e.g., “q”, “.”) occupy distinct regions.  
+
+*When `embed_dim` > 2, direct 2‑D plot isn’t possible; consider PCA/t‑SNE.*  
+
+---  
+
+## 7️⃣ Sampling from the Trained Model  
+
+1. **Initialize context** with three “.” (or any start token).  
+2. Loop:  
+   - Embed current context → hidden state → logits.  
+   - `prob = torch.softmax(logits, dim=-1)`.  
+   - Sample next token: `next_idx = torch.multinomial(prob, 1)`.  
+   - Shift context window, append `next_idx`.  
+3. Convert indices back to characters → generated string.  
+
+- Generated examples look **more name‑like** (e.g., “ham joes”, “emily”).  
+
+---  
+
+## 8️⃣ Practical Tips & Extras  
+
+- **Tensor indexing tricks** (list, 1‑D tensor, multi‑dim tensor) → `C[x]`.  
+- **`view` vs. `reshape`** – `view` is a *no‑copy* operation (fast).  
+- **Broadcasting** – Adding bias `b1` to hidden activations works automatically (`B×H` + `H`).  
+- **Avoid hard‑coding** magic numbers; use variables (`block_size`, `embed_dim`).  
+- **Google Colab** – Ready‑to‑run notebook, no local install needed (link provided in video).  
+
+---  
+
+## 9️⃣ Take‑aways & Next Steps  
+
+- **Achieved**: Loss ≈ 2.17 (better than bigram ≈ 2.45).  
+- **Open knobs for improvement**:  
+  - Increase hidden size / embedding dimension.  
+  - Use longer context (`block_size`).  
+  - Experiment with different optimizers (Adam, RMSprop).  
+  - Add regularization (weight decay, dropout).  
+  - Train longer with proper learning‑rate schedule.  
+- **Read the paper** (Bengio et al., 2003) for deeper insights & advanced ideas.  
+
+---  
+
+### 📌 Quick Reference (Pseudo‑code)
+
+```python
+# 1. Build dataset
+x, y = build_dataset(words, block_size=3)   # x: (N,3), y: (N,)
+
+# 2. Model components
+C   = torch.randn(27, embed_dim, requires_grad=True)   # embedding table
+W1  = torch.randn(3*embed_dim, hidden, requires_grad=True)
+b1  = torch.randn(hidden, requires_grad=True)
+W2  = torch.randn(hidden, 27, requires_grad=True)
+b2  = torch.randn(27, requires_grad=True)
+
+# 3. Forward pass (batch)
+def forward(x_batch):
+    e = C[x_batch]                # (B,3,embed_dim)
+    e = e.view(e.shape[0], -1)    # (B,3*embed_dim)
+    h = torch.tanh(e @ W1 + b1)   # (B,hidden)
+    logits = h @ W2 + b2          # (B,27)
+    return logits
+
+# 4. Training loop (mini‑batch)
+for step in range(num_steps):
+    ix = torch.randint(0, N, (batch_size,))
+    logits = forward(x[ix])
+    loss   = F.cross_entropy(logits, y[ix])
+    loss.backward()
+    for p in [C,W1,b1,W2,b2]:
+        p.data -= lr * p.grad
+        p.grad.zero_()
+```
+
+---  
+
+*End of mind‑map.*  

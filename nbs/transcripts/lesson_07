@@ -1,0 +1,137 @@
+# 🧠 Mind‑Map of the Transcript  
+
+*(Markdown outline – each level deeper = a more detailed sub‑topic)*  
+
+---  
+
+## 1. Introduction & Motivation  
+- **ChatGPT** – a text‑based AI that can perform many tasks (write poems, explain HTML, generate news, etc.)  
+- **Probabilistic system** – same prompt → different plausible outputs  
+- **Goal of the talk** – understand what’s “under the hood” of ChatGPT and build a tiny version ourselves  
+
+## 2. Language‑Model Basics  
+- **Definition** – models the sequence of tokens (characters, sub‑words, words)  
+- **Task** – given a prefix, predict the next token → sequence completion  
+- **Tokenization**  
+  - *Character‑level* (used in the demo) → 65‑symbol vocab  
+  - *Sub‑word / BPE* (used by OpenAI) → ~50 k vocab  
+  - Encoder ↔ Decoder maps between strings ↔ integer IDs  
+
+## 3. Data Set – “Tiny Shakespeare”  
+- Single ~1 MiB file containing all Shakespeare works  
+- Treated as a **single long integer sequence** after tokenization  
+- Split: **90 % train**, **10 % validation**  
+
+## 4. Model Architecture – From Simple to Full Transformer  
+
+### 4.1. Simple Baseline: Byte‑Level (BYR) Model  
+- Embedding table → directly produces logits for each position  
+- Loss = **Cross‑Entropy** (negative log‑likelihood)  
+
+### 4.2. Adding Positional Information  
+- Positional‑embedding matrix (block‑size × embed‑dim)  
+- Token embedding + positional embedding → input **X**  
+
+### 4.3. Self‑Attention (single head)  
+- **Queries (Q)**, **Keys (K)**, **Values (V)** = linear projections of **X**  
+- Attention scores = `Q · Kᵀ / sqrt(head_dim)`  
+- **Masking** – lower‑triangular mask to prevent future tokens from attending (decoder‑only)  
+- Softmax → weighted sum of **V** → output of the head  
+
+### 4.4. Multi‑Head Attention  
+- Run several independent heads in parallel (e.g., 4 heads)  
+- Concatenate their outputs → same dimension as original embed size  
+
+### 4.5. Feed‑Forward Network (FFN)  
+- Linear → GELU (or ReLU) → Linear  
+- Hidden dimension = 4 × embed_dim (as in the original paper)  
+
+### 4.6. Residual (Skip) Connections  
+- `X → Self‑Attention → +X`  
+- `X → FFN → +X`  
+
+### 4.7. Layer Normalization  
+- Applied **before** each sub‑layer (pre‑norm formulation)  
+- Normalizes across the embedding dimension per token  
+
+### 4.8. Dropout  
+- Applied on attention weights, after attention output, and after FFN  
+
+### 4.9. Full Decoder‑Only Block  
+```
+X ──► LayerNorm ──► Multi‑Head Self‑Attention ──► Dropout ──► +X
+   │                                            │
+   └─► LayerNorm ──► Feed‑Forward ──► Dropout ──► +X
+```
+
+### 4.10. Stacking Blocks  
+- Stack **N** identical blocks (e.g., 6 layers) → deep Transformer  
+
+### 4.11. Final Projection  
+- LayerNorm → Linear (embed_dim → vocab_size) → logits  
+
+## 5. Training Procedure  
+- **Batching** – sample random chunks (block‑size) → shape B × T  
+- **Optimizer** – Adam (often with weight‑decay)  
+- **Learning rate** – e.g., 3e‑4 (scaled down for larger models)  
+- **Training loop** – forward → loss → backward → optimizer step  
+- **Evaluation** – periodic “estimate_loss” over several batches (train & val)  
+
+## 6. Scaling Experiments & Results  
+
+| Experiment | Model Size | Block Size | Heads | Embed Dim | Layers | Validation Loss |
+|------------|------------|------------|-------|-----------|--------|-----------------|
+| BYR (char) | ~10 M params | 8 | 1 | 32 | 1 | ~4.8 |
+| Add Self‑Attention (1 head) | ~10 M | 8 | 1 | 32 | 1 | ~2.4 |
+| Multi‑Head (4 heads) | ~10 M | 8 | 4 | 8 each | 1 | ~2.28 |
+| + Feed‑Forward (4×) | ~10 M | 8 | 4 | 8 each | 1 | ~2.24 |
+| Deep + Residual + LayerNorm | ~10 M | 256 | 6 | 384 | 6 | ~2.08 |
+| Deep + LayerNorm (pre‑norm) | ~10 M | 256 | 6 | 384 | 6 | ~2.06 |
+| Full‑Scale (64‑batch, 256‑ctx, 6 heads, 6 layers, dropout 0.2) | ~10 M | 256 | 6 | 384 | 6 | **1.48** |
+
+- **Observation:** Adding attention, multi‑heads, FFN, residuals, layer‑norm, and scaling up context dramatically reduces loss.  
+- Generated text becomes more “Shakespeare‑like” (still nonsensical at character level).  
+
+## 7. Decoder‑Only vs Encoder‑Decoder  
+
+| Component | Decoder‑Only (GPT) | Encoder‑Decoder (e.g., original “Attention is All You Need”) |
+|-----------|-------------------|-----------------------------------------------------------|
+| Masking   | Causal (triangular) → autoregressive generation | No causal mask in encoder; decoder still causal |
+| Cross‑Attention | **Absent** (only self‑attention) | Present – decoder attends to encoder outputs |
+| Use‑case  | Unconditioned language modeling / text generation | Conditional generation (e.g., translation) |
+| In this demo | Only decoder block → generates Shakespeare‑style text | Not implemented (no encoder, no cross‑attention) |
+
+## 8. Fine‑Tuning & Alignment (ChatGPT)  
+
+1. **Pre‑training** – massive corpus (≈300 B tokens) → decoder‑only Transformer (e.g., GPT‑3 175 B params)  
+2. **Supervised fine‑tuning** – small dataset of *question → answer* pairs (few‑k examples) to make the model an “assistant”  
+3. **Reward Modeling** – collect multiple model outputs, rank them, train a reward model to predict human preference  
+4. **RLHF (Reinforcement Learning from Human Feedback)** – use Proximal Policy Optimization (PPO) to fine‑tune the policy so generated answers score high on the reward model  
+
+- The fine‑tuning stages are **not** publicly released; they require large‑scale infrastructure.  
+
+## 9. nanogpt Repository (by the presenter)  
+
+- **Two files**: `model.py` (definition of the Transformer) and `train.py` (training loop, checkpointing, distributed support)  
+- Mirrors the notebook implementation:  
+  - Tokenizer (character‑level)  
+  - Embedding + positional embedding  
+  - Multi‑head self‑attention (batched)  
+  - Feed‑forward, residuals, layer‑norm, dropout  
+  - Optimizer, learning‑rate schedule, evaluation utilities  
+
+## 10. Take‑aways & Next Steps  
+
+- **Core idea:** “Attention is all you need” → a stack of self‑attention + feed‑forward blocks is enough for powerful language models.  
+- **Building a GPT‑like model** can be done in ~200 lines of PyTorch code when using a tiny dataset.  
+- **Scaling** (larger context, more heads, deeper stacks, regularization) yields dramatic loss improvements.  
+- **Real‑world ChatGPT** adds two major phases beyond pre‑training: supervised fine‑tuning and RLHF.  
+- **Further work:**  
+  - Experiment with sub‑word tokenizers (BPE, SentencePiece).  
+  - Train larger models on bigger corpora (e.g., Wikipedia, OpenWebText).  
+  - Implement encoder‑decoder architecture for conditional tasks (translation, summarization).  
+  - Explore RLHF pipelines to align models with human preferences.  
+
+---  
+
+*End of mind‑map.*  

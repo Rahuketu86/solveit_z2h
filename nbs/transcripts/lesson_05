@@ -1,0 +1,168 @@
+# 🧠 Mindmap – Manual Back‑Propagation for a Two‑Layer MLP  
+
+---  
+
+## 1️⃣ Overview  
+- **Goal:** Replace `loss.backward()` with a fully manual backward pass (tensor‑level).  
+- **Why?**  
+  - Understand the internals of autograd.  
+  - Debug subtle bugs (gradient clipping, dead neurons, exploding/vanishing gradients).  
+  - Gain intuition about how gradients flow through each operation.  
+
+---  
+
+## 2️⃣ Historical Context  
+- **~2006 – 2010:**  
+  - Researchers (e.g., Hinton & Salakhutdinov) wrote their own back‑prop in MATLAB/NumPy.  
+  - Manual gradient computation was the norm.  
+- **2014:**  
+  - Author’s “Fragmented Embeddings” paper – full manual forward + backward passes in NumPy.  
+- **Today:**  
+  - Autograd is standard, but the exercise remains valuable for learning.  
+
+---  
+
+## 3️⃣ Network Architecture (forward pass)  
+
+```
+Embedding → Linear1 (W1, B1) → 10‑H (tanh) → BatchNorm (γ, β) → Linear2 (W2, B2) → Logits → Softmax → Cross‑Entropy
+```
+
+| Layer | Shape (batch = 32) | Key tensors |
+|------|-------------------|-------------|
+| **Embedding** | 32 × 3 × 10 | `C` (27 × 10) |
+| **Linear1** | 32 × 64 | `W1` (64 × 64), `B1` (1 × 64) |
+| **10‑H** | 32 × 64 | `H = tanh(preact)` |
+| **BatchNorm** | 32 × 64 | `μ` (1 × 64), `σ²` (1 × 64), `γ`, `β` |
+| **Linear2** | 32 × 27 | `W2` (27 × 64), `B2` (1 × 27) |
+| **Logits** | 32 × 27 | `logits` |
+| **Softmax** | 32 × 27 | `probs` |
+| **Loss** | scalar | `loss = -mean(log_probs[range(N), Y])` |
+
+---  
+
+## 4️⃣ Manual Back‑Propagation – Core Concepts  
+
+### 4.1 Gradient of the Loss w.r.t. `log_probs` (`d_log_probs`)  
+- **Shape:** 32 × 27 (same as `log_probs`).  
+- **Derivation:**  
+  - `loss = -(1/N) Σ_i log_probs[i, Y[i]]`  
+  - `∂loss/∂log_probs[i, j] = -1/N` if `j == Y[i]`, else `0`.  
+- **Implementation:**  
+  ```python
+  d_log_probs = torch.zeros_like(log_probs)
+  d_log_probs[torch.arange(N), Y] = -1.0 / N
+  ```
+
+### 4.2 Back‑prop through `log` → `probs`  
+- `log_probs = torch.log(probs)`  
+- Local derivative: `∂log/∂probs = 1 / probs` (element‑wise).  
+- Chain rule: `d_probs = d_log_probs / probs`.
+
+### 4.3 Back‑prop through Softmax (logits → probs)  
+- **Softmax formula:** `p_i = exp(l_i) / Σ_j exp(l_j)`.  
+- **Gradient (batch version):**  
+  ```python
+  probs = torch.softmax(logits, dim=1)
+  d_logits = probs.clone()
+  d_logits[torch.arange(N), Y] -= 1   # subtract 1 at correct class
+  d_logits /= N                        # average over batch
+  ```
+- **Intuition:**  
+  - Pull up probability of the correct class, push down all others.  
+  - Sum of each row of `d_logits` = 0 (conservation of probability).
+
+### 4.4 Linear Layer (W2, B2)  
+- Forward: `logits = H @ W2.T + B2`.  
+- Gradients:  
+  - `d_W2 = d_logits.T @ H` (shape 27 × 64).  
+  - `d_B2 = d_logits.sum(dim=0, keepdim=True)`.  
+  - `d_H  = d_logits @ W2`.
+
+### 4.5 Batch Normalization  
+- **Forward (simplified, γ = 1, β = 0):**  
+  ```
+  μ   = mean(H, dim=0)                # 1×64
+  σ²  = var(H, dim=0, unbiased=False) # 1×64
+  Ĥ   = (H - μ) / sqrt(σ² + ε)
+  ```
+- **Backward (key steps):**  
+  1. `d_Ĥ = d_H_pre` (gradient from next layer).  
+  2. `d_σ² = -0.5 * (d_Ĥ * (H-μ)) * (σ²+ε)^(-3/2)` → sum over batch.  
+  3. `d_μ  = -d_Ĥ / sqrt(σ²+ε) - 2 * d_σ² * (H-μ) / N`.  
+  4. `d_H  = d_Ĥ / sqrt(σ²+ε) + d_σ² * 2*(H-μ)/N + d_μ / N`.  
+  5. `d_γ = (d_H_pre * Ĥ).sum(dim=0, keepdim=True)` (if γ kept).  
+  6. `d_β = d_H_pre.sum(dim=0, keepdim=True)` (if β kept).  
+
+- **Broadcasting rule:**  
+  - When a scalar (e.g., `μ`) is broadcast to a matrix, the backward pass **sums** the incoming gradients over the broadcasted dimension.
+
+### 4.6 Activation `10‑H` (tanh)  
+- Forward: `H = tanh(preact)`.  
+- Local derivative: `1 - H²`.  
+- Backward: `d_preact = d_H * (1 - H**2)`.
+
+### 4.7 Linear Layer (W1, B1)  
+- Same pattern as W2/B2, but with `preact = X @ W1.T + B1`.  
+- Gradients:  
+  - `d_W1 = d_preact.T @ X`.  
+  - `d_B1 = d_preact.sum(dim=0, keepdim=True)`.  
+  - `d_X  = d_preact @ W1`.
+
+### 4.8 Embedding Lookup (indexing)  
+- Forward: `M[i, k, :] = C[Y[i, k]]`.  
+- Backward:  
+  ```python
+  d_C = torch.zeros_like(C)
+  for i in range(N):
+      for k in range(3):
+          idx = Y[i, k]
+          d_C[idx] += d_M[i, k]   # accumulate if same idx appears multiple times
+  ```
+
+---  
+
+## 5️⃣ Exercises (Progressive Refactoring)  
+
+| Exercise | What’s changed | Key takeaway |
+|----------|----------------|--------------|
+| **1** | Compute every intermediate `d_…` tensor (as above). Verify with `torch.allclose`. | Manual gradients match autograd when shapes & broadcasting are handled correctly. |
+| **2** | Derive a **single** analytic expression for `d_logits` (softmax + cross‑entropy). Implement it in one line. | Much faster forward + backward; shows that many intermediate ops can be collapsed. |
+| **3** | Derive a compact formula for **batch‑norm** backward (see §4.5). Implement the whole layer in a few lines. | Highlights the “sum‑over‑broadcast” pattern; avoids per‑element code. |
+| **4** | Assemble all manual pieces into a full training loop (no `loss.backward()`). | End‑to‑end manual training yields the same loss & samples as the autograd version. |
+
+---  
+
+## 6️⃣ Intuitive Insights  
+
+- **Gradient “push‑pull”** on logits:  
+  - Correct class gets a **negative** gradient (pull up).  
+  - Incorrect classes get a **positive** gradient (push down).  
+  - Row‑wise sum = 0 → probability mass conserved.  
+
+- **Batch‑norm variance bias vs. unbiased:**  
+  - Training often uses **biased** estimator (`1/N`).  
+  - Inference (running stats) should use **unbiased** (`1/(N‑1)`).  
+  - Mismatch can be a subtle bug; the author prefers the unbiased version throughout.  
+
+- **Broadcast ↔ Sum Duality:**  
+  - **Forward:** broadcasting replicates a smaller tensor across a larger one.  
+  - **Backward:** the gradient w.r.t. the broadcasted tensor is the **sum** of the replicated gradients.  
+
+---  
+
+## 7️⃣ Next Steps  
+
+- **Recurrent Neural Networks (RNNs) & LSTMs** – extend manual back‑prop to time‑unrolled architectures.  
+- Explore **gradient clipping**, **weight tying**, and **teacher forcing** with manual gradients.  
+
+---  
+
+### 📌 TL;DR  
+
+1. Replace `loss.backward()` with explicit tensor‑level derivatives.  
+2. Derive and implement compact formulas for softmax‑cross‑entropy and batch‑norm.  
+3. Verify each step against PyTorch’s autograd.  
+4. Assemble a full training loop that runs as fast as the autograd version while giving you full visibility into every gradient flow.  
+
+Happy hacking! 🚀  

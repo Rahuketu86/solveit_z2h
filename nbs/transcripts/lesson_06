@@ -1,0 +1,143 @@
+## 📚 Mind‑Map of the Lecture  
+*(Markdown + Mermaid diagram for quick visualisation)*  
+
+---  
+
+### 1️⃣  Overview  
+- **Goal** – Extend a simple character‑level MLP language model into a deeper, hierarchical architecture (Wavenet‑style).  
+- **Context** – Lecture recorded in a hotel room in Kyoto; continuation of previous parts (3 & 4).  
+
+### 2️⃣  Data & Baseline Model  
+- **Dataset** – 182 000 examples, each: 3‑character context → predict 4th character.  
+- **Baseline Architecture**  
+  - Embedding table (`C`) → Linear → BatchNorm (named *bathroom*) → 1D‑BatchNorm (`10h`) → Linear output.  
+  - 12 000 parameters, validation loss ≈ 2.10.  
+- **Observations**  
+  - Model already generates plausible “name‑like” strings.  
+  - Too much information is squashed in a single hidden layer.  
+
+### 3️⃣  Desired Architectural Changes  
+- **Take more context** – increase block size from 3 → 8 (later 16).  
+- **Hierarchical fusion** – progressively combine neighboring characters (bigrams → 4‑grams → …) instead of flattening all at once.  
+- **Wavenet inspiration** – dilated causal convolutions → tree‑like receptive field growth.  
+
+### 4️⃣  Refactoring the Code  
+#### 4.1  Layer Building Blocks  
+- **Linear layer** – simple matrix multiply (mirrors `torch.nn.Linear`).  
+- **BatchNorm (bathroom)** – maintains running mean/variance, behaves differently in train vs. eval.  
+- **Embedding layer** – lookup table (`nn.Embedding`).  
+- **Flatten / “FlattenConsecutive”** – custom module to reshape tensors, now able to group *n* consecutive embeddings.  
+
+#### 4.2  Containers  
+- **Sequential container** – custom implementation that stores a list of layers and forwards input through them.  
+- **Model definition** – `model = Sequential([Embedding, FlattenConsecutive, Linear, BatchNorm, …])`.  
+
+#### 4.3  Debugging & Shape‑Gymnastics  
+- Inspected tensor shapes after each layer (e.g., `B×T×C → B×T×E → B×(T·E)`).  
+- Realised flattening to `B×‑1` was too aggressive; needed a 3‑D view (`B×groups×(n·E)`).  
+
+### 5️⃣  Implementing Hierarchical Fusion  
+1. **FlattenConsecutive(n=2)** – groups every 2 consecutive characters → shape `B×(T/2)×(2·E)`.  
+2. **Stacked linear layers** – each layer processes the grouped embeddings, progressively increasing receptive field.  
+3. **Resulting network** – 3 hidden layers, each widening the context (2 → 4 → 8 characters).  
+
+### 6️⃣  BatchNorm Bug & Fix  
+- **Problem** – `BatchNorm1D` computed statistics over only the first dimension (`B`) → produced per‑position means/variances.  
+- **Fix** – Reduce over dimensions `(0, 1)` when input is 3‑D, yielding a single mean/variance per channel (`1×1×C`).  
+- **Outcome** – More stable statistics, slight validation loss improvement (2.029 → 2.022).  
+
+### 7️⃣  Training Results & Hyper‑parameter Tweaks  
+| Change | Params | Validation loss |
+|--------|--------|-----------------|
+| Baseline (3‑char) | ~12 k | 2.10 |
+| ↑ Context to 8 chars (flat) | +10 k | 2.02 |
+| Hierarchical (3‑layer) | ~22 k | 2.029 → 2.022 |
+| ↑ Embedding dim to 24, hidden units ↑ | ~76 k | **1.99** (first sub‑2.0) |
+- **Takeaway** – Bigger capacity helps, but training becomes slower; still no systematic hyper‑parameter search.  
+
+### 8️⃣  Relation to Convolutional Networks (Wavenet)  
+- **Current implementation** – Explicit “for‑loop” over each position (inefficient).  
+- **Convolutional view** – Same linear filters applied via dilated causal convolutions → parallel GPU kernels, reuse of intermediate results.  
+- **Future work** – Replace explicit loops with `nn.Conv1d` (dilated, causal), add gated activations, residual & skip connections.  
+
+### 9️⃣  Development Process Insights  
+- **Documentation pain** – PyTorch docs are good; the course’s own “Patreon” docs are sparse/inaccurate.  
+- **Shape gymnastics** – Constantly checking NCL vs. NLC ordering, using `view`, `reshape`, `permute`.  
+- **Prototyping workflow**  
+  1. **Jupyter notebook** – rapid testing, shape inspection, debugging.  
+  2. **Copy‑paste to VS Code repo** – clean module code.  
+  3. **Run experiments** via scripts (future: experiment harness).  
+
+### 🔟  Future Directions (Open Topics)  
+1. **Implement true dilated causal convolutions** (Wavenet).  
+2. **Add gated linear units, residual & skip connections**.  
+3. **Build an experimental harness** – systematic hyper‑parameter sweeps, logging, early stopping.  
+4. **Explore other architectures** – RNNs, LSTMs, GRUs, Transformers.  
+5. **Beat the current best loss (≈ 1.99)** – try different channel allocations, embedding sizes, initialization schemes, optimizers.  
+
+---  
+
+## 🧭 Mermaid Mind‑Map (copy‑paste into a Mermaid‑enabled markdown viewer)
+
+```mermaid
+mindmap
+  root((Character‑Level Language Model))
+    Overview
+      Goal
+      Context
+    Data & Baseline
+      Dataset
+      Baseline Architecture
+        Embedding
+        Linear
+        BatchNorm (bathroom)
+        1D‑BatchNorm (10h)
+        Linear Output
+      Baseline Metrics
+    Desired Changes
+      Larger Context (3→8→16)
+      Hierarchical Fusion
+        Bigrams → 4‑grams → …
+      Wavenet Inspiration
+    Refactoring
+      Layer Building Blocks
+        Linear
+        BatchNorm
+        Embedding
+        FlattenConsecutive
+      Containers
+        Sequential
+      Debugging Shapes
+    Hierarchical Fusion Implementation
+      FlattenConsecutive(n=2)
+      Stacked Linear Layers
+      Resulting 3‑layer Net
+    BatchNorm Bug
+      Problem (per‑position stats)
+      Fix (reduce over 0,1)
+      Outcome
+    Training Results
+      Table of Changes → Params → Validation loss
+      Observations
+    Convolutional Relation
+      Current explicit loops
+      Convolutional view (dilated causal)
+      Future: Conv1d + residual/skip
+    Development Process
+      Documentation challenges
+      Shape gymnastics
+      Prototyping workflow (Jupyter → VSCode)
+    Future Directions
+      Dilated convolutions
+      Gated units, residuals, skips
+      Experiment harness
+      RNN/LSTM/Transformer exploration
+      Beat loss 1.99
+```
+
+*Render the diagram with any Mermaid‑compatible markdown viewer (e.g., VS Code, GitHub, HackMD).*  
+
+---  
+
+**TL;DR:**  
+We started from a simple 3‑character MLP, expanded the context, introduced a hierarchical “flatten‑consecutive” module, fixed a subtle BatchNorm bug, and built a deeper 3‑layer network that already beats the 2.0 validation‑loss barrier. The next steps are to replace the explicit loops with true dilated causal convolutions, add residual/skip connections, and set up a proper experimental harness for systematic hyper‑parameter search. Happy hacking!

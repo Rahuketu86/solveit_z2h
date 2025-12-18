@@ -1,0 +1,183 @@
+# 🧠 Make‑More: Character‑Level Language Modeling Mind‑Map  
+
+*(All concepts are derived from the transcript.  Indentation = hierarchy.)*  
+
+---  
+
+## 1️⃣ Overview  
+- **Goal** – Re‑implement *micrograd*‑style learning on a new repo **make‑more**.  
+- **Dataset** – `names.txt` (~32 000 unique names scraped from a government site).  
+- **Use‑case** – Generate novel, name‑like strings (e.g., baby‑name suggestions).  
+
+---  
+
+## 2️⃣ Core Idea: Character‑Level Language Model  
+- **Treat each name as a sequence of characters** (including start & end tokens).  
+- **Model task** – Predict the *next* character given the previous one(s).  
+
+---  
+
+## 3️⃣ Bigram (2‑gram) Model – The Simple Baseline  
+### 3.1 Data Preparation  
+- Load `names.txt` → massive string → `splitlines()` → list `words`.  
+- Compute:  
+  - `num_words ≈ 32 000`  
+  - `min_len = 2`, `max_len = 15`  
+
+### 3.2 Extracting Bigrams  
+- For each word `w`:  
+  ```python
+  for c1, c2 in zip(w, w[1:]):   # sliding window of size 2
+      bigram = (c1, c2)
+  ```  
+- Add **special start token** `.` before the first char and **end token** `.` after the last char.  
+
+### 3.3 Counting Frequencies (Dictionary → 2‑D Tensor)  
+- `counts[prev_char, next_char] += 1` (default 0).  
+- Convert to a **28 × 28** integer tensor (`torch.int32`).  
+  - 26 letters + **start** (`.`) + **end** (`.`).  
+
+### 3.4 Visualisation (matplotlib)  
+- Heat‑map of the count matrix.  
+- Observations:  
+  - Rows/columns for start/end tokens are mostly zeros (they never appear in the “wrong” position).  
+
+### 3.5 Refinement of Token Set  
+- Collapse to **27 × 27** matrix (single special token).  
+- Re‑index:  
+  - `.` → index 0, `a` → 1, …, `z` → 26.  
+
+### 3.6 From Counts → Probabilities  
+- Row‑wise normalization:  
+  ```python
+  probs = counts.float() / counts.sum(dim=1, keepdim=True)
+  ```  
+- Each row now sums to **1** → a categorical distribution for the next character.  
+
+### 3.7 Sampling Names (using the bigram table)  
+- Start at index 0 (`.`).  
+- Loop:  
+  1. Grab current row `p = probs[current_idx]`.  
+  2. Sample `next_idx = torch.multinomial(p, 1, replacement=True, generator=g)`.  
+  3. Break if `next_idx == 0` (end token).  
+  4. Append the decoded character.  
+
+### 3.8 Model Evaluation – Likelihood  
+- **Likelihood** = product of probabilities assigned to the true bigrams.  
+- **Log‑likelihood** = sum of `log(p_i)`.  
+- **Negative Log‑Likelihood (NLL)** = `‑log_likelihood` → standard loss (lower is better).  
+- Example: NLL ≈ **2.4–2.5** on the full training set.  
+
+### 3.9 Smoothing (to avoid zero probabilities)  
+- Add a small constant (e.g., `+1`) to every count before normalisation.  
+- Guarantees non‑zero probabilities → prevents infinite NLL for unseen bigrams.  
+
+---  
+
+## 4️⃣ Neural‑Network Re‑Implementation (Gradient‑Based)  
+### 4.1 Why Switch?  
+- Counting works for bigrams but **doesn’t scale** to longer contexts (e.g., 10‑grams).  
+- Neural nets can learn **compact, differentiable** representations for arbitrary context lengths.  
+
+### 4.2 Data Encoding – One‑Hot Vectors  
+- Map each character index `i` → 27‑dimensional one‑hot vector `x_i`.  
+- Use `torch.nn.functional.one_hot(indices, num_classes=27)`.  
+- Cast to `float32` for NN input.  
+
+### 4.3 Model Architecture (initially)  
+- **Linear layer** (no bias): `logits = x @ W`  
+  - `W` shape **27 × 27** (each row = log‑counts for a given previous character).  
+- **Softmax** → probabilities:  
+  ```python
+  probs = torch.softmax(logits, dim=1)   # exponentiate + normalise internally
+  ```  
+
+### 4.4 Forward Pass (vectorised)  
+1. Encode all inputs → `X` (N × 27).  
+2. Compute `logits = X @ W`.  
+3. `probs = softmax(logits)`.  
+4. Gather the probability of the *true* next character:  
+   ```python
+   true_probs = probs[torch.arange(N), targets]   # targets = next‑char indices
+   ```  
+5. Compute **NLL loss**:  
+   ```python
+   loss = -torch.log(true_probs).mean()
+   ```  
+
+### 4.5 Back‑Propagation & Parameter Update  
+- Zero grads: `W.grad = None`.  
+- `loss.backward()` → fills `W.grad`.  
+- Gradient descent step (e.g., SGD):  
+  ```python
+  W.data -= lr * W.grad
+  ```  
+- Repeat for many epochs → loss drops from ~3.8 → ~2.4 (matches counting approach).  
+
+### 4.6 Practical PyTorch Tips (from the transcript)  
+- `torch.tensor` vs `torch.Tensor` → prefer lowercase `torch.tensor` for float tensors.  
+- **Broadcasting**: dividing a (27 × 27) matrix by a (27 × 1) column works because the column is broadcast across rows.  
+- `requires_grad=True` on parameters to enable autograd.  
+- Use `torch.Generator` with a fixed seed for deterministic sampling.  
+
+---  
+
+## 5️⃣ Regularisation & Implicit Smoothing  
+- **L2 regularisation** (weight decay) on `W`:  
+  ```python
+  reg = λ * (W**2).mean()
+  loss_total = loss + reg
+  ```  
+- When `W` → 0, logits become uniform → equivalent to **label smoothing**.  
+- Adjust λ to control the trade‑off between fitting data and keeping probabilities smooth.  
+
+---  
+
+## 6️⃣ Scaling Beyond Bigrams  
+### 6.1 Word‑Level Modeling  
+- Extend the same pipeline to **tokens = words** (instead of characters).  
+- Larger vocab → larger embedding/linear layers.  
+
+### 6.2 Longer Contexts (n‑grams, RNNs, Transformers)  
+- Feed **multiple previous characters** (or embeddings) into deeper networks:  
+  - **RNN / LSTM** → hidden state carries history.  
+  - **Transformer** → self‑attention over the whole context.  
+- Output layer always produces **logits → softmax → probability distribution** for the next token.  
+
+### 6.3 Why Neural Nets Scale  
+- Counting tables would explode (`|V|^k` entries for k‑gram).  
+- Parameter sharing in NN (weights) keeps model size **linear** in vocabulary size, not exponential in context length.  
+
+---  
+
+## 7️⃣ Future Roadmap (as hinted in the talk)  
+1. **Word‑level language model** – generate full sentences.  
+2. **Image‑text models** – e.g., DALL·E, Stable Diffusion.  
+3. **Full transformer implementation** – equivalent to GPT‑2 at character level, then scale up.  
+
+---  
+
+## 8️⃣ Quick Reference Cheat‑Sheet  
+
+| Concept | Symbol / Code | Key Insight |
+|--------|---------------|-------------|
+| **Start token** | `.` (index 0) | Marks beginning of a name |
+| **End token** | `.` (index 0 after collapse) | Marks termination |
+| **Bigram count matrix** | `N` (28 × 28) | Raw frequencies |
+| **Probability matrix** | `P = N / N.sum(dim=1, keepdim=True)` | Row‑wise categorical distribution |
+| **One‑hot encoding** | `x_i = F.one_hot(i, 27).float()` | Turns integer index into NN input |
+| **Weight matrix** | `W` (27 × 27) | Learns log‑counts (logits) |
+| **Softmax** | `torch.softmax(logits, dim=1)` | Turns logits → probabilities |
+| **Negative Log‑Likelihood** | `loss = -log(p_true).mean()` | Optimisation objective |
+| **Gradient step** | `W.data -= lr * W.grad` | Simple SGD update |
+| **L2 regularisation** | `λ * (W**2).mean()` | Encourages smoother (more uniform) predictions |
+| **Sampling loop** | `while idx != 0: idx = torch.multinomial(P[idx], 1)` | Generates a new name |
+
+---  
+
+### 🎉 Take‑away  
+- **Counting bigrams** gives a perfect baseline (NLL ≈ 2.4).  
+- **Training the same model with gradient descent** reproduces the baseline *and* provides a flexible foundation for more powerful architectures (RNNs, Transformers).  
+- Understanding **tensor shapes, broadcasting, and autograd** is essential for scaling up.  
+
+*Happy modeling!* 🚀

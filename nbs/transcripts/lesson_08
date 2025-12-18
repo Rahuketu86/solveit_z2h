@@ -1,0 +1,164 @@
+## 🧠 Tokenization Mind‑Map (Markdown + Mermaid)
+
+Below is a **comprehensive mind‑map** that captures every major idea, sub‑idea and detail from the transcript.  
+The map is written in **Mermaid** syntax (supported by most Markdown viewers) and is followed by a plain‑text outline for quick reference.
+
+---  
+
+### Mermaid Diagram  
+
+```mermaid
+mindmap
+  root((Tokenization in Large Language Models))
+
+    subgraph Overview
+      Overview[What is tokenization?]
+      WhyItMatters[Why tokenization is the “atom” of LLMs]
+      HiddenIssues[Hidden foot‑guns & odd behaviours]
+    end
+
+    subgraph Naive_Char_Level
+      CharTokenizer[Character‑level tokenizer (65 chars)]
+      EmbeddingTable[Embedding table = vocab size rows]
+      Limitations[Too coarse → real models use chunk‑level]
+    end
+
+    subgraph BPE_Concept
+      BPE[Byte‑Pair Encoding (BPE)]
+      InputEncoding[UTF‑8 → bytes (0‑255)]
+      InitialVocab[256 raw byte tokens]
+      MergeProcess[Iteratively merge most‑frequent byte pairs]
+      VocabularyGrowth[New token IDs appended (256,257,…)]
+      Example[Example: “AA” → token 256, then “AB” → token 257 …]
+    end
+
+    subgraph Tokenizer_Implementation
+      GetStats[Function: get_stats(list of ints)]
+      MergeStep[Function: replace_pair(ids, pair, new_id)]
+      YLoop[Iterate merges → target vocab size]
+      Compression[Sequence length shrinks, vocab grows]
+      CodeRepo[MBP repo – reference implementation]
+    end
+
+    subgraph Real_World_Tokenizers
+      Tiktoken[Tiktoken (OpenAI)]
+        TiktokenApp[Web UI – live tokenisation]
+        GPT2_Tokenizer[~50 k vocab, 1.24‑token context]
+        GPT4_Tokenizer[~100 k vocab, denser, better whitespace handling]
+        SpecialTokens[<eos>, <pad>, <bos>, <fim> prefixes]
+        TokenSizeEffect[More tokens → denser context, but larger embedding & LM head]
+      SentencePiece[Google SentencePiece]
+        SP_Encoding[Can train & infer]
+        SP_BPE[Runs BPE on Unicode code‑points]
+        ByteFallback[Rare code‑points → UTF‑8 bytes → extra tokens]
+        ConfigComplexity[Many hyper‑params, “shrink‑factor”, etc.]
+        RegexChunking[Regex rules to prevent bad merges (punctuation, numbers, etc.)]
+    end
+
+    subgraph Tokenization_Issues
+      Spelling[LLMs struggle with spelling (long tokens like “defaultstyle”)]
+      Arithmetic[Numbers split arbitrarily → poor arithmetic]
+      NonEnglish[More tokens for same sentence → context waste]
+      Python_Code[Spaces become separate tokens → context loss]
+      TrailingSpace[Warning: trailing space adds a token → hurts performance]
+      UnstableTokens[“unstable” token handling in tiktoken source]
+      SolidGoldMagikarp[Rare Reddit‑user token never seen in LM training → undefined behaviour]
+    end
+
+    subgraph Model_Surgery
+      ExtendVocab[Add new special tokens → resize embedding rows]
+      LMHeadResize[Resize final linear layer (logits) accordingly]
+      FreezeBase[Freeze original weights, train only new token embeddings]
+      GistTokens[Compress long prompts into a few learned tokens (distillation)]
+    end
+
+    subgraph Multimodal_Tokenization
+      VisionTokens[Image patches → tokens]
+      AudioTokens[Audio frames → tokens]
+      SoftTokens[Continuous embeddings (auto‑encoders) vs hard tokens]
+      UnifiedTransformer[Same architecture, different token vocabularies]
+    end
+
+    subgraph Efficiency_Considerations
+      ContextLength[Longer vocab → shorter sequences → more context per token]
+      EmbeddingCost[More rows → more parameters & compute]
+      DataFormats[JSON vs YAML token count (JSON 116 tokens, YAML 99 tokens)]
+      TokenEconomy[Pay‑per‑token APIs → choose dense encodings]
+    end
+
+    subgraph Recommendations
+      UseGPT4_Tiktoken[Prefer GPT‑4 tokeniser (dense, good whitespace handling)]
+      IfTrainingNeeded[Use SentencePiece BPE (but copy‑paste Meta’s config)]
+      AvoidDIY[Don’t hand‑tune many SP hyper‑params – easy to mis‑configure]
+      WaitForM‑BPE[Future: a training‑ready version of tiktoken’s BPE]
+      BewareSpecialTokens[Know special‑token IDs when fine‑tuning]
+    end
+
+    %% Connections
+    Overview --> WhyItMatters
+    Overview --> HiddenIssues
+    Naive_Char_Level --> CharTokenizer
+    Naive_Char_Level --> EmbeddingTable
+    Naive_Char_Level --> Limitations
+    BPE_Concept --> InputEncoding
+    BPE_Concept --> InitialVocab
+    BPE_Concept --> MergeProcess
+    BPE_Concept --> VocabularyGrowth
+    BPE_Concept --> Example
+    Tokenizer_Implementation --> GetStats
+    Tokenizer_Implementation --> MergeStep
+    Tokenizer_Implementation --> YLoop
+    Tokenizer_Implementation --> Compression
+    Tokenizer_Implementation --> CodeRepo
+    Real_World_Tokenizers --> Tiktoken
+    Real_World_Tokenizers --> SentencePiece
+    Tokenization_Issues --> Spelling
+    Tokenization_Issues --> Arithmetic
+    Tokenization_Issues --> NonEnglish
+    Tokenization_Issues --> Python_Code
+    Tokenization_Issues --> TrailingSpace
+    Tokenization_Issues --> UnstableTokens
+    Tokenization_Issues --> SolidGoldMagikarp
+    Model_Surgery --> ExtendVocab
+    Model_Surgery --> LMHeadResize
+    Model_Surgery --> FreezeBase
+    Model_Surgery --> GistTokens
+    Multimodal_Tokenization --> VisionTokens
+    Multimodal_Tokenization --> AudioTokens
+    Multimodal_Tokenization --> SoftTokens
+    Multimodal_Tokenization --> UnifiedTransformer
+    Efficiency_Considerations --> ContextLength
+    Efficiency_Considerations --> EmbeddingCost
+    Efficiency_Considerations --> DataFormats
+    Efficiency_Considerations --> TokenEconomy
+    Recommendations --> UseGPT4_Tiktoken
+    Recommendations --> IfTrainingNeeded
+    Recommendations --> AvoidDIY
+    Recommendations --> WaitForM‑BPE
+    Recommendations --> BewareSpecialTokens
+```
+
+---  
+
+### Plain‑Text Outline (for quick skim)
+
+| **Section** | **Key Points** |
+|------------|----------------|
+| **Tokenization Overview** | Converts raw text → sequence of integer tokens. Tokens are the atomic unit of LLMs; many hidden quirks stem from this step. |
+| **Naïve Character‑Level Tokenizer** | 65‑character vocab from Shakespeare data; each char → token; embedding table size = vocab size. Works but far from state‑of‑the‑art. |
+| **Byte‑Pair Encoding (BPE)** | Start with 256 byte tokens (UTF‑8). Repeatedly find most frequent adjacent byte pair, replace with a new token (ID 256, 257, …). Reduces sequence length while growing vocab. |
+| **Implementation Details** | `get_stats` counts consecutive pairs; `merge` replaces a pair with a new ID; a Y‑loop repeats until target vocab size (e.g., 276 → 20 merges). Compression ratio ≈ 1.27 on example text. |
+| **Real‑World Tokenizers** | **Tiktoken** (OpenAI): fast inference, pre‑trained vocab (GPT‑2 ≈ 50 k, GPT‑4 ≈ 100 k). Handles special tokens (`<eos>`, `<pad>`, `<fim>`). **SentencePiece**: can train & infer, runs BPE on Unicode code‑points, falls back to byte tokens for rare chars, many configurable options, regex‑based chunking to avoid bad merges. |
+| **Tokenization Issues** | • Spelling: long tokens (e.g., “defaultstyle”) make the model treat whole words as single atoms → poor spelling. <br>• Arithmetic: numbers split arbitrarily (e.g., “127” → two tokens) → bad math. <br>• Non‑English: same sentence uses many more tokens → context waste. <br>• Python code: each space becomes a token → huge context consumption. <br>• Trailing spaces add a token → API warns of degraded performance. <br>• “Unstable” tokens in tiktoken source cause edge‑case failures. <br>• “Solid Gold Magikarp” – a Reddit‑user token never seen during LM training → untrained embedding → undefined behaviour. |
+| **Model Surgery for New Tokens** | To add special tokens: enlarge embedding matrix (new rows) and LM head (new columns). Usually freeze original weights, train only new token embeddings. “Gist tokens” compress long prompts into a few learned tokens via distillation. |
+| **Multimodal Tokenization** | Same Transformer can process image patches, audio frames, or soft continuous embeddings as tokens. No architectural change needed – just different vocabularies. |
+| **Efficiency & Token Economy** | Larger vocab → shorter sequences → more context per token, but larger embedding & final linear layer → more compute. Choose dense data formats (YAML < JSON) to save tokens; token cost matters for API pricing. |
+| **Practical Recommendations** | 1. Use **tiktoken (GPT‑4)** for inference – most efficient. <br>2. If you must train a tokenizer, copy Meta’s SentencePiece config (avoid fiddling with many hyper‑params). <br>3. Don’t reinvent SentencePiece; it’s easy to mis‑configure. <br>4. Await a training‑ready version of tiktoken’s BPE (M‑BPE). <br>5. When fine‑tuning, remember to resize embeddings & LM head for any new special tokens. |
+
+---  
+
+#### How to view the diagram
+- If you’re using **GitHub**, **GitLab**, **VS Code**, **Obsidian**, or any Markdown editor that supports Mermaid, simply copy the Mermaid block above into a `.md` file and it will render automatically.  
+- For plain‑text viewers, refer to the outline table.
+
+Feel free to expand any node (e.g., dive deeper into the regex used by SentencePiece, or explore the exact token IDs for special tokens) by adding sub‑branches in the Mermaid code. Happy tokenizing! 🚀

@@ -1,0 +1,187 @@
+# 🧠 Mind‑Map of the Lecture  
+
+*(All points are derived from the transcript.  The hierarchy shows the logical flow and relationships between concepts.)*  
+
+---  
+
+## 1️⃣  Recap:  Multi‑Layer Perceptron (MLP) for character‑level language modelling  
+- Implemented following **Benj 2003** (MLP → next‑character prediction).  
+- **Current status**  
+  - 11 k parameters, 200 k training steps, batch‑size = 32.  
+  - Training/validation loss ≈ 2.16.  
+  - Sampling produces readable but imperfect words.  
+
+---  
+
+## 2️⃣  Why look deeper?  
+- Goal: move to **recurrent / LSTM / GRU** networks.  
+- **Prerequisite:** solid intuition of **activations** & **gradients** during training.  
+- Understanding these dynamics explains why RNNs are **hard to optimise** with plain first‑order methods.  
+
+---  
+
+## 3️⃣  Problem #1 – Bad Initialisation of the MLP  
+
+### 3.1  Observed symptom  
+- **Loss at iteration 0:** 27 → much higher than expected.  
+
+### 3.2  Expected loss for a uniform softmax  
+- 27 possible next characters → uniform probability = 1/27.  
+- Negative‑log‑likelihood = `-log(1/27) ≈ 3.29`.  
+
+### 3.3  What went wrong?  
+| Issue | Effect |
+|------|--------|
+| **Logits far from 0** (extreme values) | Softmax becomes **over‑confident** → huge loss. |
+| **Random bias `b₂`** | Adds a constant offset → pushes logits away from 0. |
+| **Weight scale too large** (`W₂`) | Amplifies the offset, further saturating softmax. |
+
+### 3.4  Fixes applied  
+1. **Zero the output bias** (`b₂ = 0`).  
+2. **Scale down `W₂`** (multiply by 0.1 → 0.01).  
+3. Keep a tiny non‑zero variance (e.g., 0.01) for **symmetry breaking**.  
+
+Result: loss curve loses the “hockey‑stick” shape; training becomes more productive.  
+
+---  
+
+## 4️⃣  Problem #2 – Saturated `tanh` (𝑡𝑎𝑛ℎ) activations  
+
+### 4.1  Observation  
+- Histogram of hidden‑state `H` after `tanh` shows **most values at ±1**.  
+- Pre‑activations (input to `tanh`) range roughly **‑5 … 15** → many neurons in the **flat tails**.  
+
+### 4.2  Consequence for back‑propagation  
+- Derivative of `tanh` = `1 – t²`.  
+- When `t ≈ ±1`, derivative ≈ 0 → **gradient vanishes** for those neurons.  
+- “Dead neurons” (always saturated) never learn (gradient = 0).  
+
+### 4.3  Diagnostic check  
+- Compute **percentage of units with |t| > 0.99** → large white area in Boolean mask → many dead neurons.  
+
+### 4.4  Remedy  
+- Reduce magnitude of pre‑activations:  
+  - **Scale down the first‑layer weights** (`W₁`) (e.g., multiply by 0.1).  
+  - Optionally **bias = 0** (biases become useless after batch‑norm, see §6).  
+- Result: hidden activations become **roughly Gaussian (≈ 𝒩(0,1))**, gradients stay alive.  
+
+---  
+
+## 5️⃣  General Weight‑Initialisation Theory  
+
+### 5.1  Fan‑in / Fan‑out concept  
+- For a layer with `fan_in` inputs, initialise weights with variance `1 / fan_in`.  
+- Guarantees that **output variance ≈ input variance** (preserves a unit‑Gaussian flow).  
+
+### 5.2  Gains for different non‑linearities (He / Xavier)  
+| Non‑linearity | Recommended gain `g` | Reason |
+|---------------|----------------------|--------|
+| Linear / Identity | `1` | No contraction. |
+| ReLU / Leaky‑ReLU | `√2` | Half the distribution is zeroed. |
+| tanh | `5/3` (≈ 1.67) | Empirically balances contraction of tanh. |
+| (others) | derived from variance analysis | – |
+
+- **Final weight scale** = `gain / √fan_in`.  
+
+---  
+
+## 6️⃣  Batch Normalisation (BatchNorm) – The “Game‑Changer”  
+
+### 6.1  Core idea  
+1. **Collect batch statistics** → mean `μ_B` and variance `σ²_B`.  
+2. **Standardise**: `x̂ = (x – μ_B) / √(σ²_B + ε)`.  
+3. **Learnable affine transform**: `y = γ·x̂ + β`.  
+
+### 6.2  Why it works  
+- Forces **activations to stay unit‑Gaussian** throughout the network → prevents saturation / vanishing gradients.  
+- Acts as a **regulariser** (batch‑wise noise).  
+
+### 6.3  Training vs. Inference  
+- **Training:** use batch statistics (`μ_B`, `σ²_B`).  
+- **Inference:** use **running estimates** (`μ̂`, `σ̂²`) updated with exponential moving average:  
+
+  `running_mean = momentum·running_mean + (1‑momentum)·μ_B`  
+
+  `running_var  = momentum·running_var  + (1‑momentum)·σ²_B`  
+
+- `momentum` ≈ 0.1 for large batches; smaller batches may need **lower momentum** (e.g., 0.001).  
+
+### 6.4  Practical notes  
+- **Bias before BatchNorm is useless** – BatchNorm already learns a bias (`β`).  
+- Set `affine=True` (learnable `γ`, `β`).  
+- `eps` (default 1e‑5) avoids division‑by‑zero.  
+- **No gradient tracking** for running stats (`torch.no_grad()` context).  
+
+---  
+
+## 7️⃣  Diagnostic Toolbox for Neural‑Net Health  
+
+| Diagnostic | What it tells you | Typical “good” range |
+|------------|-------------------|---------------------|
+| **Activation histogram** (per layer) | Distribution shape, saturation % | Std ≈ 1, saturation < 5 % |
+| **Gradient histogram** (per layer) | Gradient magnitude, vanishing/exploding | Similar scale to activations |
+| **Weight histogram** | Parameter spread, dead weights | Std ≈ 1 (or as per init) |
+| **Update‑to‑Data ratio** `‖Δθ‖ / ‖θ‖` (log₁₀) | Relative step size per iteration | ≈ ‑3 (i.e., updates ≈ 0.001 × parameter) |
+| **Learning‑rate sanity check** | If ratio ≪ ‑3 → LR too low; ≫ ‑2 → LR too high | Aim for –3 ± 0.5 |
+| **Running‑mean / var convergence** | BatchNorm stats stabilise? | Small drift after a few epochs |
+
+- Plot these **over training time** (not just a single snapshot) to see trends.  
+
+---  
+
+## 8️⃣  Putting It All Together – “Torch‑ify” the Code  
+
+### 8.1  Modular design (mirrors `torch.nn`)  
+- **Linear layer** → `nn.Linear(in_features, out_features, bias=False)` (bias omitted when followed by BatchNorm).  
+- **BatchNorm1d** → `nn.BatchNorm1d(num_features, eps=1e‑5, momentum=0.001, affine=True)`.  
+- **tanh activation** → custom wrapper (or `nn.Tanh`).  
+
+### 8.2  Network construction pattern  
+
+```text
+Embedding → Linear → BatchNorm → tanh → Linear → BatchNorm → tanh → … → Linear → BatchNorm → Softmax
+```
+
+- **BatchNorm placed after each Linear, before tanh** (standard practice).  
+- Can also be placed after tanh – results are similar.  
+
+### 8.3  Training loop (high‑level)  
+
+1. **Zero grads**.  
+2. **Forward pass** (collect activations, apply BatchNorm).  
+3. **Compute loss** (cross‑entropy).  
+4. **Backward** (`loss.backward()`).  
+5. **Optimizer step** (SGD / Adam).  
+6. **Update running stats** (handled automatically by `nn.BatchNorm`).  
+
+---  
+
+## 9️⃣  Take‑aways & Outlook  
+
+1. **Initialisation matters** – scaling weights & zeroing biases prevents early “over‑confidence”.  
+2. **tanh saturation kills gradients** – keep pre‑activations near zero (via weight scaling).  
+3. **BatchNorm stabilises deep nets** by constantly re‑Gaussianising activations; it also reduces sensitivity to exact gain choices.  
+4. **Diagnostic visualisations** (histograms, update‑to‑data ratios) are essential for spotting dead neurons, exploding/vanishing gradients, and mis‑scaled learning rates.  
+5. **Future work**  
+   - Move to **recurrent architectures** (RNN, LSTM, GRU) – deeper unrolled graphs will amplify the issues we just mitigated.  
+   - Explore **alternative normalisation** (LayerNorm, GroupNorm) that avoid batch coupling.  
+   - Leverage **advanced optimisers** (Adam, RMSProp) and **residual connections** for even deeper models.  
+
+---  
+
+### 📌  Quick‑Reference Cheat‑Sheet  
+
+| Concept | Formula / Setting | Typical Value |
+|---------|-------------------|---------------|
+| Weight init variance | `var = gain² / fan_in` | `gain = 1` (linear), `√2` (ReLU), `5/3` (tanh) |
+| Softmax uniform loss | `-log(1/𝑘)` | `k = vocab size` |
+| tanh derivative | `1 – t²` | → 0 when `|t| → 1` |
+| BatchNorm scaling | `γ` (learned) | Initialise to `1` |
+| BatchNorm shift | `β` (learned) | Initialise to `0` |
+| Update‑to‑Data log₁₀ target | `≈ ‑3` | Adjust LR accordingly |
+| Momentum for running stats | `0.1` (large batch) / `0.001` (batch = 32) | – |
+| ε (epsilon) in BN | `1e‑5` | – |
+
+---  
+
+*End of mind‑map.*  

@@ -1,0 +1,169 @@
+## 🧠 Mindmap of the Lecture “Building & Understanding Micrograd”
+
+```mermaid
+mindmap
+  root((Micrograd Lecture – Neural‑Net Training Under the Hood))
+
+  %% -------------------------------------------------
+  %% 1. Introduction & Goals
+  %% -------------------------------------------------
+  Introduction
+    What we’ll do
+      • Start from a blank Jupyter notebook
+      • Define & train a neural net step‑by‑step
+      • Peek “under the hood” of back‑propagation
+    Why it matters
+      • Intuitive grasp of gradient‑based learning
+      • Build a tiny autograd engine (micrograd)
+
+  %% -------------------------------------------------
+  %% 2. Micrograd – The Core Idea
+  %% -------------------------------------------------
+  Micrograd
+    Definition
+      • A **scalar‑valued autograd engine**
+      • Implements **automatic differentiation** (back‑prop)
+    Key Concepts
+      • **Value object** – wraps a scalar & tracks graph info
+      • **Expression graph** – nodes = operations, edges = data flow
+      • **Forward pass** – compute output (e.g. g = …)
+      • **Backward pass** – propagate gradients via chain rule
+    Operations supported
+      • add (+)          – local derivative = 1
+      • mul (×)          – local derivative = other operand
+      • pow (^)          – local derivative = n·xⁿ⁻¹
+      • tanh (10h)       – local derivative = 1 – tanh²(x)
+      • neg, sqrt, div, … (can be added similarly)
+
+  %% -------------------------------------------------
+  %% 3. Derivative Intuition
+  %% -------------------------------------------------
+  Derivative Basics
+    • Definition: limₕ→0 (f(x+h) – f(x))/h
+    • Numerical approximation with tiny h (e.g. 0.001)
+    • Example: f(x)=3x²–4x+5 → f′(3)=14
+    • Sign tells direction of change (positive → increase)
+
+  %% -------------------------------------------------
+  %% 4. Building the Value Object
+  %% -------------------------------------------------
+  Value Object
+    Attributes
+      • data  – raw scalar
+      • grad  – ∂output/∂self (init 0)
+      • _prev – set of child nodes (for graph traversal)
+      • _op   – string name of operation that created it
+    Operator Overloads
+      • __add__(self, other) → Value
+      • __radd__(self, other) → Value (handles const + Value)
+      • __mul__(self, other) → Value
+      • __rmul__(self, other) → Value (handles const × Value)
+      • __pow__(self, exponent) → Value
+      • __neg__, __sub__, __truediv__ (via mul & pow)
+    Local Backward Functions
+      • add:   self.grad += out.grad ; other.grad += out.grad
+      • mul:   self.grad += other.data * out.grad
+               other.grad += self.data * out.grad
+      • pow:   self.grad += exponent * (self.data**(exponent-1)) * out.grad
+      • tanh:  self.grad += (1 - self.data**2) * out.grad
+
+  %% -------------------------------------------------
+  %% 5. Graph Visualization
+  %% -------------------------------------------------
+  Graph Drawing (drawdot)
+    • Uses Graphviz (graphviz‑dot) to render nodes & edges
+    • Shows operation nodes (e.g. “+”, “*”) and value nodes
+    • Helpful for debugging & teaching
+
+  %% -------------------------------------------------
+  %% 6. Back‑Propagation Mechanics
+  %% -------------------------------------------------
+  Back‑Propagation
+    • Start at output node → set grad = 1
+    • **Topological sort** (DFS) to order nodes so children processed first
+    • Walk nodes in reverse topological order, calling each node’s _backward
+    • **Chain rule**: local derivative × upstream gradient
+    • Gradient accumulation (`+=`) – crucial when a node has multiple parents
+      – Fixed bug: previously used `=` causing overwrites (e.g. a + a)
+
+  %% -------------------------------------------------
+  %% 7. Numerical Gradient Checks
+  %% -------------------------------------------------
+  Gradient Check
+    • Perturb a leaf (e.g. a += h) → recompute output
+    • Approximate ∂output/∂a ≈ (f(a+h) – f(a))/h
+    • Verify against analytically computed grads
+
+  %% -------------------------------------------------
+  %% 8. Building Neural Networks with Micrograd
+  %% -------------------------------------------------
+  Neural‑Net Construction
+    Neuron
+      • Parameters: weights `w_i` (list of Value) + bias `b`
+      • Forward: Σ w_i·x_i + b → activation (tanh)
+    Layer
+      • List of Neurons (fully‑connected to same inputs)
+      • Forward: apply each neuron, collect outputs
+    MLP (Multi‑Layer Perceptron)
+      • Sequence of Layers
+      • Forward: feed output of one layer as input to next
+      • Example architecture: 3‑input → [4,4] hidden → 1‑output
+
+  %% -------------------------------------------------
+  %% 9. Loss Functions & Training Loop
+  %% -------------------------------------------------
+  Loss & Optimization
+    Loss (Mean‑Squared‑Error)
+      • L = Σ (y_pred – y_true)²
+      • Gradient w.r.t. each prediction = 2·(y_pred – y_true)
+    Training Loop (Stochastic Gradient Descent)
+      1. Zero grads (`p.grad = 0` for all params)
+      2. Forward pass → compute loss
+      3. Backward pass (`loss.backward()`)
+      4. Parameter update: `p.data -= lr * p.grad`
+      5. Repeat (adjust learning‑rate, optionally decay)
+    Common Pitfalls
+      • Forgetting to zero grads → gradient accumulation bug
+      • Too large learning rate → overshoot / divergence
+      • Too small → slow convergence
+
+  %% -------------------------------------------------
+  %% 10. Comparison with PyTorch
+  %% -------------------------------------------------
+  PyTorch Parallel
+    • Same API: `torch.tensor`, `requires_grad=True`
+    • Autograd automatically builds the same graph (but with tensors)
+    • Forward & backward behave identically for scalar case
+    • Example: replicate micrograd network using `torch.nn.Module`
+    • Extending PyTorch
+      – Register custom ops (forward + backward) via `torch.autograd.Function`
+      – Example shown for a cubic polynomial
+
+  %% -------------------------------------------------
+  │ 11. Advanced Topics (Briefly Mentioned)
+  %% -------------------------------------------------
+  Advanced Topics
+    • Batching & mini‑batch SGD (process subsets of data)
+    • Cross‑entropy loss for classification
+    • L2 regularization (weight decay) for better generalization
+    • Learning‑rate schedules (decay, momentum, Adam, etc.)
+    • Scaling to billions of parameters (e.g., GPT‑style models)
+
+  %% -------------------------------------------------
+  %% 12. Summary & Take‑aways
+  %% -------------------------------------------------
+  Summary
+    • Neural nets = **compositional mathematical expressions**
+    • **Back‑prop = recursive application of the chain rule**
+    • Micrograd shows the **minimal code** needed (≈150 lines)
+    • Real libraries (PyTorch) add **tensor efficiency** but same math
+    • Understanding the core mechanics helps debug & extend models
+```
+
+### How to Read the Mindmap
+- **Indentation** → hierarchy (main topic → sub‑topic → details).  
+- **Bold headings** indicate the most important concepts.  
+- **Arrows (→)** show data flow or process steps (e.g., forward → backward).  
+- **Bullet points** under each node give concrete examples, code snippets, or key take‑aways.
+
+Feel free to copy the Mermaid block into any Markdown viewer that supports Mermaid (e.g., GitHub, VS Code, Jupyter with `%%mermaid`) to see the visual mindmap. Happy learning! 🚀
