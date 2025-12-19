@@ -9,6 +9,8 @@ __all__ = []
 import numpy as np
 import matplotlib.pyplot as plt
 from fastcore.utils import L
+import pathlib
+import os
 
 # %% ../nbs/01_micrograd.ipynb 4
 print("Hello")

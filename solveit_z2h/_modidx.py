@@ -7,4 +7,6 @@ d = { 'settings': { 'branch': 'main',
                 'lib_path': 'solveit_z2h'},
   'syms': { 'solveit_z2h.core': { 'solveit_z2h.core.foo': ('core.html#foo', 'solveit_z2h/core.py'),
                                   'solveit_z2h.core.hello': ('core.html#hello', 'solveit_z2h/core.py')},
-            'solveit_z2h.micrograd': {}}}
+            'solveit_z2h.micrograd': {},
+            'solveit_z2h.utils': { 'solveit_z2h.utils.draw_dot': ('utils.html#draw_dot', 'solveit_z2h/utils.py'),
+                                   'solveit_z2h.utils.trace': ('utils.html#trace', 'solveit_z2h/utils.py')}}}
