@@ -1,0 +1,3212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>summary – solveit_z2h</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d09c2ebb0ad6a85e36aef4f9137b58e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="solveit_z2h">
+<meta property="og:description" content="Zero to hero course done using solveit">
+<meta property="og:site_name" content="solveit_z2h">
+<meta name="twitter:title" content="solveit_z2h">
+<meta name="twitter:description" content="Zero to hero course done using solveit">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">solveit_z2h</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">solveit_z2h</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../core.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">core</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../micrograd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">micrograd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../utils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">utils</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../contextcollector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Now you can call it:</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Read the markdown file</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#lesson-1" id="toc-lesson-1" class="nav-link active" data-scroll-target="#lesson-1">Lesson 1</a>
+  <ul class="collapse">
+  <li><a href="#mindmap-of-the-lecture-building-understanding-micrograd" id="toc-mindmap-of-the-lecture-building-understanding-micrograd" class="nav-link" data-scroll-target="#mindmap-of-the-lecture-building-understanding-micrograd">🧠 Mindmap of the Lecture “Building &amp; Understanding Micrograd”</a>
+  <ul class="collapse">
+  <li><a href="#how-to-read-the-mindmap" id="toc-how-to-read-the-mindmap" class="nav-link" data-scroll-target="#how-to-read-the-mindmap">How to Read the Mindmap</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#makemore-characterlevel-language-modeling-mindmap" id="toc-makemore-characterlevel-language-modeling-mindmap" class="nav-link" data-scroll-target="#makemore-characterlevel-language-modeling-mindmap">🧠 Make‑More: Character‑Level Language Modeling Mind‑Map</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">1️⃣ Overview</a></li>
+  <li><a href="#core-idea-characterlevel-language-model" id="toc-core-idea-characterlevel-language-model" class="nav-link" data-scroll-target="#core-idea-characterlevel-language-model">2️⃣ Core Idea: Character‑Level Language Model</a></li>
+  <li><a href="#bigram-2gram-model-the-simple-baseline" id="toc-bigram-2gram-model-the-simple-baseline" class="nav-link" data-scroll-target="#bigram-2gram-model-the-simple-baseline">3️⃣ Bigram (2‑gram) Model – The Simple Baseline</a>
+  <ul class="collapse">
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">3.1 Data Preparation</a></li>
+  <li><a href="#extracting-bigrams" id="toc-extracting-bigrams" class="nav-link" data-scroll-target="#extracting-bigrams">3.2 Extracting Bigrams</a></li>
+  <li><a href="#counting-frequencies-dictionary-2d-tensor" id="toc-counting-frequencies-dictionary-2d-tensor" class="nav-link" data-scroll-target="#counting-frequencies-dictionary-2d-tensor">3.3 Counting Frequencies (Dictionary → 2‑D Tensor)</a></li>
+  <li><a href="#visualisation-matplotlib" id="toc-visualisation-matplotlib" class="nav-link" data-scroll-target="#visualisation-matplotlib">3.4 Visualisation (matplotlib)</a></li>
+  <li><a href="#refinement-of-token-set" id="toc-refinement-of-token-set" class="nav-link" data-scroll-target="#refinement-of-token-set">3.5 Refinement of Token Set</a></li>
+  <li><a href="#from-counts-probabilities" id="toc-from-counts-probabilities" class="nav-link" data-scroll-target="#from-counts-probabilities">3.6 From Counts → Probabilities</a></li>
+  <li><a href="#sampling-names-using-the-bigram-table" id="toc-sampling-names-using-the-bigram-table" class="nav-link" data-scroll-target="#sampling-names-using-the-bigram-table">3.7 Sampling Names (using the bigram table)</a></li>
+  <li><a href="#model-evaluation-likelihood" id="toc-model-evaluation-likelihood" class="nav-link" data-scroll-target="#model-evaluation-likelihood">3.8 Model Evaluation – Likelihood</a></li>
+  <li><a href="#smoothing-to-avoid-zero-probabilities" id="toc-smoothing-to-avoid-zero-probabilities" class="nav-link" data-scroll-target="#smoothing-to-avoid-zero-probabilities">3.9 Smoothing (to avoid zero probabilities)</a></li>
+  </ul></li>
+  <li><a href="#neuralnetwork-reimplementation-gradientbased" id="toc-neuralnetwork-reimplementation-gradientbased" class="nav-link" data-scroll-target="#neuralnetwork-reimplementation-gradientbased">4️⃣ Neural‑Network Re‑Implementation (Gradient‑Based)</a>
+  <ul class="collapse">
+  <li><a href="#why-switch" id="toc-why-switch" class="nav-link" data-scroll-target="#why-switch">4.1 Why Switch?</a></li>
+  <li><a href="#data-encoding-onehot-vectors" id="toc-data-encoding-onehot-vectors" class="nav-link" data-scroll-target="#data-encoding-onehot-vectors">4.2 Data Encoding – One‑Hot Vectors</a></li>
+  <li><a href="#model-architecture-initially" id="toc-model-architecture-initially" class="nav-link" data-scroll-target="#model-architecture-initially">4.3 Model Architecture (initially)</a></li>
+  <li><a href="#forward-pass-vectorised" id="toc-forward-pass-vectorised" class="nav-link" data-scroll-target="#forward-pass-vectorised">4.4 Forward Pass (vectorised)</a></li>
+  <li><a href="#backpropagation-parameter-update" id="toc-backpropagation-parameter-update" class="nav-link" data-scroll-target="#backpropagation-parameter-update">4.5 Back‑Propagation &amp; Parameter Update</a></li>
+  <li><a href="#practical-pytorch-tips-from-the-transcript" id="toc-practical-pytorch-tips-from-the-transcript" class="nav-link" data-scroll-target="#practical-pytorch-tips-from-the-transcript">4.6 Practical PyTorch Tips (from the transcript)</a></li>
+  </ul></li>
+  <li><a href="#regularisation-implicit-smoothing" id="toc-regularisation-implicit-smoothing" class="nav-link" data-scroll-target="#regularisation-implicit-smoothing">5️⃣ Regularisation &amp; Implicit Smoothing</a></li>
+  <li><a href="#scaling-beyond-bigrams" id="toc-scaling-beyond-bigrams" class="nav-link" data-scroll-target="#scaling-beyond-bigrams">6️⃣ Scaling Beyond Bigrams</a>
+  <ul class="collapse">
+  <li><a href="#wordlevel-modeling" id="toc-wordlevel-modeling" class="nav-link" data-scroll-target="#wordlevel-modeling">6.1 Word‑Level Modeling</a></li>
+  <li><a href="#longer-contexts-ngrams-rnns-transformers" id="toc-longer-contexts-ngrams-rnns-transformers" class="nav-link" data-scroll-target="#longer-contexts-ngrams-rnns-transformers">6.2 Longer Contexts (n‑grams, RNNs, Transformers)</a></li>
+  <li><a href="#why-neural-nets-scale" id="toc-why-neural-nets-scale" class="nav-link" data-scroll-target="#why-neural-nets-scale">6.3 Why Neural Nets Scale</a></li>
+  </ul></li>
+  <li><a href="#future-roadmap-as-hinted-in-the-talk" id="toc-future-roadmap-as-hinted-in-the-talk" class="nav-link" data-scroll-target="#future-roadmap-as-hinted-in-the-talk">7️⃣ Future Roadmap (as hinted in the talk)</a></li>
+  <li><a href="#quick-reference-cheatsheet" id="toc-quick-reference-cheatsheet" class="nav-link" data-scroll-target="#quick-reference-cheatsheet">8️⃣ Quick Reference Cheat‑Sheet</a>
+  <ul class="collapse">
+  <li><a href="#takeaway" id="toc-takeaway" class="nav-link" data-scroll-target="#takeaway">🎉 Take‑away</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#comprehensive-mindmap-of-the-makemore-lecture" id="toc-comprehensive-mindmap-of-the-makemore-lecture" class="nav-link" data-scroll-target="#comprehensive-mindmap-of-the-makemore-lecture">🧠 Comprehensive Mind‑Map of the “Makemore” Lecture</a>
+  <ul class="collapse">
+  <li><a href="#introduction-recap" id="toc-introduction-recap" class="nav-link" data-scroll-target="#introduction-recap">1️⃣ Introduction &amp; Recap</a></li>
+  <li><a href="#moving-to-a-multilayer-perceptron-mlp" id="toc-moving-to-a-multilayer-perceptron-mlp" class="nav-link" data-scroll-target="#moving-to-a-multilayer-perceptron-mlp">2️⃣ Moving to a Multi‑Layer Perceptron (MLP)</a>
+  <ul class="collapse">
+  <li><a href="#core-idea-from-the-paper" id="toc-core-idea-from-the-paper" class="nav-link" data-scroll-target="#core-idea-from-the-paper">2.1 Core Idea from the Paper</a></li>
+  <li><a href="#adapting-to-characters" id="toc-adapting-to-characters" class="nav-link" data-scroll-target="#adapting-to-characters">2.2 Adapting to Characters</a></li>
+  </ul></li>
+  <li><a href="#implementation-details-pytorch" id="toc-implementation-details-pytorch" class="nav-link" data-scroll-target="#implementation-details-pytorch">3️⃣ Implementation Details (PyTorch)</a>
+  <ul class="collapse">
+  <li><a href="#data-preparation-1" id="toc-data-preparation-1" class="nav-link" data-scroll-target="#data-preparation-1">3.1 Data Preparation</a></li>
+  <li><a href="#embedding-lookup-c" id="toc-embedding-lookup-c" class="nav-link" data-scroll-target="#embedding-lookup-c">3.2 Embedding Lookup (<code>C</code>)</a></li>
+  <li><a href="#flattening-the-context" id="toc-flattening-the-context" class="nav-link" data-scroll-target="#flattening-the-context">3.3 Flattening the Context</a></li>
+  <li><a href="#hidden-layer" id="toc-hidden-layer" class="nav-link" data-scroll-target="#hidden-layer">3.4 Hidden Layer</a></li>
+  <li><a href="#output-layer" id="toc-output-layer" class="nav-link" data-scroll-target="#output-layer">3.5 Output Layer</a></li>
+  <li><a href="#loss-computation" id="toc-loss-computation" class="nav-link" data-scroll-target="#loss-computation">3.6 Loss Computation</a></li>
+  <li><a href="#training-loop-core-steps" id="toc-training-loop-core-steps" class="nav-link" data-scroll-target="#training-loop-core-steps">3.7 Training Loop (Core Steps)</a></li>
+  <li><a href="#minibatch-training" id="toc-minibatch-training" class="nav-link" data-scroll-target="#minibatch-training">3.8 Mini‑Batch Training</a></li>
+  </ul></li>
+  <li><a href="#hyperparameter-exploration" id="toc-hyperparameter-exploration" class="nav-link" data-scroll-target="#hyperparameter-exploration">4️⃣ Hyper‑Parameter Exploration</a>
+  <ul class="collapse">
+  <li><a href="#learningrate-search-practical-trick" id="toc-learningrate-search-practical-trick" class="nav-link" data-scroll-target="#learningrate-search-practical-trick">4.1 Learning‑Rate Search (Practical Trick)</a></li>
+  <li><a href="#overunderfitting-diagnosis" id="toc-overunderfitting-diagnosis" class="nav-link" data-scroll-target="#overunderfitting-diagnosis">4.2 Over‑/Under‑Fitting Diagnosis</a></li>
+  </ul></li>
+  <li><a href="#data-splits-evaluation" id="toc-data-splits-evaluation" class="nav-link" data-scroll-target="#data-splits-evaluation">5️⃣ Data Splits &amp; Evaluation</a></li>
+  <li><a href="#embedding-visualization-2d-case" id="toc-embedding-visualization-2d-case" class="nav-link" data-scroll-target="#embedding-visualization-2d-case">6️⃣ Embedding Visualization (2‑D case)</a></li>
+  <li><a href="#sampling-from-the-trained-model" id="toc-sampling-from-the-trained-model" class="nav-link" data-scroll-target="#sampling-from-the-trained-model">7️⃣ Sampling from the Trained Model</a></li>
+  <li><a href="#practical-tips-extras" id="toc-practical-tips-extras" class="nav-link" data-scroll-target="#practical-tips-extras">8️⃣ Practical Tips &amp; Extras</a></li>
+  <li><a href="#takeaways-next-steps" id="toc-takeaways-next-steps" class="nav-link" data-scroll-target="#takeaways-next-steps">9️⃣ Take‑aways &amp; Next Steps</a>
+  <ul class="collapse">
+  <li><a href="#quick-reference-pseudocode" id="toc-quick-reference-pseudocode" class="nav-link" data-scroll-target="#quick-reference-pseudocode">📌 Quick Reference (Pseudo‑code)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#mindmap-of-the-lecture" id="toc-mindmap-of-the-lecture" class="nav-link" data-scroll-target="#mindmap-of-the-lecture">🧠 Mind‑Map of the Lecture</a>
+  <ul class="collapse">
+  <li><a href="#recap-multilayer-perceptron-mlp-for-characterlevel-language-modelling" id="toc-recap-multilayer-perceptron-mlp-for-characterlevel-language-modelling" class="nav-link" data-scroll-target="#recap-multilayer-perceptron-mlp-for-characterlevel-language-modelling">1️⃣ Recap: Multi‑Layer Perceptron (MLP) for character‑level language modelling</a></li>
+  <li><a href="#why-look-deeper" id="toc-why-look-deeper" class="nav-link" data-scroll-target="#why-look-deeper">2️⃣ Why look deeper?</a></li>
+  <li><a href="#problem-1-bad-initialisation-of-the-mlp" id="toc-problem-1-bad-initialisation-of-the-mlp" class="nav-link" data-scroll-target="#problem-1-bad-initialisation-of-the-mlp">3️⃣ Problem #1 – Bad Initialisation of the MLP</a>
+  <ul class="collapse">
+  <li><a href="#observed-symptom" id="toc-observed-symptom" class="nav-link" data-scroll-target="#observed-symptom">3.1 Observed symptom</a></li>
+  <li><a href="#expected-loss-for-a-uniform-softmax" id="toc-expected-loss-for-a-uniform-softmax" class="nav-link" data-scroll-target="#expected-loss-for-a-uniform-softmax">3.2 Expected loss for a uniform softmax</a></li>
+  <li><a href="#what-went-wrong" id="toc-what-went-wrong" class="nav-link" data-scroll-target="#what-went-wrong">3.3 What went wrong?</a></li>
+  <li><a href="#fixes-applied" id="toc-fixes-applied" class="nav-link" data-scroll-target="#fixes-applied">3.4 Fixes applied</a></li>
+  </ul></li>
+  <li><a href="#problem-2-saturated-tanh-𝑡𝑎𝑛ℎ-activations" id="toc-problem-2-saturated-tanh-𝑡𝑎𝑛ℎ-activations" class="nav-link" data-scroll-target="#problem-2-saturated-tanh-𝑡𝑎𝑛ℎ-activations">4️⃣ Problem #2 – Saturated <code>tanh</code> (𝑡𝑎𝑛ℎ) activations</a>
+  <ul class="collapse">
+  <li><a href="#observation" id="toc-observation" class="nav-link" data-scroll-target="#observation">4.1 Observation</a></li>
+  <li><a href="#consequence-for-backpropagation" id="toc-consequence-for-backpropagation" class="nav-link" data-scroll-target="#consequence-for-backpropagation">4.2 Consequence for back‑propagation</a></li>
+  <li><a href="#diagnostic-check" id="toc-diagnostic-check" class="nav-link" data-scroll-target="#diagnostic-check">4.3 Diagnostic check</a></li>
+  <li><a href="#remedy" id="toc-remedy" class="nav-link" data-scroll-target="#remedy">4.4 Remedy</a></li>
+  </ul></li>
+  <li><a href="#general-weightinitialisation-theory" id="toc-general-weightinitialisation-theory" class="nav-link" data-scroll-target="#general-weightinitialisation-theory">5️⃣ General Weight‑Initialisation Theory</a>
+  <ul class="collapse">
+  <li><a href="#fanin-fanout-concept" id="toc-fanin-fanout-concept" class="nav-link" data-scroll-target="#fanin-fanout-concept">5.1 Fan‑in / Fan‑out concept</a></li>
+  <li><a href="#gains-for-different-nonlinearities-he-xavier" id="toc-gains-for-different-nonlinearities-he-xavier" class="nav-link" data-scroll-target="#gains-for-different-nonlinearities-he-xavier">5.2 Gains for different non‑linearities (He / Xavier)</a></li>
+  </ul></li>
+  <li><a href="#batch-normalisation-batchnorm-the-gamechanger" id="toc-batch-normalisation-batchnorm-the-gamechanger" class="nav-link" data-scroll-target="#batch-normalisation-batchnorm-the-gamechanger">6️⃣ Batch Normalisation (BatchNorm) – The “Game‑Changer”</a>
+  <ul class="collapse">
+  <li><a href="#core-idea" id="toc-core-idea" class="nav-link" data-scroll-target="#core-idea">6.1 Core idea</a></li>
+  <li><a href="#why-it-works" id="toc-why-it-works" class="nav-link" data-scroll-target="#why-it-works">6.2 Why it works</a></li>
+  <li><a href="#training-vs.-inference" id="toc-training-vs.-inference" class="nav-link" data-scroll-target="#training-vs.-inference">6.3 Training vs.&nbsp;Inference</a></li>
+  <li><a href="#practical-notes" id="toc-practical-notes" class="nav-link" data-scroll-target="#practical-notes">6.4 Practical notes</a></li>
+  </ul></li>
+  <li><a href="#diagnostic-toolbox-for-neuralnet-health" id="toc-diagnostic-toolbox-for-neuralnet-health" class="nav-link" data-scroll-target="#diagnostic-toolbox-for-neuralnet-health">7️⃣ Diagnostic Toolbox for Neural‑Net Health</a></li>
+  <li><a href="#putting-it-all-together-torchify-the-code" id="toc-putting-it-all-together-torchify-the-code" class="nav-link" data-scroll-target="#putting-it-all-together-torchify-the-code">8️⃣ Putting It All Together – “Torch‑ify” the Code</a>
+  <ul class="collapse">
+  <li><a href="#modular-design-mirrors-torch.nn" id="toc-modular-design-mirrors-torch.nn" class="nav-link" data-scroll-target="#modular-design-mirrors-torch.nn">8.1 Modular design (mirrors <code>torch.nn</code>)</a></li>
+  <li><a href="#network-construction-pattern" id="toc-network-construction-pattern" class="nav-link" data-scroll-target="#network-construction-pattern">8.2 Network construction pattern</a></li>
+  <li><a href="#training-loop-highlevel" id="toc-training-loop-highlevel" class="nav-link" data-scroll-target="#training-loop-highlevel">8.3 Training loop (high‑level)</a></li>
+  </ul></li>
+  <li><a href="#takeaways-outlook" id="toc-takeaways-outlook" class="nav-link" data-scroll-target="#takeaways-outlook">9️⃣ Take‑aways &amp; Outlook</a>
+  <ul class="collapse">
+  <li><a href="#quickreference-cheatsheet" id="toc-quickreference-cheatsheet" class="nav-link" data-scroll-target="#quickreference-cheatsheet">📌 Quick‑Reference Cheat‑Sheet</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#mindmap-manual-backpropagation-for-a-twolayer-mlp" id="toc-mindmap-manual-backpropagation-for-a-twolayer-mlp" class="nav-link" data-scroll-target="#mindmap-manual-backpropagation-for-a-twolayer-mlp">🧠 Mindmap – Manual Back‑Propagation for a Two‑Layer MLP</a>
+  <ul class="collapse">
+  <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">1️⃣ Overview</a></li>
+  <li><a href="#historical-context" id="toc-historical-context" class="nav-link" data-scroll-target="#historical-context">2️⃣ Historical Context</a></li>
+  <li><a href="#network-architecture-forward-pass" id="toc-network-architecture-forward-pass" class="nav-link" data-scroll-target="#network-architecture-forward-pass">3️⃣ Network Architecture (forward pass)</a></li>
+  <li><a href="#manual-backpropagation-core-concepts" id="toc-manual-backpropagation-core-concepts" class="nav-link" data-scroll-target="#manual-backpropagation-core-concepts">4️⃣ Manual Back‑Propagation – Core Concepts</a>
+  <ul class="collapse">
+  <li><a href="#gradient-of-the-loss-w.r.t.-log_probs-d_log_probs" id="toc-gradient-of-the-loss-w.r.t.-log_probs-d_log_probs" class="nav-link" data-scroll-target="#gradient-of-the-loss-w.r.t.-log_probs-d_log_probs">4.1 Gradient of the Loss w.r.t. <code>log_probs</code> (<code>d_log_probs</code>)</a></li>
+  <li><a href="#backprop-through-log-probs" id="toc-backprop-through-log-probs" class="nav-link" data-scroll-target="#backprop-through-log-probs">4.2 Back‑prop through <code>log</code> → <code>probs</code></a></li>
+  <li><a href="#backprop-through-softmax-logits-probs" id="toc-backprop-through-softmax-logits-probs" class="nav-link" data-scroll-target="#backprop-through-softmax-logits-probs">4.3 Back‑prop through Softmax (logits → probs)</a></li>
+  <li><a href="#linear-layer-w2-b2" id="toc-linear-layer-w2-b2" class="nav-link" data-scroll-target="#linear-layer-w2-b2">4.4 Linear Layer (W2, B2)</a></li>
+  <li><a href="#batch-normalization" id="toc-batch-normalization" class="nav-link" data-scroll-target="#batch-normalization">4.5 Batch Normalization</a></li>
+  <li><a href="#activation-10h-tanh" id="toc-activation-10h-tanh" class="nav-link" data-scroll-target="#activation-10h-tanh">4.6 Activation <code>10‑H</code> (tanh)</a></li>
+  <li><a href="#linear-layer-w1-b1" id="toc-linear-layer-w1-b1" class="nav-link" data-scroll-target="#linear-layer-w1-b1">4.7 Linear Layer (W1, B1)</a></li>
+  <li><a href="#embedding-lookup-indexing" id="toc-embedding-lookup-indexing" class="nav-link" data-scroll-target="#embedding-lookup-indexing">4.8 Embedding Lookup (indexing)</a></li>
+  </ul></li>
+  <li><a href="#exercises-progressive-refactoring" id="toc-exercises-progressive-refactoring" class="nav-link" data-scroll-target="#exercises-progressive-refactoring">5️⃣ Exercises (Progressive Refactoring)</a></li>
+  <li><a href="#intuitive-insights" id="toc-intuitive-insights" class="nav-link" data-scroll-target="#intuitive-insights">6️⃣ Intuitive Insights</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">7️⃣ Next Steps</a>
+  <ul class="collapse">
+  <li><a href="#tldr" id="toc-tldr" class="nav-link" data-scroll-target="#tldr">📌 TL;DR</a></li>
+  </ul></li>
+  <li><a href="#mindmap-of-the-lecture-1" id="toc-mindmap-of-the-lecture-1" class="nav-link" data-scroll-target="#mindmap-of-the-lecture-1">📚 Mind‑Map of the Lecture</a>
+  <ul class="collapse">
+  <li><a href="#overview-2" id="toc-overview-2" class="nav-link" data-scroll-target="#overview-2">1️⃣ Overview</a></li>
+  <li><a href="#data-baseline-model" id="toc-data-baseline-model" class="nav-link" data-scroll-target="#data-baseline-model">2️⃣ Data &amp; Baseline Model</a></li>
+  <li><a href="#desired-architectural-changes" id="toc-desired-architectural-changes" class="nav-link" data-scroll-target="#desired-architectural-changes">3️⃣ Desired Architectural Changes</a></li>
+  <li><a href="#refactoring-the-code" id="toc-refactoring-the-code" class="nav-link" data-scroll-target="#refactoring-the-code">4️⃣ Refactoring the Code</a></li>
+  <li><a href="#implementing-hierarchical-fusion" id="toc-implementing-hierarchical-fusion" class="nav-link" data-scroll-target="#implementing-hierarchical-fusion">5️⃣ Implementing Hierarchical Fusion</a></li>
+  <li><a href="#batchnorm-bug-fix" id="toc-batchnorm-bug-fix" class="nav-link" data-scroll-target="#batchnorm-bug-fix">6️⃣ BatchNorm Bug &amp; Fix</a></li>
+  <li><a href="#training-results-hyperparameter-tweaks" id="toc-training-results-hyperparameter-tweaks" class="nav-link" data-scroll-target="#training-results-hyperparameter-tweaks">7️⃣ Training Results &amp; Hyper‑parameter Tweaks</a></li>
+  <li><a href="#relation-to-convolutional-networks-wavenet" id="toc-relation-to-convolutional-networks-wavenet" class="nav-link" data-scroll-target="#relation-to-convolutional-networks-wavenet">8️⃣ Relation to Convolutional Networks (Wavenet)</a></li>
+  <li><a href="#development-process-insights" id="toc-development-process-insights" class="nav-link" data-scroll-target="#development-process-insights">9️⃣ Development Process Insights</a></li>
+  <li><a href="#future-directions-open-topics" id="toc-future-directions-open-topics" class="nav-link" data-scroll-target="#future-directions-open-topics">🔟 Future Directions (Open Topics)</a></li>
+  </ul></li>
+  <li><a href="#mermaid-mindmap-copypaste-into-a-mermaidenabled-markdown-viewer" id="toc-mermaid-mindmap-copypaste-into-a-mermaidenabled-markdown-viewer" class="nav-link" data-scroll-target="#mermaid-mindmap-copypaste-into-a-mermaidenabled-markdown-viewer">🧭 Mermaid Mind‑Map (copy‑paste into a Mermaid‑enabled markdown viewer)</a></li>
+  </ul></li>
+  <li><a href="#mindmap-of-the-transcript" id="toc-mindmap-of-the-transcript" class="nav-link" data-scroll-target="#mindmap-of-the-transcript">🧠 Mind‑Map of the Transcript</a>
+  <ul class="collapse">
+  <li><a href="#introduction-motivation" id="toc-introduction-motivation" class="nav-link" data-scroll-target="#introduction-motivation">1. Introduction &amp; Motivation</a></li>
+  <li><a href="#languagemodel-basics" id="toc-languagemodel-basics" class="nav-link" data-scroll-target="#languagemodel-basics">2. Language‑Model Basics</a></li>
+  <li><a href="#data-set-tiny-shakespeare" id="toc-data-set-tiny-shakespeare" class="nav-link" data-scroll-target="#data-set-tiny-shakespeare">3. Data Set – “Tiny Shakespeare”</a></li>
+  <li><a href="#model-architecture-from-simple-to-full-transformer" id="toc-model-architecture-from-simple-to-full-transformer" class="nav-link" data-scroll-target="#model-architecture-from-simple-to-full-transformer">4. Model Architecture – From Simple to Full Transformer</a>
+  <ul class="collapse">
+  <li><a href="#simple-baseline-bytelevel-byr-model" id="toc-simple-baseline-bytelevel-byr-model" class="nav-link" data-scroll-target="#simple-baseline-bytelevel-byr-model">4.1. Simple Baseline: Byte‑Level (BYR) Model</a></li>
+  <li><a href="#adding-positional-information" id="toc-adding-positional-information" class="nav-link" data-scroll-target="#adding-positional-information">4.2. Adding Positional Information</a></li>
+  <li><a href="#selfattention-single-head" id="toc-selfattention-single-head" class="nav-link" data-scroll-target="#selfattention-single-head">4.3. Self‑Attention (single head)</a></li>
+  <li><a href="#multihead-attention" id="toc-multihead-attention" class="nav-link" data-scroll-target="#multihead-attention">4.4. Multi‑Head Attention</a></li>
+  <li><a href="#feedforward-network-ffn" id="toc-feedforward-network-ffn" class="nav-link" data-scroll-target="#feedforward-network-ffn">4.5. Feed‑Forward Network (FFN)</a></li>
+  <li><a href="#residual-skip-connections" id="toc-residual-skip-connections" class="nav-link" data-scroll-target="#residual-skip-connections">4.6. Residual (Skip) Connections</a></li>
+  <li><a href="#layer-normalization" id="toc-layer-normalization" class="nav-link" data-scroll-target="#layer-normalization">4.7. Layer Normalization</a></li>
+  <li><a href="#dropout" id="toc-dropout" class="nav-link" data-scroll-target="#dropout">4.8. Dropout</a></li>
+  <li><a href="#full-decoderonly-block" id="toc-full-decoderonly-block" class="nav-link" data-scroll-target="#full-decoderonly-block">4.9. Full Decoder‑Only Block</a></li>
+  <li><a href="#stacking-blocks" id="toc-stacking-blocks" class="nav-link" data-scroll-target="#stacking-blocks">4.10. Stacking Blocks</a></li>
+  <li><a href="#final-projection" id="toc-final-projection" class="nav-link" data-scroll-target="#final-projection">4.11. Final Projection</a></li>
+  </ul></li>
+  <li><a href="#training-procedure" id="toc-training-procedure" class="nav-link" data-scroll-target="#training-procedure">5. Training Procedure</a></li>
+  <li><a href="#scaling-experiments-results" id="toc-scaling-experiments-results" class="nav-link" data-scroll-target="#scaling-experiments-results">6. Scaling Experiments &amp; Results</a></li>
+  <li><a href="#decoderonly-vs-encoderdecoder" id="toc-decoderonly-vs-encoderdecoder" class="nav-link" data-scroll-target="#decoderonly-vs-encoderdecoder">7. Decoder‑Only vs Encoder‑Decoder</a></li>
+  <li><a href="#finetuning-alignment-chatgpt" id="toc-finetuning-alignment-chatgpt" class="nav-link" data-scroll-target="#finetuning-alignment-chatgpt">8. Fine‑Tuning &amp; Alignment (ChatGPT)</a></li>
+  <li><a href="#nanogpt-repository-by-the-presenter" id="toc-nanogpt-repository-by-the-presenter" class="nav-link" data-scroll-target="#nanogpt-repository-by-the-presenter">9. nanogpt Repository (by the presenter)</a></li>
+  <li><a href="#takeaways-next-steps-1" id="toc-takeaways-next-steps-1" class="nav-link" data-scroll-target="#takeaways-next-steps-1">10. Take‑aways &amp; Next Steps</a></li>
+  <li><a href="#tokenization-mindmap-markdown-mermaid" id="toc-tokenization-mindmap-markdown-mermaid" class="nav-link" data-scroll-target="#tokenization-mindmap-markdown-mermaid">🧠 Tokenization Mind‑Map (Markdown + Mermaid)</a>
+  <ul class="collapse">
+  <li><a href="#mermaid-diagram" id="toc-mermaid-diagram" class="nav-link" data-scroll-target="#mermaid-diagram">Mermaid Diagram</a></li>
+  <li><a href="#plaintext-outline-for-quick-skim" id="toc-plaintext-outline-for-quick-skim" class="nav-link" data-scroll-target="#plaintext-outline-for-quick-skim">Plain‑Text Outline (for quick skim)</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Rahuketu86/solveit_z2h/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Summary-commonmark.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="lesson-1" class="level1">
+<h1>Lesson 1</h1>
+<section id="mindmap-of-the-lecture-building-understanding-micrograd" class="level2">
+<h2 class="anchored" data-anchor-id="mindmap-of-the-lecture-building-understanding-micrograd">🧠 Mindmap of the Lecture “Building &amp; Understanding Micrograd”</h2>
+<pre class="mermaid"><code>mindmap
+  root((Micrograd Lecture – Neural‑Net Training Under the Hood))
+
+  %% -------------------------------------------------
+  %% 1. Introduction &amp; Goals
+  %% -------------------------------------------------
+  Introduction
+    What we’ll do
+      • Start from a blank Jupyter notebook
+      • Define &amp; train a neural net step‑by‑step
+      • Peek “under the hood” of back‑propagation
+    Why it matters
+      • Intuitive grasp of gradient‑based learning
+      • Build a tiny autograd engine (micrograd)
+
+  %% -------------------------------------------------
+  %% 2. Micrograd – The Core Idea
+  %% -------------------------------------------------
+  Micrograd
+    Definition
+      • A **scalar‑valued autograd engine**
+      • Implements **automatic differentiation** (back‑prop)
+    Key Concepts
+      • **Value object** – wraps a scalar &amp; tracks graph info
+      • **Expression graph** – nodes = operations, edges = data flow
+      • **Forward pass** – compute output (e.g. g = …)
+      • **Backward pass** – propagate gradients via chain rule
+    Operations supported
+      • add (+)          – local derivative = 1
+      • mul (×)          – local derivative = other operand
+      • pow (^)          – local derivative = n·xⁿ⁻¹
+      • tanh (10h)       – local derivative = 1 – tanh²(x)
+      • neg, sqrt, div, … (can be added similarly)
+
+  %% -------------------------------------------------
+  %% 3. Derivative Intuition
+  %% -------------------------------------------------
+  Derivative Basics
+    • Definition: limₕ→0 (f(x+h) – f(x))/h
+    • Numerical approximation with tiny h (e.g. 0.001)
+    • Example: f(x)=3x²–4x+5 → f′(3)=14
+    • Sign tells direction of change (positive → increase)
+
+  %% -------------------------------------------------
+  %% 4. Building the Value Object
+  %% -------------------------------------------------
+  Value Object
+    Attributes
+      • data  – raw scalar
+      • grad  – ∂output/∂self (init 0)
+      • _prev – set of child nodes (for graph traversal)
+      • _op   – string name of operation that created it
+    Operator Overloads
+      • __add__(self, other) → Value
+      • __radd__(self, other) → Value (handles const + Value)
+      • __mul__(self, other) → Value
+      • __rmul__(self, other) → Value (handles const × Value)
+      • __pow__(self, exponent) → Value
+      • __neg__, __sub__, __truediv__ (via mul &amp; pow)
+    Local Backward Functions
+      • add:   self.grad += out.grad ; other.grad += out.grad
+      • mul:   self.grad += other.data * out.grad
+               other.grad += self.data * out.grad
+      • pow:   self.grad += exponent * (self.data**(exponent-1)) * out.grad
+      • tanh:  self.grad += (1 - self.data**2) * out.grad
+
+  %% -------------------------------------------------
+  %% 5. Graph Visualization
+  %% -------------------------------------------------
+  Graph Drawing (drawdot)
+    • Uses Graphviz (graphviz‑dot) to render nodes &amp; edges
+    • Shows operation nodes (e.g. “+”, “*”) and value nodes
+    • Helpful for debugging &amp; teaching
+
+  %% -------------------------------------------------
+  %% 6. Back‑Propagation Mechanics
+  %% -------------------------------------------------
+  Back‑Propagation
+    • Start at output node → set grad = 1
+    • **Topological sort** (DFS) to order nodes so children processed first
+    • Walk nodes in reverse topological order, calling each node’s _backward
+    • **Chain rule**: local derivative × upstream gradient
+    • Gradient accumulation (`+=`) – crucial when a node has multiple parents
+      – Fixed bug: previously used `=` causing overwrites (e.g. a + a)
+
+  %% -------------------------------------------------
+  %% 7. Numerical Gradient Checks
+  %% -------------------------------------------------
+  Gradient Check
+    • Perturb a leaf (e.g. a += h) → recompute output
+    • Approximate ∂output/∂a ≈ (f(a+h) – f(a))/h
+    • Verify against analytically computed grads
+
+  %% -------------------------------------------------
+  %% 8. Building Neural Networks with Micrograd
+  %% -------------------------------------------------
+  Neural‑Net Construction
+    Neuron
+      • Parameters: weights `w_i` (list of Value) + bias `b`
+      • Forward: Σ w_i·x_i + b → activation (tanh)
+    Layer
+      • List of Neurons (fully‑connected to same inputs)
+      • Forward: apply each neuron, collect outputs
+    MLP (Multi‑Layer Perceptron)
+      • Sequence of Layers
+      • Forward: feed output of one layer as input to next
+      • Example architecture: 3‑input → [4,4] hidden → 1‑output
+
+  %% -------------------------------------------------
+  %% 9. Loss Functions &amp; Training Loop
+  %% -------------------------------------------------
+  Loss &amp; Optimization
+    Loss (Mean‑Squared‑Error)
+      • L = Σ (y_pred – y_true)²
+      • Gradient w.r.t. each prediction = 2·(y_pred – y_true)
+    Training Loop (Stochastic Gradient Descent)
+      1. Zero grads (`p.grad = 0` for all params)
+      2. Forward pass → compute loss
+      3. Backward pass (`loss.backward()`)
+      4. Parameter update: `p.data -= lr * p.grad`
+      5. Repeat (adjust learning‑rate, optionally decay)
+    Common Pitfalls
+      • Forgetting to zero grads → gradient accumulation bug
+      • Too large learning rate → overshoot / divergence
+      • Too small → slow convergence
+
+  %% -------------------------------------------------
+  %% 10. Comparison with PyTorch
+  %% -------------------------------------------------
+  PyTorch Parallel
+    • Same API: `torch.tensor`, `requires_grad=True`
+    • Autograd automatically builds the same graph (but with tensors)
+    • Forward &amp; backward behave identically for scalar case
+    • Example: replicate micrograd network using `torch.nn.Module`
+    • Extending PyTorch
+      – Register custom ops (forward + backward) via `torch.autograd.Function`
+      – Example shown for a cubic polynomial
+
+  %% -------------------------------------------------
+  │ 11. Advanced Topics (Briefly Mentioned)
+  %% -------------------------------------------------
+  Advanced Topics
+    • Batching &amp; mini‑batch SGD (process subsets of data)
+    • Cross‑entropy loss for classification
+    • L2 regularization (weight decay) for better generalization
+    • Learning‑rate schedules (decay, momentum, Adam, etc.)
+    • Scaling to billions of parameters (e.g., GPT‑style models)
+
+  %% -------------------------------------------------
+  %% 12. Summary &amp; Take‑aways
+  %% -------------------------------------------------
+  Summary
+    • Neural nets = **compositional mathematical expressions**
+    • **Back‑prop = recursive application of the chain rule**
+    • Micrograd shows the **minimal code** needed (≈150 lines)
+    • Real libraries (PyTorch) add **tensor efficiency** but same math
+    • Understanding the core mechanics helps debug &amp; extend models</code></pre>
+<section id="how-to-read-the-mindmap" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-read-the-mindmap">How to Read the Mindmap</h3>
+<ul>
+<li><strong>Indentation</strong> → hierarchy (main topic → sub‑topic → details).<br>
+</li>
+<li><strong>Bold headings</strong> indicate the most important concepts.<br>
+</li>
+<li><strong>Arrows (→)</strong> show data flow or process steps (e.g., forward → backward).<br>
+</li>
+<li><strong>Bullet points</strong> under each node give concrete examples, code snippets, or key take‑aways.</li>
+</ul>
+<p>Feel free to copy the Mermaid block into any Markdown viewer that supports Mermaid (e.g., GitHub, VS Code, Jupyter with <code>%%mermaid</code>) to see the visual mindmap. Happy learning! 🚀 # Lesson 2</p>
+</section>
+</section>
+</section>
+<section id="makemore-characterlevel-language-modeling-mindmap" class="level1">
+<h1>🧠 Make‑More: Character‑Level Language Modeling Mind‑Map</h1>
+<p><em>(All concepts are derived from the transcript. Indentation = hierarchy.)</em></p>
+<hr>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">1️⃣ Overview</h2>
+<ul>
+<li><strong>Goal</strong> – Re‑implement <em>micrograd</em>‑style learning on a new repo <strong>make‑more</strong>.<br>
+</li>
+<li><strong>Dataset</strong> – <code>names.txt</code> (~32 000 unique names scraped from a government site).<br>
+</li>
+<li><strong>Use‑case</strong> – Generate novel, name‑like strings (e.g., baby‑name suggestions).</li>
+</ul>
+<hr>
+</section>
+<section id="core-idea-characterlevel-language-model" class="level2">
+<h2 class="anchored" data-anchor-id="core-idea-characterlevel-language-model">2️⃣ Core Idea: Character‑Level Language Model</h2>
+<ul>
+<li><strong>Treat each name as a sequence of characters</strong> (including start &amp; end tokens).<br>
+</li>
+<li><strong>Model task</strong> – Predict the <em>next</em> character given the previous one(s).</li>
+</ul>
+<hr>
+</section>
+<section id="bigram-2gram-model-the-simple-baseline" class="level2">
+<h2 class="anchored" data-anchor-id="bigram-2gram-model-the-simple-baseline">3️⃣ Bigram (2‑gram) Model – The Simple Baseline</h2>
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">3.1 Data Preparation</h3>
+<ul>
+<li>Load <code>names.txt</code> → massive string → <code>splitlines()</code> → list <code>words</code>.<br>
+</li>
+<li>Compute:
+<ul>
+<li><code>num_words ≈ 32 000</code><br>
+</li>
+<li><code>min_len = 2</code>, <code>max_len = 15</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="extracting-bigrams" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-bigrams">3.2 Extracting Bigrams</h3>
+<ul>
+<li><p>For each word <code>w</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c1, c2 <span class="kw">in</span> <span class="bu">zip</span>(w, w[<span class="dv">1</span>:]):   <span class="co"># sliding window of size 2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    bigram <span class="op">=</span> (c1, c2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Add <strong>special start token</strong> <code>.</code> before the first char and <strong>end token</strong> <code>.</code> after the last char.</p></li>
+</ul>
+</section>
+<section id="counting-frequencies-dictionary-2d-tensor" class="level3">
+<h3 class="anchored" data-anchor-id="counting-frequencies-dictionary-2d-tensor">3.3 Counting Frequencies (Dictionary → 2‑D Tensor)</h3>
+<ul>
+<li><code>counts[prev_char, next_char] += 1</code> (default 0).<br>
+</li>
+<li>Convert to a <strong>28 × 28</strong> integer tensor (<code>torch.int32</code>).
+<ul>
+<li>26 letters + <strong>start</strong> (<code>.</code>) + <strong>end</strong> (<code>.</code>).</li>
+</ul></li>
+</ul>
+</section>
+<section id="visualisation-matplotlib" class="level3">
+<h3 class="anchored" data-anchor-id="visualisation-matplotlib">3.4 Visualisation (matplotlib)</h3>
+<ul>
+<li>Heat‑map of the count matrix.<br>
+</li>
+<li>Observations:
+<ul>
+<li>Rows/columns for start/end tokens are mostly zeros (they never appear in the “wrong” position).</li>
+</ul></li>
+</ul>
+</section>
+<section id="refinement-of-token-set" class="level3">
+<h3 class="anchored" data-anchor-id="refinement-of-token-set">3.5 Refinement of Token Set</h3>
+<ul>
+<li>Collapse to <strong>27 × 27</strong> matrix (single special token).<br>
+</li>
+<li>Re‑index:
+<ul>
+<li><code>.</code> → index 0, <code>a</code> → 1, …, <code>z</code> → 26.</li>
+</ul></li>
+</ul>
+</section>
+<section id="from-counts-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="from-counts-probabilities">3.6 From Counts → Probabilities</h3>
+<ul>
+<li><p>Row‑wise normalization:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> counts.<span class="bu">float</span>() <span class="op">/</span> counts.<span class="bu">sum</span>(dim<span class="op">=</span><span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Each row now sums to <strong>1</strong> → a categorical distribution for the next character.</p></li>
+</ul>
+</section>
+<section id="sampling-names-using-the-bigram-table" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-names-using-the-bigram-table">3.7 Sampling Names (using the bigram table)</h3>
+<ul>
+<li>Start at index 0 (<code>.</code>).<br>
+</li>
+<li>Loop:
+<ol type="1">
+<li>Grab current row <code>p = probs[current_idx]</code>.<br>
+</li>
+<li>Sample <code>next_idx = torch.multinomial(p, 1, replacement=True, generator=g)</code>.<br>
+</li>
+<li>Break if <code>next_idx == 0</code> (end token).<br>
+</li>
+<li>Append the decoded character.</li>
+</ol></li>
+</ul>
+</section>
+<section id="model-evaluation-likelihood" class="level3">
+<h3 class="anchored" data-anchor-id="model-evaluation-likelihood">3.8 Model Evaluation – Likelihood</h3>
+<ul>
+<li><strong>Likelihood</strong> = product of probabilities assigned to the true bigrams.<br>
+</li>
+<li><strong>Log‑likelihood</strong> = sum of <code>log(p_i)</code>.<br>
+</li>
+<li><strong>Negative Log‑Likelihood (NLL)</strong> = <code>‑log_likelihood</code> → standard loss (lower is better).<br>
+</li>
+<li>Example: NLL ≈ <strong>2.4–2.5</strong> on the full training set.</li>
+</ul>
+</section>
+<section id="smoothing-to-avoid-zero-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="smoothing-to-avoid-zero-probabilities">3.9 Smoothing (to avoid zero probabilities)</h3>
+<ul>
+<li>Add a small constant (e.g., <code>+1</code>) to every count before normalisation.<br>
+</li>
+<li>Guarantees non‑zero probabilities → prevents infinite NLL for unseen bigrams.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="neuralnetwork-reimplementation-gradientbased" class="level2">
+<h2 class="anchored" data-anchor-id="neuralnetwork-reimplementation-gradientbased">4️⃣ Neural‑Network Re‑Implementation (Gradient‑Based)</h2>
+<section id="why-switch" class="level3">
+<h3 class="anchored" data-anchor-id="why-switch">4.1 Why Switch?</h3>
+<ul>
+<li>Counting works for bigrams but <strong>doesn’t scale</strong> to longer contexts (e.g., 10‑grams).<br>
+</li>
+<li>Neural nets can learn <strong>compact, differentiable</strong> representations for arbitrary context lengths.</li>
+</ul>
+</section>
+<section id="data-encoding-onehot-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="data-encoding-onehot-vectors">4.2 Data Encoding – One‑Hot Vectors</h3>
+<ul>
+<li>Map each character index <code>i</code> → 27‑dimensional one‑hot vector <code>x_i</code>.<br>
+</li>
+<li>Use <code>torch.nn.functional.one_hot(indices, num_classes=27)</code>.<br>
+</li>
+<li>Cast to <code>float32</code> for NN input.</li>
+</ul>
+</section>
+<section id="model-architecture-initially" class="level3">
+<h3 class="anchored" data-anchor-id="model-architecture-initially">4.3 Model Architecture (initially)</h3>
+<ul>
+<li><p><strong>Linear layer</strong> (no bias): <code>logits = x @ W</code></p>
+<ul>
+<li><code>W</code> shape <strong>27 × 27</strong> (each row = log‑counts for a given previous character).<br>
+</li>
+</ul></li>
+<li><p><strong>Softmax</strong> → probabilities:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> torch.softmax(logits, dim<span class="op">=</span><span class="dv">1</span>)   <span class="co"># exponentiate + normalise internally</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+</section>
+<section id="forward-pass-vectorised" class="level3">
+<h3 class="anchored" data-anchor-id="forward-pass-vectorised">4.4 Forward Pass (vectorised)</h3>
+<ol type="1">
+<li><p>Encode all inputs → <code>X</code> (N × 27).<br>
+</p></li>
+<li><p>Compute <code>logits = X @ W</code>.<br>
+</p></li>
+<li><p><code>probs = softmax(logits)</code>.<br>
+</p></li>
+<li><p>Gather the probability of the <em>true</em> next character:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>true_probs <span class="op">=</span> probs[torch.arange(N), targets]   <span class="co"># targets = next‑char indices</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Compute <strong>NLL loss</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="op">-</span>torch.log(true_probs).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+</section>
+<section id="backpropagation-parameter-update" class="level3">
+<h3 class="anchored" data-anchor-id="backpropagation-parameter-update">4.5 Back‑Propagation &amp; Parameter Update</h3>
+<ul>
+<li><p>Zero grads: <code>W.grad = None</code>.<br>
+</p></li>
+<li><p><code>loss.backward()</code> → fills <code>W.grad</code>.<br>
+</p></li>
+<li><p>Gradient descent step (e.g., SGD):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>W.data <span class="op">-=</span> lr <span class="op">*</span> W.grad</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Repeat for many epochs → loss drops from ~3.8 → ~2.4 (matches counting approach).</p></li>
+</ul>
+</section>
+<section id="practical-pytorch-tips-from-the-transcript" class="level3">
+<h3 class="anchored" data-anchor-id="practical-pytorch-tips-from-the-transcript">4.6 Practical PyTorch Tips (from the transcript)</h3>
+<ul>
+<li><code>torch.tensor</code> vs <code>torch.Tensor</code> → prefer lowercase <code>torch.tensor</code> for float tensors.<br>
+</li>
+<li><strong>Broadcasting</strong>: dividing a (27 × 27) matrix by a (27 × 1) column works because the column is broadcast across rows.<br>
+</li>
+<li><code>requires_grad=True</code> on parameters to enable autograd.<br>
+</li>
+<li>Use <code>torch.Generator</code> with a fixed seed for deterministic sampling.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="regularisation-implicit-smoothing" class="level2">
+<h2 class="anchored" data-anchor-id="regularisation-implicit-smoothing">5️⃣ Regularisation &amp; Implicit Smoothing</h2>
+<ul>
+<li><p><strong>L2 regularisation</strong> (weight decay) on <code>W</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> λ <span class="op">*</span> (W<span class="op">**</span><span class="dv">2</span>).mean()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>loss_total <span class="op">=</span> loss <span class="op">+</span> reg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>When <code>W</code> → 0, logits become uniform → equivalent to <strong>label smoothing</strong>.<br>
+</p></li>
+<li><p>Adjust λ to control the trade‑off between fitting data and keeping probabilities smooth.</p></li>
+</ul>
+<hr>
+</section>
+<section id="scaling-beyond-bigrams" class="level2">
+<h2 class="anchored" data-anchor-id="scaling-beyond-bigrams">6️⃣ Scaling Beyond Bigrams</h2>
+<section id="wordlevel-modeling" class="level3">
+<h3 class="anchored" data-anchor-id="wordlevel-modeling">6.1 Word‑Level Modeling</h3>
+<ul>
+<li>Extend the same pipeline to <strong>tokens = words</strong> (instead of characters).<br>
+</li>
+<li>Larger vocab → larger embedding/linear layers.</li>
+</ul>
+</section>
+<section id="longer-contexts-ngrams-rnns-transformers" class="level3">
+<h3 class="anchored" data-anchor-id="longer-contexts-ngrams-rnns-transformers">6.2 Longer Contexts (n‑grams, RNNs, Transformers)</h3>
+<ul>
+<li>Feed <strong>multiple previous characters</strong> (or embeddings) into deeper networks:
+<ul>
+<li><strong>RNN / LSTM</strong> → hidden state carries history.<br>
+</li>
+<li><strong>Transformer</strong> → self‑attention over the whole context.<br>
+</li>
+</ul></li>
+<li>Output layer always produces <strong>logits → softmax → probability distribution</strong> for the next token.</li>
+</ul>
+</section>
+<section id="why-neural-nets-scale" class="level3">
+<h3 class="anchored" data-anchor-id="why-neural-nets-scale">6.3 Why Neural Nets Scale</h3>
+<ul>
+<li>Counting tables would explode (<code>|V|^k</code> entries for k‑gram).<br>
+</li>
+<li>Parameter sharing in NN (weights) keeps model size <strong>linear</strong> in vocabulary size, not exponential in context length.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="future-roadmap-as-hinted-in-the-talk" class="level2">
+<h2 class="anchored" data-anchor-id="future-roadmap-as-hinted-in-the-talk">7️⃣ Future Roadmap (as hinted in the talk)</h2>
+<ol type="1">
+<li><strong>Word‑level language model</strong> – generate full sentences.<br>
+</li>
+<li><strong>Image‑text models</strong> – e.g., DALL·E, Stable Diffusion.<br>
+</li>
+<li><strong>Full transformer implementation</strong> – equivalent to GPT‑2 at character level, then scale up.</li>
+</ol>
+<hr>
+</section>
+<section id="quick-reference-cheatsheet" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference-cheatsheet">8️⃣ Quick Reference Cheat‑Sheet</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 41%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Symbol / Code</th>
+<th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Start token</strong></td>
+<td><code>.</code> (index 0)</td>
+<td>Marks beginning of a name</td>
+</tr>
+<tr class="even">
+<td><strong>End token</strong></td>
+<td><code>.</code> (index 0 after collapse)</td>
+<td>Marks termination</td>
+</tr>
+<tr class="odd">
+<td><strong>Bigram count matrix</strong></td>
+<td><code>N</code> (28 × 28)</td>
+<td>Raw frequencies</td>
+</tr>
+<tr class="even">
+<td><strong>Probability matrix</strong></td>
+<td><code>P = N / N.sum(dim=1, keepdim=True)</code></td>
+<td>Row‑wise categorical distribution</td>
+</tr>
+<tr class="odd">
+<td><strong>One‑hot encoding</strong></td>
+<td><code>x_i = F.one_hot(i, 27).float()</code></td>
+<td>Turns integer index into NN input</td>
+</tr>
+<tr class="even">
+<td><strong>Weight matrix</strong></td>
+<td><code>W</code> (27 × 27)</td>
+<td>Learns log‑counts (logits)</td>
+</tr>
+<tr class="odd">
+<td><strong>Softmax</strong></td>
+<td><code>torch.softmax(logits, dim=1)</code></td>
+<td>Turns logits → probabilities</td>
+</tr>
+<tr class="even">
+<td><strong>Negative Log‑Likelihood</strong></td>
+<td><code>loss = -log(p_true).mean()</code></td>
+<td>Optimisation objective</td>
+</tr>
+<tr class="odd">
+<td><strong>Gradient step</strong></td>
+<td><code>W.data -= lr * W.grad</code></td>
+<td>Simple SGD update</td>
+</tr>
+<tr class="even">
+<td><strong>L2 regularisation</strong></td>
+<td><code>λ * (W**2).mean()</code></td>
+<td>Encourages smoother (more uniform) predictions</td>
+</tr>
+<tr class="odd">
+<td><strong>Sampling loop</strong></td>
+<td><code>while idx != 0: idx = torch.multinomial(P[idx], 1)</code></td>
+<td>Generates a new name</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<section id="takeaway" class="level3">
+<h3 class="anchored" data-anchor-id="takeaway">🎉 Take‑away</h3>
+<ul>
+<li><strong>Counting bigrams</strong> gives a perfect baseline (NLL ≈ 2.4).<br>
+</li>
+<li><strong>Training the same model with gradient descent</strong> reproduces the baseline <em>and</em> provides a flexible foundation for more powerful architectures (RNNs, Transformers).<br>
+</li>
+<li>Understanding <strong>tensor shapes, broadcasting, and autograd</strong> is essential for scaling up.</li>
+</ul>
+<p><em>Happy modeling!</em> 🚀 # Lesson 3</p>
+</section>
+</section>
+</section>
+<section id="comprehensive-mindmap-of-the-makemore-lecture" class="level1">
+<h1>🧠 Comprehensive Mind‑Map of the “Makemore” Lecture</h1>
+<p><em>(All points are derived from the transcript. The hierarchy reflects the logical flow of ideas, concepts, and implementation details.)</em></p>
+<hr>
+<section id="introduction-recap" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-recap">1️⃣ Introduction &amp; Recap</h2>
+<ul>
+<li><strong>Previous lecture</strong>
+<ul>
+<li>Implemented a <strong>bigram language model</strong>
+<ul>
+<li>Count‑based version → normalized to probabilities (rows sum to 1)<br>
+</li>
+<li>Simple neural net with a <strong>single linear layer</strong><br>
+</li>
+</ul></li>
+<li><strong>Limitation:</strong> only one previous character → poor “name‑like” predictions</li>
+</ul></li>
+<li><strong>Problem with extending the count table</strong>
+<ul>
+<li>Context length <em>k</em> → table size grows <strong>exponentially</strong> (<code>27^k</code> for characters)<br>
+</li>
+<li>Too many rows → insufficient counts → model “explodes”</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="moving-to-a-multilayer-perceptron-mlp" class="level2">
+<h2 class="anchored" data-anchor-id="moving-to-a-multilayer-perceptron-mlp">2️⃣ Moving to a Multi‑Layer Perceptron (MLP)</h2>
+<ul>
+<li><strong>Goal:</strong> Predict next character using <strong>multiple previous characters</strong> as context.<br>
+</li>
+<li><strong>Reference paper:</strong> <em>Bengio et al., 2003</em> (word‑level, but ideas transfer).</li>
+</ul>
+<section id="core-idea-from-the-paper" class="level3">
+<h3 class="anchored" data-anchor-id="core-idea-from-the-paper">2.1 Core Idea from the Paper</h3>
+<ul>
+<li><strong>Word embeddings:</strong> each word → 30‑dimensional vector (random init, learned).<br>
+</li>
+<li><strong>Neural net:</strong>
+<ol type="1">
+<li><strong>Embedding lookup</strong> → concatenate embeddings of previous <em>n</em> words.<br>
+</li>
+<li><strong>Hidden layer</strong> (size = hyper‑parameter).<br>
+</li>
+<li><strong>Linear output layer</strong> → logits for all possible next tokens.<br>
+</li>
+<li><strong>Softmax</strong> → probability distribution.<br>
+</li>
+</ol></li>
+<li><strong>Training objective:</strong> Maximize log‑likelihood (same as cross‑entropy).</li>
+</ul>
+</section>
+<section id="adapting-to-characters" class="level3">
+<h3 class="anchored" data-anchor-id="adapting-to-characters">2.2 Adapting to Characters</h3>
+<ul>
+<li>Vocabulary = <strong>27 characters</strong> (a‑z + “.”).<br>
+</li>
+<li>Embedding dimension initially <strong>2</strong> (for easy visualization).<br>
+</li>
+<li>Context length (block size) = <strong>3</strong> characters (can be changed).</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="implementation-details-pytorch" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-details-pytorch">3️⃣ Implementation Details (PyTorch)</h2>
+<section id="data-preparation-1" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation-1">3.1 Data Preparation</h3>
+<ul>
+<li><strong>Build dataset</strong> (<code>x</code>, <code>y</code>):
+<ul>
+<li><code>x</code> = list of <em>block‑size</em> integer indices (context).<br>
+</li>
+<li><code>y</code> = integer index of the next character.<br>
+</li>
+<li>Pad with zeros for the first <em>block‑size</em> positions.<br>
+</li>
+</ul></li>
+<li>Example (word “emma”):
+<ul>
+<li>Context <code>[0,0, e] → label m</code>, <code>[0, e, m] → label m</code>, …</li>
+</ul></li>
+</ul>
+</section>
+<section id="embedding-lookup-c" class="level3">
+<h3 class="anchored" data-anchor-id="embedding-lookup-c">3.2 Embedding Lookup (<code>C</code>)</h3>
+<ul>
+<li><code>C</code> shape: <strong>27 × 2</strong> (rows = characters, cols = embedding dim).<br>
+</li>
+<li>Two equivalent ways to embed an index <code>i</code>:
+<ol type="1">
+<li>Direct indexing: <code>C[i]</code>.<br>
+</li>
+<li>One‑hot → matrix multiplication: <code>one_hot(i) @ C</code>.<br>
+</li>
+</ol></li>
+<li>For a batch <code>x</code> (shape <code>B × 3</code>): <code>C[x]</code> → <strong>B × 3 × 2</strong> tensor.</li>
+</ul>
+</section>
+<section id="flattening-the-context" class="level3">
+<h3 class="anchored" data-anchor-id="flattening-the-context">3.3 Flattening the Context</h3>
+<ul>
+<li>Need shape <strong>B × (3 × 2) = B × 6</strong> to feed the hidden layer.<br>
+</li>
+<li><strong>Methods:</strong>
+<ul>
+<li><code>torch.cat([c0, c1, c2], dim=1)</code> (naïve, not generic).<br>
+</li>
+<li><code>torch.unbind(x, dim=1)</code> → tuple of tensors → <code>torch.cat(..., dim=1)</code>.<br>
+</li>
+<li><strong>Best:</strong> <code>C[x].view(B, -1)</code> (uses <code>view</code> → no extra memory).</li>
+</ul></li>
+</ul>
+</section>
+<section id="hidden-layer" class="level3">
+<h3 class="anchored" data-anchor-id="hidden-layer">3.4 Hidden Layer</h3>
+<ul>
+<li>Weight matrix <code>W1</code>: <strong>6 × H</strong> (H = hidden size, e.g., 100).<br>
+</li>
+<li>Bias <code>b1</code>: <strong>H</strong>.<br>
+</li>
+<li>Activation: <strong>tanh</strong> (<code>torch.tanh</code>).</li>
+</ul>
+</section>
+<section id="output-layer" class="level3">
+<h3 class="anchored" data-anchor-id="output-layer">3.5 Output Layer</h3>
+<ul>
+<li>Weight matrix <code>W2</code>: <strong>H × 27</strong>.<br>
+</li>
+<li>Bias <code>b2</code>: <strong>27</strong>.<br>
+</li>
+<li>Logits: <code>h @ W2 + b2</code> → shape <strong>B × 27</strong>.</li>
+</ul>
+</section>
+<section id="loss-computation" class="level3">
+<h3 class="anchored" data-anchor-id="loss-computation">3.6 Loss Computation</h3>
+<ul>
+<li><strong>Manual:</strong>
+<ul>
+<li><code>logits.exp()</code> → “counts”.<br>
+</li>
+<li>Normalize → probabilities.<br>
+</li>
+<li>Pick probability of true class → <code>-log(p_true)</code>.<br>
+</li>
+</ul></li>
+<li><strong>Preferred:</strong> <code>torch.nn.functional.cross_entropy(logits, y)</code>
+<ul>
+<li>Faster (fused kernels).<br>
+</li>
+<li>Numerically stable (log‑softmax internally).</li>
+</ul></li>
+</ul>
+</section>
+<section id="training-loop-core-steps" class="level3">
+<h3 class="anchored" data-anchor-id="training-loop-core-steps">3.7 Training Loop (Core Steps)</h3>
+<ol type="1">
+<li>Zero grads: <code>p.grad = None</code> for each parameter.<br>
+</li>
+<li>Forward pass → loss.<br>
+</li>
+<li><code>loss.backward()</code> → gradients.<br>
+</li>
+<li>Parameter update: <code>p -= lr * p.grad</code>.</li>
+</ol>
+</section>
+<section id="minibatch-training" class="level3">
+<h3 class="anchored" data-anchor-id="minibatch-training">3.8 Mini‑Batch Training</h3>
+<ul>
+<li><strong>Why:</strong> Full dataset (~228 k examples) → too slow.<br>
+</li>
+<li><strong>How:</strong>
+<ul>
+<li>Sample random indices <code>ix = torch.randint(0, N, (batch_size,))</code>.<br>
+</li>
+<li>Use <code>x[ix]</code>, <code>y[ix]</code> for each iteration.<br>
+</li>
+</ul></li>
+<li><strong>Effect:</strong> Noisy gradient → need more steps, but far faster.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="hyperparameter-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="hyperparameter-exploration">4️⃣ Hyper‑Parameter Exploration</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 25%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Hyper‑parameter</th>
+<th>Description</th>
+<th>Typical Values (used)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>block_size</code></td>
+<td>Number of previous characters</td>
+<td>3 (tried 4, 5, 10)</td>
+</tr>
+<tr class="even">
+<td><code>embed_dim</code></td>
+<td>Dimensionality of character embeddings</td>
+<td>2 (visual), 10 (better)</td>
+</tr>
+<tr class="odd">
+<td><code>hidden_size</code></td>
+<td>Neurons in hidden layer</td>
+<td>100 → 200 → 300</td>
+</tr>
+<tr class="even">
+<td><code>lr</code> (learning rate)</td>
+<td>Step size for SGD</td>
+<td>0.1 (good), 0.01 (fine‑tune), 0.001 (slow)</td>
+</tr>
+<tr class="odd">
+<td><code>batch_size</code></td>
+<td>Mini‑batch size</td>
+<td>32 (default), can increase</td>
+</tr>
+<tr class="even">
+<td><code>num_steps</code></td>
+<td>Training iterations</td>
+<td>10 k → 200 k (long runs)</td>
+</tr>
+<tr class="odd">
+<td><code>lr_decay</code></td>
+<td>Reduce LR after N steps</td>
+<td>×0.1 after 100 k steps</td>
+</tr>
+</tbody>
+</table>
+<section id="learningrate-search-practical-trick" class="level3">
+<h3 class="anchored" data-anchor-id="learningrate-search-practical-trick">4.1 Learning‑Rate Search (Practical Trick)</h3>
+<ul>
+<li>Sweep <strong>log‑space</strong>: <code>lr_exps = torch.linspace(-3, 0, steps=1000)</code> → <code>lrs = 10**lr_exps</code>.<br>
+</li>
+<li>Run a few steps for each LR, record loss → plot <strong>LR vs.&nbsp;loss</strong>.<br>
+</li>
+<li>Choose LR in the “valley” (e.g., <code>10⁻¹ = 0.1</code>).</li>
+</ul>
+</section>
+<section id="overunderfitting-diagnosis" class="level3">
+<h3 class="anchored" data-anchor-id="overunderfitting-diagnosis">4.2 Over‑/Under‑Fitting Diagnosis</h3>
+<ul>
+<li><strong>Training loss ≈ validation loss</strong> → <strong>under‑fitting</strong> (model too small).<br>
+</li>
+<li><strong>Training loss &lt;&lt; validation loss</strong> → <strong>over‑fitting</strong> (model too large).<br>
+</li>
+<li>Adjust hidden size, embed dim, or regularization accordingly.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="data-splits-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="data-splits-evaluation">5️⃣ Data Splits &amp; Evaluation</h2>
+<ol type="1">
+<li><strong>Training set</strong> – ~80 % of words (≈ 25 k examples).<br>
+</li>
+<li><strong>Dev/validation set</strong> – ~10 % (≈ 3 k examples).<br>
+</li>
+<li><strong>Test set</strong> – remaining ~10 % (≈ 2 k examples).</li>
+</ol>
+<ul>
+<li><strong>Training</strong> uses only the training split.<br>
+</li>
+<li><strong>Hyper‑parameter tuning</strong> uses the dev set.<br>
+</li>
+<li><strong>Final performance</strong> reported on the test set <strong>once</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="embedding-visualization-2d-case" class="level2">
+<h2 class="anchored" data-anchor-id="embedding-visualization-2d-case">6️⃣ Embedding Visualization (2‑D case)</h2>
+<ul>
+<li>After training with <code>embed_dim = 2</code>, plot each character:
+<ul>
+<li><code>x = C[:,0]</code>, <code>y = C[:,1]</code>.<br>
+</li>
+<li>Annotate with the character symbol.<br>
+</li>
+</ul></li>
+<li>Observations:
+<ul>
+<li>Vowels cluster together → network learns similarity.<br>
+</li>
+<li>Rare symbols (e.g., “q”, “.”) occupy distinct regions.</li>
+</ul></li>
+</ul>
+<p><em>When <code>embed_dim</code> &gt; 2, direct 2‑D plot isn’t possible; consider PCA/t‑SNE.</em></p>
+<hr>
+</section>
+<section id="sampling-from-the-trained-model" class="level2">
+<h2 class="anchored" data-anchor-id="sampling-from-the-trained-model">7️⃣ Sampling from the Trained Model</h2>
+<ol type="1">
+<li><strong>Initialize context</strong> with three “.” (or any start token).<br>
+</li>
+<li>Loop:
+<ul>
+<li>Embed current context → hidden state → logits.<br>
+</li>
+<li><code>prob = torch.softmax(logits, dim=-1)</code>.<br>
+</li>
+<li>Sample next token: <code>next_idx = torch.multinomial(prob, 1)</code>.<br>
+</li>
+<li>Shift context window, append <code>next_idx</code>.<br>
+</li>
+</ul></li>
+<li>Convert indices back to characters → generated string.</li>
+</ol>
+<ul>
+<li>Generated examples look <strong>more name‑like</strong> (e.g., “ham joes”, “emily”).</li>
+</ul>
+<hr>
+</section>
+<section id="practical-tips-extras" class="level2">
+<h2 class="anchored" data-anchor-id="practical-tips-extras">8️⃣ Practical Tips &amp; Extras</h2>
+<ul>
+<li><strong>Tensor indexing tricks</strong> (list, 1‑D tensor, multi‑dim tensor) → <code>C[x]</code>.<br>
+</li>
+<li><strong><code>view</code> vs.&nbsp;<code>reshape</code></strong> – <code>view</code> is a <em>no‑copy</em> operation (fast).<br>
+</li>
+<li><strong>Broadcasting</strong> – Adding bias <code>b1</code> to hidden activations works automatically (<code>B×H</code> + <code>H</code>).<br>
+</li>
+<li><strong>Avoid hard‑coding</strong> magic numbers; use variables (<code>block_size</code>, <code>embed_dim</code>).<br>
+</li>
+<li><strong>Google Colab</strong> – Ready‑to‑run notebook, no local install needed (link provided in video).</li>
+</ul>
+<hr>
+</section>
+<section id="takeaways-next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="takeaways-next-steps">9️⃣ Take‑aways &amp; Next Steps</h2>
+<ul>
+<li><strong>Achieved</strong>: Loss ≈ 2.17 (better than bigram ≈ 2.45).<br>
+</li>
+<li><strong>Open knobs for improvement</strong>:
+<ul>
+<li>Increase hidden size / embedding dimension.<br>
+</li>
+<li>Use longer context (<code>block_size</code>).<br>
+</li>
+<li>Experiment with different optimizers (Adam, RMSprop).<br>
+</li>
+<li>Add regularization (weight decay, dropout).<br>
+</li>
+<li>Train longer with proper learning‑rate schedule.<br>
+</li>
+</ul></li>
+<li><strong>Read the paper</strong> (Bengio et al., 2003) for deeper insights &amp; advanced ideas.</li>
+</ul>
+<hr>
+<section id="quick-reference-pseudocode" class="level3">
+<h3 class="anchored" data-anchor-id="quick-reference-pseudocode">📌 Quick Reference (Pseudo‑code)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Build dataset</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> build_dataset(words, block_size<span class="op">=</span><span class="dv">3</span>)   <span class="co"># x: (N,3), y: (N,)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Model components</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>C   <span class="op">=</span> torch.randn(<span class="dv">27</span>, embed_dim, requires_grad<span class="op">=</span><span class="va">True</span>)   <span class="co"># embedding table</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>W1  <span class="op">=</span> torch.randn(<span class="dv">3</span><span class="op">*</span>embed_dim, hidden, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>b1  <span class="op">=</span> torch.randn(hidden, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>W2  <span class="op">=</span> torch.randn(hidden, <span class="dv">27</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>b2  <span class="op">=</span> torch.randn(<span class="dv">27</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Forward pass (batch)</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward(x_batch):</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    e <span class="op">=</span> C[x_batch]                <span class="co"># (B,3,embed_dim)</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    e <span class="op">=</span> e.view(e.shape[<span class="dv">0</span>], <span class="op">-</span><span class="dv">1</span>)    <span class="co"># (B,3*embed_dim)</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> torch.tanh(e <span class="op">@</span> W1 <span class="op">+</span> b1)   <span class="co"># (B,hidden)</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> h <span class="op">@</span> W2 <span class="op">+</span> b2          <span class="co"># (B,27)</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> logits</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Training loop (mini‑batch)</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> step <span class="kw">in</span> <span class="bu">range</span>(num_steps):</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    ix <span class="op">=</span> torch.randint(<span class="dv">0</span>, N, (batch_size,))</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> forward(x[ix])</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    loss   <span class="op">=</span> F.cross_entropy(logits, y[ix])</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    loss.backward()</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> [C,W1,b1,W2,b2]:</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        p.data <span class="op">-=</span> lr <span class="op">*</span> p.grad</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        p.grad.zero_()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<p><em>End of mind‑map.</em><br>
+# Lesson 4</p>
+</section>
+</section>
+</section>
+<section id="mindmap-of-the-lecture" class="level1">
+<h1>🧠 Mind‑Map of the Lecture</h1>
+<p><em>(All points are derived from the transcript. The hierarchy shows the logical flow and relationships between concepts.)</em></p>
+<hr>
+<section id="recap-multilayer-perceptron-mlp-for-characterlevel-language-modelling" class="level2">
+<h2 class="anchored" data-anchor-id="recap-multilayer-perceptron-mlp-for-characterlevel-language-modelling">1️⃣ Recap: Multi‑Layer Perceptron (MLP) for character‑level language modelling</h2>
+<ul>
+<li>Implemented following <strong>Benj 2003</strong> (MLP → next‑character prediction).<br>
+</li>
+<li><strong>Current status</strong>
+<ul>
+<li>11 k parameters, 200 k training steps, batch‑size = 32.<br>
+</li>
+<li>Training/validation loss ≈ 2.16.<br>
+</li>
+<li>Sampling produces readable but imperfect words.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="why-look-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="why-look-deeper">2️⃣ Why look deeper?</h2>
+<ul>
+<li>Goal: move to <strong>recurrent / LSTM / GRU</strong> networks.<br>
+</li>
+<li><strong>Prerequisite:</strong> solid intuition of <strong>activations</strong> &amp; <strong>gradients</strong> during training.<br>
+</li>
+<li>Understanding these dynamics explains why RNNs are <strong>hard to optimise</strong> with plain first‑order methods.</li>
+</ul>
+<hr>
+</section>
+<section id="problem-1-bad-initialisation-of-the-mlp" class="level2">
+<h2 class="anchored" data-anchor-id="problem-1-bad-initialisation-of-the-mlp">3️⃣ Problem #1 – Bad Initialisation of the MLP</h2>
+<section id="observed-symptom" class="level3">
+<h3 class="anchored" data-anchor-id="observed-symptom">3.1 Observed symptom</h3>
+<ul>
+<li><strong>Loss at iteration 0:</strong> 27 → much higher than expected.</li>
+</ul>
+</section>
+<section id="expected-loss-for-a-uniform-softmax" class="level3">
+<h3 class="anchored" data-anchor-id="expected-loss-for-a-uniform-softmax">3.2 Expected loss for a uniform softmax</h3>
+<ul>
+<li>27 possible next characters → uniform probability = 1/27.<br>
+</li>
+<li>Negative‑log‑likelihood = <code>-log(1/27) ≈ 3.29</code>.</li>
+</ul>
+</section>
+<section id="what-went-wrong" class="level3">
+<h3 class="anchored" data-anchor-id="what-went-wrong">3.3 What went wrong?</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Issue</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Logits far from 0</strong> (extreme values)</td>
+<td>Softmax becomes <strong>over‑confident</strong> → huge loss.</td>
+</tr>
+<tr class="even">
+<td><strong>Random bias <code>b₂</code></strong></td>
+<td>Adds a constant offset → pushes logits away from 0.</td>
+</tr>
+<tr class="odd">
+<td><strong>Weight scale too large</strong> (<code>W₂</code>)</td>
+<td>Amplifies the offset, further saturating softmax.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fixes-applied" class="level3">
+<h3 class="anchored" data-anchor-id="fixes-applied">3.4 Fixes applied</h3>
+<ol type="1">
+<li><strong>Zero the output bias</strong> (<code>b₂ = 0</code>).<br>
+</li>
+<li><strong>Scale down <code>W₂</code></strong> (multiply by 0.1 → 0.01).<br>
+</li>
+<li>Keep a tiny non‑zero variance (e.g., 0.01) for <strong>symmetry breaking</strong>.</li>
+</ol>
+<p>Result: loss curve loses the “hockey‑stick” shape; training becomes more productive.</p>
+<hr>
+</section>
+</section>
+<section id="problem-2-saturated-tanh-𝑡𝑎𝑛ℎ-activations" class="level2">
+<h2 class="anchored" data-anchor-id="problem-2-saturated-tanh-𝑡𝑎𝑛ℎ-activations">4️⃣ Problem #2 – Saturated <code>tanh</code> (𝑡𝑎𝑛ℎ) activations</h2>
+<section id="observation" class="level3">
+<h3 class="anchored" data-anchor-id="observation">4.1 Observation</h3>
+<ul>
+<li>Histogram of hidden‑state <code>H</code> after <code>tanh</code> shows <strong>most values at ±1</strong>.<br>
+</li>
+<li>Pre‑activations (input to <code>tanh</code>) range roughly <strong>‑5 … 15</strong> → many neurons in the <strong>flat tails</strong>.</li>
+</ul>
+</section>
+<section id="consequence-for-backpropagation" class="level3">
+<h3 class="anchored" data-anchor-id="consequence-for-backpropagation">4.2 Consequence for back‑propagation</h3>
+<ul>
+<li>Derivative of <code>tanh</code> = <code>1 – t²</code>.<br>
+</li>
+<li>When <code>t ≈ ±1</code>, derivative ≈ 0 → <strong>gradient vanishes</strong> for those neurons.<br>
+</li>
+<li>“Dead neurons” (always saturated) never learn (gradient = 0).</li>
+</ul>
+</section>
+<section id="diagnostic-check" class="level3">
+<h3 class="anchored" data-anchor-id="diagnostic-check">4.3 Diagnostic check</h3>
+<ul>
+<li>Compute <strong>percentage of units with |t| &gt; 0.99</strong> → large white area in Boolean mask → many dead neurons.</li>
+</ul>
+</section>
+<section id="remedy" class="level3">
+<h3 class="anchored" data-anchor-id="remedy">4.4 Remedy</h3>
+<ul>
+<li>Reduce magnitude of pre‑activations:
+<ul>
+<li><strong>Scale down the first‑layer weights</strong> (<code>W₁</code>) (e.g., multiply by 0.1).<br>
+</li>
+<li>Optionally <strong>bias = 0</strong> (biases become useless after batch‑norm, see §6).<br>
+</li>
+</ul></li>
+<li>Result: hidden activations become <strong>roughly Gaussian (≈ 𝒩(0,1))</strong>, gradients stay alive.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="general-weightinitialisation-theory" class="level2">
+<h2 class="anchored" data-anchor-id="general-weightinitialisation-theory">5️⃣ General Weight‑Initialisation Theory</h2>
+<section id="fanin-fanout-concept" class="level3">
+<h3 class="anchored" data-anchor-id="fanin-fanout-concept">5.1 Fan‑in / Fan‑out concept</h3>
+<ul>
+<li>For a layer with <code>fan_in</code> inputs, initialise weights with variance <code>1 / fan_in</code>.<br>
+</li>
+<li>Guarantees that <strong>output variance ≈ input variance</strong> (preserves a unit‑Gaussian flow).</li>
+</ul>
+</section>
+<section id="gains-for-different-nonlinearities-he-xavier" class="level3">
+<h3 class="anchored" data-anchor-id="gains-for-different-nonlinearities-he-xavier">5.2 Gains for different non‑linearities (He / Xavier)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Non‑linearity</th>
+<th>Recommended gain <code>g</code></th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Linear / Identity</td>
+<td><code>1</code></td>
+<td>No contraction.</td>
+</tr>
+<tr class="even">
+<td>ReLU / Leaky‑ReLU</td>
+<td><code>√2</code></td>
+<td>Half the distribution is zeroed.</td>
+</tr>
+<tr class="odd">
+<td>tanh</td>
+<td><code>5/3</code> (≈ 1.67)</td>
+<td>Empirically balances contraction of tanh.</td>
+</tr>
+<tr class="even">
+<td>(others)</td>
+<td>derived from variance analysis</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Final weight scale</strong> = <code>gain / √fan_in</code>.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="batch-normalisation-batchnorm-the-gamechanger" class="level2">
+<h2 class="anchored" data-anchor-id="batch-normalisation-batchnorm-the-gamechanger">6️⃣ Batch Normalisation (BatchNorm) – The “Game‑Changer”</h2>
+<section id="core-idea" class="level3">
+<h3 class="anchored" data-anchor-id="core-idea">6.1 Core idea</h3>
+<ol type="1">
+<li><strong>Collect batch statistics</strong> → mean <code>μ_B</code> and variance <code>σ²_B</code>.<br>
+</li>
+<li><strong>Standardise</strong>: <code>x̂ = (x – μ_B) / √(σ²_B + ε)</code>.<br>
+</li>
+<li><strong>Learnable affine transform</strong>: <code>y = γ·x̂ + β</code>.</li>
+</ol>
+</section>
+<section id="why-it-works" class="level3">
+<h3 class="anchored" data-anchor-id="why-it-works">6.2 Why it works</h3>
+<ul>
+<li>Forces <strong>activations to stay unit‑Gaussian</strong> throughout the network → prevents saturation / vanishing gradients.<br>
+</li>
+<li>Acts as a <strong>regulariser</strong> (batch‑wise noise).</li>
+</ul>
+</section>
+<section id="training-vs.-inference" class="level3">
+<h3 class="anchored" data-anchor-id="training-vs.-inference">6.3 Training vs.&nbsp;Inference</h3>
+<ul>
+<li><p><strong>Training:</strong> use batch statistics (<code>μ_B</code>, <code>σ²_B</code>).<br>
+</p></li>
+<li><p><strong>Inference:</strong> use <strong>running estimates</strong> (<code>μ̂</code>, <code>σ̂²</code>) updated with exponential moving average:</p>
+<p><code>running_mean = momentum·running_mean + (1‑momentum)·μ_B</code></p>
+<p><code>running_var  = momentum·running_var  + (1‑momentum)·σ²_B</code></p></li>
+<li><p><code>momentum</code> ≈ 0.1 for large batches; smaller batches may need <strong>lower momentum</strong> (e.g., 0.001).</p></li>
+</ul>
+</section>
+<section id="practical-notes" class="level3">
+<h3 class="anchored" data-anchor-id="practical-notes">6.4 Practical notes</h3>
+<ul>
+<li><strong>Bias before BatchNorm is useless</strong> – BatchNorm already learns a bias (<code>β</code>).<br>
+</li>
+<li>Set <code>affine=True</code> (learnable <code>γ</code>, <code>β</code>).<br>
+</li>
+<li><code>eps</code> (default 1e‑5) avoids division‑by‑zero.<br>
+</li>
+<li><strong>No gradient tracking</strong> for running stats (<code>torch.no_grad()</code> context).</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="diagnostic-toolbox-for-neuralnet-health" class="level2">
+<h2 class="anchored" data-anchor-id="diagnostic-toolbox-for-neuralnet-health">7️⃣ Diagnostic Toolbox for Neural‑Net Health</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 36%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Diagnostic</th>
+<th>What it tells you</th>
+<th>Typical “good” range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Activation histogram</strong> (per layer)</td>
+<td>Distribution shape, saturation %</td>
+<td>Std ≈ 1, saturation &lt; 5 %</td>
+</tr>
+<tr class="even">
+<td><strong>Gradient histogram</strong> (per layer)</td>
+<td>Gradient magnitude, vanishing/exploding</td>
+<td>Similar scale to activations</td>
+</tr>
+<tr class="odd">
+<td><strong>Weight histogram</strong></td>
+<td>Parameter spread, dead weights</td>
+<td>Std ≈ 1 (or as per init)</td>
+</tr>
+<tr class="even">
+<td><strong>Update‑to‑Data ratio</strong> <code>‖Δθ‖ / ‖θ‖</code> (log₁₀)</td>
+<td>Relative step size per iteration</td>
+<td>≈ ‑3 (i.e., updates ≈ 0.001 × parameter)</td>
+</tr>
+<tr class="odd">
+<td><strong>Learning‑rate sanity check</strong></td>
+<td>If ratio ≪ ‑3 → LR too low; ≫ ‑2 → LR too high</td>
+<td>Aim for –3 ± 0.5</td>
+</tr>
+<tr class="even">
+<td><strong>Running‑mean / var convergence</strong></td>
+<td>BatchNorm stats stabilise?</td>
+<td>Small drift after a few epochs</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Plot these <strong>over training time</strong> (not just a single snapshot) to see trends.</li>
+</ul>
+<hr>
+</section>
+<section id="putting-it-all-together-torchify-the-code" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together-torchify-the-code">8️⃣ Putting It All Together – “Torch‑ify” the Code</h2>
+<section id="modular-design-mirrors-torch.nn" class="level3">
+<h3 class="anchored" data-anchor-id="modular-design-mirrors-torch.nn">8.1 Modular design (mirrors <code>torch.nn</code>)</h3>
+<ul>
+<li><strong>Linear layer</strong> → <code>nn.Linear(in_features, out_features, bias=False)</code> (bias omitted when followed by BatchNorm).<br>
+</li>
+<li><strong>BatchNorm1d</strong> → <code>nn.BatchNorm1d(num_features, eps=1e‑5, momentum=0.001, affine=True)</code>.<br>
+</li>
+<li><strong>tanh activation</strong> → custom wrapper (or <code>nn.Tanh</code>).</li>
+</ul>
+</section>
+<section id="network-construction-pattern" class="level3">
+<h3 class="anchored" data-anchor-id="network-construction-pattern">8.2 Network construction pattern</h3>
+<pre class="text"><code>Embedding → Linear → BatchNorm → tanh → Linear → BatchNorm → tanh → … → Linear → BatchNorm → Softmax</code></pre>
+<ul>
+<li><strong>BatchNorm placed after each Linear, before tanh</strong> (standard practice).<br>
+</li>
+<li>Can also be placed after tanh – results are similar.</li>
+</ul>
+</section>
+<section id="training-loop-highlevel" class="level3">
+<h3 class="anchored" data-anchor-id="training-loop-highlevel">8.3 Training loop (high‑level)</h3>
+<ol type="1">
+<li><strong>Zero grads</strong>.<br>
+</li>
+<li><strong>Forward pass</strong> (collect activations, apply BatchNorm).<br>
+</li>
+<li><strong>Compute loss</strong> (cross‑entropy).<br>
+</li>
+<li><strong>Backward</strong> (<code>loss.backward()</code>).<br>
+</li>
+<li><strong>Optimizer step</strong> (SGD / Adam).<br>
+</li>
+<li><strong>Update running stats</strong> (handled automatically by <code>nn.BatchNorm</code>).</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="takeaways-outlook" class="level2">
+<h2 class="anchored" data-anchor-id="takeaways-outlook">9️⃣ Take‑aways &amp; Outlook</h2>
+<ol type="1">
+<li><strong>Initialisation matters</strong> – scaling weights &amp; zeroing biases prevents early “over‑confidence”.<br>
+</li>
+<li><strong>tanh saturation kills gradients</strong> – keep pre‑activations near zero (via weight scaling).<br>
+</li>
+<li><strong>BatchNorm stabilises deep nets</strong> by constantly re‑Gaussianising activations; it also reduces sensitivity to exact gain choices.<br>
+</li>
+<li><strong>Diagnostic visualisations</strong> (histograms, update‑to‑data ratios) are essential for spotting dead neurons, exploding/vanishing gradients, and mis‑scaled learning rates.<br>
+</li>
+<li><strong>Future work</strong>
+<ul>
+<li>Move to <strong>recurrent architectures</strong> (RNN, LSTM, GRU) – deeper unrolled graphs will amplify the issues we just mitigated.<br>
+</li>
+<li>Explore <strong>alternative normalisation</strong> (LayerNorm, GroupNorm) that avoid batch coupling.<br>
+</li>
+<li>Leverage <strong>advanced optimisers</strong> (Adam, RMSProp) and <strong>residual connections</strong> for even deeper models.</li>
+</ul></li>
+</ol>
+<hr>
+<section id="quickreference-cheatsheet" class="level3">
+<h3 class="anchored" data-anchor-id="quickreference-cheatsheet">📌 Quick‑Reference Cheat‑Sheet</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 44%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Formula / Setting</th>
+<th>Typical Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Weight init variance</td>
+<td><code>var = gain² / fan_in</code></td>
+<td><code>gain = 1</code> (linear), <code>√2</code> (ReLU), <code>5/3</code> (tanh)</td>
+</tr>
+<tr class="even">
+<td>Softmax uniform loss</td>
+<td><code>-log(1/𝑘)</code></td>
+<td><code>k = vocab size</code></td>
+</tr>
+<tr class="odd">
+<td>tanh derivative</td>
+<td><code>1 – t²</code></td>
+<td>→ 0 when <code>|t| → 1</code></td>
+</tr>
+<tr class="even">
+<td>BatchNorm scaling</td>
+<td><code>γ</code> (learned)</td>
+<td>Initialise to <code>1</code></td>
+</tr>
+<tr class="odd">
+<td>BatchNorm shift</td>
+<td><code>β</code> (learned)</td>
+<td>Initialise to <code>0</code></td>
+</tr>
+<tr class="even">
+<td>Update‑to‑Data log₁₀ target</td>
+<td><code>≈ ‑3</code></td>
+<td>Adjust LR accordingly</td>
+</tr>
+<tr class="odd">
+<td>Momentum for running stats</td>
+<td><code>0.1</code> (large batch) / <code>0.001</code> (batch = 32)</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>ε (epsilon) in BN</td>
+<td><code>1e‑5</code></td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>End of mind‑map.</em><br>
+# Lesson 5</p>
+</section>
+</section>
+</section>
+<section id="mindmap-manual-backpropagation-for-a-twolayer-mlp" class="level1">
+<h1>🧠 Mindmap – Manual Back‑Propagation for a Two‑Layer MLP</h1>
+<hr>
+<section id="overview-1" class="level2">
+<h2 class="anchored" data-anchor-id="overview-1">1️⃣ Overview</h2>
+<ul>
+<li><strong>Goal:</strong> Replace <code>loss.backward()</code> with a fully manual backward pass (tensor‑level).<br>
+</li>
+<li><strong>Why?</strong>
+<ul>
+<li>Understand the internals of autograd.<br>
+</li>
+<li>Debug subtle bugs (gradient clipping, dead neurons, exploding/vanishing gradients).<br>
+</li>
+<li>Gain intuition about how gradients flow through each operation.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="historical-context" class="level2">
+<h2 class="anchored" data-anchor-id="historical-context">2️⃣ Historical Context</h2>
+<ul>
+<li><strong>~2006 – 2010:</strong>
+<ul>
+<li>Researchers (e.g., Hinton &amp; Salakhutdinov) wrote their own back‑prop in MATLAB/NumPy.<br>
+</li>
+<li>Manual gradient computation was the norm.<br>
+</li>
+</ul></li>
+<li><strong>2014:</strong>
+<ul>
+<li>Author’s “Fragmented Embeddings” paper – full manual forward + backward passes in NumPy.<br>
+</li>
+</ul></li>
+<li><strong>Today:</strong>
+<ul>
+<li>Autograd is standard, but the exercise remains valuable for learning.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="network-architecture-forward-pass" class="level2">
+<h2 class="anchored" data-anchor-id="network-architecture-forward-pass">3️⃣ Network Architecture (forward pass)</h2>
+<pre><code>Embedding → Linear1 (W1, B1) → 10‑H (tanh) → BatchNorm (γ, β) → Linear2 (W2, B2) → Logits → Softmax → Cross‑Entropy</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Shape (batch = 32)</th>
+<th>Key tensors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Embedding</strong></td>
+<td>32 × 3 × 10</td>
+<td><code>C</code> (27 × 10)</td>
+</tr>
+<tr class="even">
+<td><strong>Linear1</strong></td>
+<td>32 × 64</td>
+<td><code>W1</code> (64 × 64), <code>B1</code> (1 × 64)</td>
+</tr>
+<tr class="odd">
+<td><strong>10‑H</strong></td>
+<td>32 × 64</td>
+<td><code>H = tanh(preact)</code></td>
+</tr>
+<tr class="even">
+<td><strong>BatchNorm</strong></td>
+<td>32 × 64</td>
+<td><code>μ</code> (1 × 64), <code>σ²</code> (1 × 64), <code>γ</code>, <code>β</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Linear2</strong></td>
+<td>32 × 27</td>
+<td><code>W2</code> (27 × 64), <code>B2</code> (1 × 27)</td>
+</tr>
+<tr class="even">
+<td><strong>Logits</strong></td>
+<td>32 × 27</td>
+<td><code>logits</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Softmax</strong></td>
+<td>32 × 27</td>
+<td><code>probs</code></td>
+</tr>
+<tr class="even">
+<td><strong>Loss</strong></td>
+<td>scalar</td>
+<td><code>loss = -mean(log_probs[range(N), Y])</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="manual-backpropagation-core-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="manual-backpropagation-core-concepts">4️⃣ Manual Back‑Propagation – Core Concepts</h2>
+<section id="gradient-of-the-loss-w.r.t.-log_probs-d_log_probs" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-of-the-loss-w.r.t.-log_probs-d_log_probs">4.1 Gradient of the Loss w.r.t. <code>log_probs</code> (<code>d_log_probs</code>)</h3>
+<ul>
+<li><p><strong>Shape:</strong> 32 × 27 (same as <code>log_probs</code>).<br>
+</p></li>
+<li><p><strong>Derivation:</strong></p>
+<ul>
+<li><code>loss = -(1/N) Σ_i log_probs[i, Y[i]]</code><br>
+</li>
+<li><code>∂loss/∂log_probs[i, j] = -1/N</code> if <code>j == Y[i]</code>, else <code>0</code>.<br>
+</li>
+</ul></li>
+<li><p><strong>Implementation:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d_log_probs <span class="op">=</span> torch.zeros_like(log_probs)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>d_log_probs[torch.arange(N), Y] <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span> <span class="op">/</span> N</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+</section>
+<section id="backprop-through-log-probs" class="level3">
+<h3 class="anchored" data-anchor-id="backprop-through-log-probs">4.2 Back‑prop through <code>log</code> → <code>probs</code></h3>
+<ul>
+<li><code>log_probs = torch.log(probs)</code><br>
+</li>
+<li>Local derivative: <code>∂log/∂probs = 1 / probs</code> (element‑wise).<br>
+</li>
+<li>Chain rule: <code>d_probs = d_log_probs / probs</code>.</li>
+</ul>
+</section>
+<section id="backprop-through-softmax-logits-probs" class="level3">
+<h3 class="anchored" data-anchor-id="backprop-through-softmax-logits-probs">4.3 Back‑prop through Softmax (logits → probs)</h3>
+<ul>
+<li><p><strong>Softmax formula:</strong> <code>p_i = exp(l_i) / Σ_j exp(l_j)</code>.<br>
+</p></li>
+<li><p><strong>Gradient (batch version):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> torch.softmax(logits, dim<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>d_logits <span class="op">=</span> probs.clone()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>d_logits[torch.arange(N), Y] <span class="op">-=</span> <span class="dv">1</span>   <span class="co"># subtract 1 at correct class</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>d_logits <span class="op">/=</span> N                        <span class="co"># average over batch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Intuition:</strong></p>
+<ul>
+<li>Pull up probability of the correct class, push down all others.<br>
+</li>
+<li>Sum of each row of <code>d_logits</code> = 0 (conservation of probability).</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-layer-w2-b2" class="level3">
+<h3 class="anchored" data-anchor-id="linear-layer-w2-b2">4.4 Linear Layer (W2, B2)</h3>
+<ul>
+<li>Forward: <code>logits = H @ W2.T + B2</code>.<br>
+</li>
+<li>Gradients:
+<ul>
+<li><code>d_W2 = d_logits.T @ H</code> (shape 27 × 64).<br>
+</li>
+<li><code>d_B2 = d_logits.sum(dim=0, keepdim=True)</code>.<br>
+</li>
+<li><code>d_H  = d_logits @ W2</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="batch-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="batch-normalization">4.5 Batch Normalization</h3>
+<ul>
+<li><p><strong>Forward (simplified, γ = 1, β = 0):</strong></p>
+<pre><code>μ   = mean(H, dim=0)                # 1×64
+σ²  = var(H, dim=0, unbiased=False) # 1×64
+Ĥ   = (H - μ) / sqrt(σ² + ε)</code></pre></li>
+<li><p><strong>Backward (key steps):</strong></p>
+<ol type="1">
+<li><code>d_Ĥ = d_H_pre</code> (gradient from next layer).<br>
+</li>
+<li><code>d_σ² = -0.5 * (d_Ĥ * (H-μ)) * (σ²+ε)^(-3/2)</code> → sum over batch.<br>
+</li>
+<li><code>d_μ  = -d_Ĥ / sqrt(σ²+ε) - 2 * d_σ² * (H-μ) / N</code>.<br>
+</li>
+<li><code>d_H  = d_Ĥ / sqrt(σ²+ε) + d_σ² * 2*(H-μ)/N + d_μ / N</code>.<br>
+</li>
+<li><code>d_γ = (d_H_pre * Ĥ).sum(dim=0, keepdim=True)</code> (if γ kept).<br>
+</li>
+<li><code>d_β = d_H_pre.sum(dim=0, keepdim=True)</code> (if β kept).</li>
+</ol></li>
+<li><p><strong>Broadcasting rule:</strong></p>
+<ul>
+<li>When a scalar (e.g., <code>μ</code>) is broadcast to a matrix, the backward pass <strong>sums</strong> the incoming gradients over the broadcasted dimension.</li>
+</ul></li>
+</ul>
+</section>
+<section id="activation-10h-tanh" class="level3">
+<h3 class="anchored" data-anchor-id="activation-10h-tanh">4.6 Activation <code>10‑H</code> (tanh)</h3>
+<ul>
+<li>Forward: <code>H = tanh(preact)</code>.<br>
+</li>
+<li>Local derivative: <code>1 - H²</code>.<br>
+</li>
+<li>Backward: <code>d_preact = d_H * (1 - H**2)</code>.</li>
+</ul>
+</section>
+<section id="linear-layer-w1-b1" class="level3">
+<h3 class="anchored" data-anchor-id="linear-layer-w1-b1">4.7 Linear Layer (W1, B1)</h3>
+<ul>
+<li>Same pattern as W2/B2, but with <code>preact = X @ W1.T + B1</code>.<br>
+</li>
+<li>Gradients:
+<ul>
+<li><code>d_W1 = d_preact.T @ X</code>.<br>
+</li>
+<li><code>d_B1 = d_preact.sum(dim=0, keepdim=True)</code>.<br>
+</li>
+<li><code>d_X  = d_preact @ W1</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="embedding-lookup-indexing" class="level3">
+<h3 class="anchored" data-anchor-id="embedding-lookup-indexing">4.8 Embedding Lookup (indexing)</h3>
+<ul>
+<li><p>Forward: <code>M[i, k, :] = C[Y[i, k]]</code>.<br>
+</p></li>
+<li><p>Backward:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>d_C <span class="op">=</span> torch.zeros_like(C)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> Y[i, k]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        d_C[idx] <span class="op">+=</span> d_M[i, k]   <span class="co"># accumulate if same idx appears multiple times</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="exercises-progressive-refactoring" class="level2">
+<h2 class="anchored" data-anchor-id="exercises-progressive-refactoring">5️⃣ Exercises (Progressive Refactoring)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 40%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Exercise</th>
+<th>What’s changed</th>
+<th>Key takeaway</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td>Compute every intermediate <code>d_…</code> tensor (as above). Verify with <code>torch.allclose</code>.</td>
+<td>Manual gradients match autograd when shapes &amp; broadcasting are handled correctly.</td>
+</tr>
+<tr class="even">
+<td><strong>2</strong></td>
+<td>Derive a <strong>single</strong> analytic expression for <code>d_logits</code> (softmax + cross‑entropy). Implement it in one line.</td>
+<td>Much faster forward + backward; shows that many intermediate ops can be collapsed.</td>
+</tr>
+<tr class="odd">
+<td><strong>3</strong></td>
+<td>Derive a compact formula for <strong>batch‑norm</strong> backward (see §4.5). Implement the whole layer in a few lines.</td>
+<td>Highlights the “sum‑over‑broadcast” pattern; avoids per‑element code.</td>
+</tr>
+<tr class="even">
+<td><strong>4</strong></td>
+<td>Assemble all manual pieces into a full training loop (no <code>loss.backward()</code>).</td>
+<td>End‑to‑end manual training yields the same loss &amp; samples as the autograd version.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="intuitive-insights" class="level2">
+<h2 class="anchored" data-anchor-id="intuitive-insights">6️⃣ Intuitive Insights</h2>
+<ul>
+<li><strong>Gradient “push‑pull”</strong> on logits:
+<ul>
+<li>Correct class gets a <strong>negative</strong> gradient (pull up).<br>
+</li>
+<li>Incorrect classes get a <strong>positive</strong> gradient (push down).<br>
+</li>
+<li>Row‑wise sum = 0 → probability mass conserved.</li>
+</ul></li>
+<li><strong>Batch‑norm variance bias vs.&nbsp;unbiased:</strong>
+<ul>
+<li>Training often uses <strong>biased</strong> estimator (<code>1/N</code>).<br>
+</li>
+<li>Inference (running stats) should use <strong>unbiased</strong> (<code>1/(N‑1)</code>).<br>
+</li>
+<li>Mismatch can be a subtle bug; the author prefers the unbiased version throughout.</li>
+</ul></li>
+<li><strong>Broadcast ↔︎ Sum Duality:</strong>
+<ul>
+<li><strong>Forward:</strong> broadcasting replicates a smaller tensor across a larger one.<br>
+</li>
+<li><strong>Backward:</strong> the gradient w.r.t. the broadcasted tensor is the <strong>sum</strong> of the replicated gradients.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">7️⃣ Next Steps</h2>
+<ul>
+<li><strong>Recurrent Neural Networks (RNNs) &amp; LSTMs</strong> – extend manual back‑prop to time‑unrolled architectures.<br>
+</li>
+<li>Explore <strong>gradient clipping</strong>, <strong>weight tying</strong>, and <strong>teacher forcing</strong> with manual gradients.</li>
+</ul>
+<hr>
+<section id="tldr" class="level3">
+<h3 class="anchored" data-anchor-id="tldr">📌 TL;DR</h3>
+<ol type="1">
+<li>Replace <code>loss.backward()</code> with explicit tensor‑level derivatives.<br>
+</li>
+<li>Derive and implement compact formulas for softmax‑cross‑entropy and batch‑norm.<br>
+</li>
+<li>Verify each step against PyTorch’s autograd.<br>
+</li>
+<li>Assemble a full training loop that runs as fast as the autograd version while giving you full visibility into every gradient flow.</li>
+</ol>
+<p>Happy hacking! 🚀<br>
+# Lesson 6</p>
+</section>
+</section>
+<section id="mindmap-of-the-lecture-1" class="level2">
+<h2 class="anchored" data-anchor-id="mindmap-of-the-lecture-1">📚 Mind‑Map of the Lecture</h2>
+<p><em>(Markdown + Mermaid diagram for quick visualisation)</em></p>
+<hr>
+<section id="overview-2" class="level3">
+<h3 class="anchored" data-anchor-id="overview-2">1️⃣ Overview</h3>
+<ul>
+<li><strong>Goal</strong> – Extend a simple character‑level MLP language model into a deeper, hierarchical architecture (Wavenet‑style).<br>
+</li>
+<li><strong>Context</strong> – Lecture recorded in a hotel room in Kyoto; continuation of previous parts (3 &amp; 4).</li>
+</ul>
+</section>
+<section id="data-baseline-model" class="level3">
+<h3 class="anchored" data-anchor-id="data-baseline-model">2️⃣ Data &amp; Baseline Model</h3>
+<ul>
+<li><strong>Dataset</strong> – 182 000 examples, each: 3‑character context → predict 4th character.<br>
+</li>
+<li><strong>Baseline Architecture</strong>
+<ul>
+<li>Embedding table (<code>C</code>) → Linear → BatchNorm (named <em>bathroom</em>) → 1D‑BatchNorm (<code>10h</code>) → Linear output.<br>
+</li>
+<li>12 000 parameters, validation loss ≈ 2.10.<br>
+</li>
+</ul></li>
+<li><strong>Observations</strong>
+<ul>
+<li>Model already generates plausible “name‑like” strings.<br>
+</li>
+<li>Too much information is squashed in a single hidden layer.</li>
+</ul></li>
+</ul>
+</section>
+<section id="desired-architectural-changes" class="level3">
+<h3 class="anchored" data-anchor-id="desired-architectural-changes">3️⃣ Desired Architectural Changes</h3>
+<ul>
+<li><strong>Take more context</strong> – increase block size from 3 → 8 (later 16).<br>
+</li>
+<li><strong>Hierarchical fusion</strong> – progressively combine neighboring characters (bigrams → 4‑grams → …) instead of flattening all at once.<br>
+</li>
+<li><strong>Wavenet inspiration</strong> – dilated causal convolutions → tree‑like receptive field growth.</li>
+</ul>
+</section>
+<section id="refactoring-the-code" class="level3">
+<h3 class="anchored" data-anchor-id="refactoring-the-code">4️⃣ Refactoring the Code</h3>
+<section id="layer-building-blocks" class="level4">
+<h4 class="anchored" data-anchor-id="layer-building-blocks">4.1 Layer Building Blocks</h4>
+<ul>
+<li><strong>Linear layer</strong> – simple matrix multiply (mirrors <code>torch.nn.Linear</code>).<br>
+</li>
+<li><strong>BatchNorm (bathroom)</strong> – maintains running mean/variance, behaves differently in train vs.&nbsp;eval.<br>
+</li>
+<li><strong>Embedding layer</strong> – lookup table (<code>nn.Embedding</code>).<br>
+</li>
+<li><strong>Flatten / “FlattenConsecutive”</strong> – custom module to reshape tensors, now able to group <em>n</em> consecutive embeddings.</li>
+</ul>
+</section>
+<section id="containers" class="level4">
+<h4 class="anchored" data-anchor-id="containers">4.2 Containers</h4>
+<ul>
+<li><strong>Sequential container</strong> – custom implementation that stores a list of layers and forwards input through them.<br>
+</li>
+<li><strong>Model definition</strong> – <code>model = Sequential([Embedding, FlattenConsecutive, Linear, BatchNorm, …])</code>.</li>
+</ul>
+</section>
+<section id="debugging-shapegymnastics" class="level4">
+<h4 class="anchored" data-anchor-id="debugging-shapegymnastics">4.3 Debugging &amp; Shape‑Gymnastics</h4>
+<ul>
+<li>Inspected tensor shapes after each layer (e.g., <code>B×T×C → B×T×E → B×(T·E)</code>).<br>
+</li>
+<li>Realised flattening to <code>B×‑1</code> was too aggressive; needed a 3‑D view (<code>B×groups×(n·E)</code>).</li>
+</ul>
+</section>
+</section>
+<section id="implementing-hierarchical-fusion" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-hierarchical-fusion">5️⃣ Implementing Hierarchical Fusion</h3>
+<ol type="1">
+<li><strong>FlattenConsecutive(n=2)</strong> – groups every 2 consecutive characters → shape <code>B×(T/2)×(2·E)</code>.<br>
+</li>
+<li><strong>Stacked linear layers</strong> – each layer processes the grouped embeddings, progressively increasing receptive field.<br>
+</li>
+<li><strong>Resulting network</strong> – 3 hidden layers, each widening the context (2 → 4 → 8 characters).</li>
+</ol>
+</section>
+<section id="batchnorm-bug-fix" class="level3">
+<h3 class="anchored" data-anchor-id="batchnorm-bug-fix">6️⃣ BatchNorm Bug &amp; Fix</h3>
+<ul>
+<li><strong>Problem</strong> – <code>BatchNorm1D</code> computed statistics over only the first dimension (<code>B</code>) → produced per‑position means/variances.<br>
+</li>
+<li><strong>Fix</strong> – Reduce over dimensions <code>(0, 1)</code> when input is 3‑D, yielding a single mean/variance per channel (<code>1×1×C</code>).<br>
+</li>
+<li><strong>Outcome</strong> – More stable statistics, slight validation loss improvement (2.029 → 2.022).</li>
+</ul>
+</section>
+<section id="training-results-hyperparameter-tweaks" class="level3">
+<h3 class="anchored" data-anchor-id="training-results-hyperparameter-tweaks">7️⃣ Training Results &amp; Hyper‑parameter Tweaks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 51%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Change</th>
+<th>Params</th>
+<th>Validation loss</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Baseline (3‑char)</td>
+<td>~12 k</td>
+<td>2.10</td>
+</tr>
+<tr class="even">
+<td>↑ Context to 8 chars (flat)</td>
+<td>+10 k</td>
+<td>2.02</td>
+</tr>
+<tr class="odd">
+<td>Hierarchical (3‑layer)</td>
+<td>~22 k</td>
+<td>2.029 → 2.022</td>
+</tr>
+<tr class="even">
+<td>↑ Embedding dim to 24, hidden units ↑</td>
+<td>~76 k</td>
+<td><strong>1.99</strong> (first sub‑2.0)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Takeaway</strong> – Bigger capacity helps, but training becomes slower; still no systematic hyper‑parameter search.</li>
+</ul>
+</section>
+<section id="relation-to-convolutional-networks-wavenet" class="level3">
+<h3 class="anchored" data-anchor-id="relation-to-convolutional-networks-wavenet">8️⃣ Relation to Convolutional Networks (Wavenet)</h3>
+<ul>
+<li><strong>Current implementation</strong> – Explicit “for‑loop” over each position (inefficient).<br>
+</li>
+<li><strong>Convolutional view</strong> – Same linear filters applied via dilated causal convolutions → parallel GPU kernels, reuse of intermediate results.<br>
+</li>
+<li><strong>Future work</strong> – Replace explicit loops with <code>nn.Conv1d</code> (dilated, causal), add gated activations, residual &amp; skip connections.</li>
+</ul>
+</section>
+<section id="development-process-insights" class="level3">
+<h3 class="anchored" data-anchor-id="development-process-insights">9️⃣ Development Process Insights</h3>
+<ul>
+<li><strong>Documentation pain</strong> – PyTorch docs are good; the course’s own “Patreon” docs are sparse/inaccurate.<br>
+</li>
+<li><strong>Shape gymnastics</strong> – Constantly checking NCL vs.&nbsp;NLC ordering, using <code>view</code>, <code>reshape</code>, <code>permute</code>.<br>
+</li>
+<li><strong>Prototyping workflow</strong>
+<ol type="1">
+<li><strong>Jupyter notebook</strong> – rapid testing, shape inspection, debugging.<br>
+</li>
+<li><strong>Copy‑paste to VS Code repo</strong> – clean module code.<br>
+</li>
+<li><strong>Run experiments</strong> via scripts (future: experiment harness).</li>
+</ol></li>
+</ul>
+</section>
+<section id="future-directions-open-topics" class="level3">
+<h3 class="anchored" data-anchor-id="future-directions-open-topics">🔟 Future Directions (Open Topics)</h3>
+<ol type="1">
+<li><strong>Implement true dilated causal convolutions</strong> (Wavenet).<br>
+</li>
+<li><strong>Add gated linear units, residual &amp; skip connections</strong>.<br>
+</li>
+<li><strong>Build an experimental harness</strong> – systematic hyper‑parameter sweeps, logging, early stopping.<br>
+</li>
+<li><strong>Explore other architectures</strong> – RNNs, LSTMs, GRUs, Transformers.<br>
+</li>
+<li><strong>Beat the current best loss (≈ 1.99)</strong> – try different channel allocations, embedding sizes, initialization schemes, optimizers.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="mermaid-mindmap-copypaste-into-a-mermaidenabled-markdown-viewer" class="level2">
+<h2 class="anchored" data-anchor-id="mermaid-mindmap-copypaste-into-a-mermaidenabled-markdown-viewer">🧭 Mermaid Mind‑Map (copy‑paste into a Mermaid‑enabled markdown viewer)</h2>
+<pre class="mermaid"><code>mindmap
+  root((Character‑Level Language Model))
+    Overview
+      Goal
+      Context
+    Data &amp; Baseline
+      Dataset
+      Baseline Architecture
+        Embedding
+        Linear
+        BatchNorm (bathroom)
+        1D‑BatchNorm (10h)
+        Linear Output
+      Baseline Metrics
+    Desired Changes
+      Larger Context (3→8→16)
+      Hierarchical Fusion
+        Bigrams → 4‑grams → …
+      Wavenet Inspiration
+    Refactoring
+      Layer Building Blocks
+        Linear
+        BatchNorm
+        Embedding
+        FlattenConsecutive
+      Containers
+        Sequential
+      Debugging Shapes
+    Hierarchical Fusion Implementation
+      FlattenConsecutive(n=2)
+      Stacked Linear Layers
+      Resulting 3‑layer Net
+    BatchNorm Bug
+      Problem (per‑position stats)
+      Fix (reduce over 0,1)
+      Outcome
+    Training Results
+      Table of Changes → Params → Validation loss
+      Observations
+    Convolutional Relation
+      Current explicit loops
+      Convolutional view (dilated causal)
+      Future: Conv1d + residual/skip
+    Development Process
+      Documentation challenges
+      Shape gymnastics
+      Prototyping workflow (Jupyter → VSCode)
+    Future Directions
+      Dilated convolutions
+      Gated units, residuals, skips
+      Experiment harness
+      RNN/LSTM/Transformer exploration
+      Beat loss 1.99</code></pre>
+<p><em>Render the diagram with any Mermaid‑compatible markdown viewer (e.g., VS Code, GitHub, HackMD).</em></p>
+<hr>
+<p><strong>TL;DR:</strong><br>
+We started from a simple 3‑character MLP, expanded the context, introduced a hierarchical “flatten‑consecutive” module, fixed a subtle BatchNorm bug, and built a deeper 3‑layer network that already beats the 2.0 validation‑loss barrier. The next steps are to replace the explicit loops with true dilated causal convolutions, add residual/skip connections, and set up a proper experimental harness for systematic hyper‑parameter search. Happy hacking! # Lesson 7</p>
+</section>
+</section>
+<section id="mindmap-of-the-transcript" class="level1">
+<h1>🧠 Mind‑Map of the Transcript</h1>
+<p><em>(Markdown outline – each level deeper = a more detailed sub‑topic)</em></p>
+<hr>
+<section id="introduction-motivation" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-motivation">1. Introduction &amp; Motivation</h2>
+<ul>
+<li><strong>ChatGPT</strong> – a text‑based AI that can perform many tasks (write poems, explain HTML, generate news, etc.)<br>
+</li>
+<li><strong>Probabilistic system</strong> – same prompt → different plausible outputs<br>
+</li>
+<li><strong>Goal of the talk</strong> – understand what’s “under the hood” of ChatGPT and build a tiny version ourselves</li>
+</ul>
+</section>
+<section id="languagemodel-basics" class="level2">
+<h2 class="anchored" data-anchor-id="languagemodel-basics">2. Language‑Model Basics</h2>
+<ul>
+<li><strong>Definition</strong> – models the sequence of tokens (characters, sub‑words, words)<br>
+</li>
+<li><strong>Task</strong> – given a prefix, predict the next token → sequence completion<br>
+</li>
+<li><strong>Tokenization</strong>
+<ul>
+<li><em>Character‑level</em> (used in the demo) → 65‑symbol vocab<br>
+</li>
+<li><em>Sub‑word / BPE</em> (used by OpenAI) → ~50 k vocab<br>
+</li>
+<li>Encoder ↔︎ Decoder maps between strings ↔︎ integer IDs</li>
+</ul></li>
+</ul>
+</section>
+<section id="data-set-tiny-shakespeare" class="level2">
+<h2 class="anchored" data-anchor-id="data-set-tiny-shakespeare">3. Data Set – “Tiny Shakespeare”</h2>
+<ul>
+<li>Single ~1 MiB file containing all Shakespeare works<br>
+</li>
+<li>Treated as a <strong>single long integer sequence</strong> after tokenization<br>
+</li>
+<li>Split: <strong>90 % train</strong>, <strong>10 % validation</strong></li>
+</ul>
+</section>
+<section id="model-architecture-from-simple-to-full-transformer" class="level2">
+<h2 class="anchored" data-anchor-id="model-architecture-from-simple-to-full-transformer">4. Model Architecture – From Simple to Full Transformer</h2>
+<section id="simple-baseline-bytelevel-byr-model" class="level3">
+<h3 class="anchored" data-anchor-id="simple-baseline-bytelevel-byr-model">4.1. Simple Baseline: Byte‑Level (BYR) Model</h3>
+<ul>
+<li>Embedding table → directly produces logits for each position<br>
+</li>
+<li>Loss = <strong>Cross‑Entropy</strong> (negative log‑likelihood)</li>
+</ul>
+</section>
+<section id="adding-positional-information" class="level3">
+<h3 class="anchored" data-anchor-id="adding-positional-information">4.2. Adding Positional Information</h3>
+<ul>
+<li>Positional‑embedding matrix (block‑size × embed‑dim)<br>
+</li>
+<li>Token embedding + positional embedding → input <strong>X</strong></li>
+</ul>
+</section>
+<section id="selfattention-single-head" class="level3">
+<h3 class="anchored" data-anchor-id="selfattention-single-head">4.3. Self‑Attention (single head)</h3>
+<ul>
+<li><strong>Queries (Q)</strong>, <strong>Keys (K)</strong>, <strong>Values (V)</strong> = linear projections of <strong>X</strong><br>
+</li>
+<li>Attention scores = <code>Q · Kᵀ / sqrt(head_dim)</code><br>
+</li>
+<li><strong>Masking</strong> – lower‑triangular mask to prevent future tokens from attending (decoder‑only)<br>
+</li>
+<li>Softmax → weighted sum of <strong>V</strong> → output of the head</li>
+</ul>
+</section>
+<section id="multihead-attention" class="level3">
+<h3 class="anchored" data-anchor-id="multihead-attention">4.4. Multi‑Head Attention</h3>
+<ul>
+<li>Run several independent heads in parallel (e.g., 4 heads)<br>
+</li>
+<li>Concatenate their outputs → same dimension as original embed size</li>
+</ul>
+</section>
+<section id="feedforward-network-ffn" class="level3">
+<h3 class="anchored" data-anchor-id="feedforward-network-ffn">4.5. Feed‑Forward Network (FFN)</h3>
+<ul>
+<li>Linear → GELU (or ReLU) → Linear<br>
+</li>
+<li>Hidden dimension = 4 × embed_dim (as in the original paper)</li>
+</ul>
+</section>
+<section id="residual-skip-connections" class="level3">
+<h3 class="anchored" data-anchor-id="residual-skip-connections">4.6. Residual (Skip) Connections</h3>
+<ul>
+<li><code>X → Self‑Attention → +X</code><br>
+</li>
+<li><code>X → FFN → +X</code></li>
+</ul>
+</section>
+<section id="layer-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="layer-normalization">4.7. Layer Normalization</h3>
+<ul>
+<li>Applied <strong>before</strong> each sub‑layer (pre‑norm formulation)<br>
+</li>
+<li>Normalizes across the embedding dimension per token</li>
+</ul>
+</section>
+<section id="dropout" class="level3">
+<h3 class="anchored" data-anchor-id="dropout">4.8. Dropout</h3>
+<ul>
+<li>Applied on attention weights, after attention output, and after FFN</li>
+</ul>
+</section>
+<section id="full-decoderonly-block" class="level3">
+<h3 class="anchored" data-anchor-id="full-decoderonly-block">4.9. Full Decoder‑Only Block</h3>
+<pre><code>X ──► LayerNorm ──► Multi‑Head Self‑Attention ──► Dropout ──► +X
+   │                                            │
+   └─► LayerNorm ──► Feed‑Forward ──► Dropout ──► +X</code></pre>
+</section>
+<section id="stacking-blocks" class="level3">
+<h3 class="anchored" data-anchor-id="stacking-blocks">4.10. Stacking Blocks</h3>
+<ul>
+<li>Stack <strong>N</strong> identical blocks (e.g., 6 layers) → deep Transformer</li>
+</ul>
+</section>
+<section id="final-projection" class="level3">
+<h3 class="anchored" data-anchor-id="final-projection">4.11. Final Projection</h3>
+<ul>
+<li>LayerNorm → Linear (embed_dim → vocab_size) → logits</li>
+</ul>
+</section>
+</section>
+<section id="training-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="training-procedure">5. Training Procedure</h2>
+<ul>
+<li><strong>Batching</strong> – sample random chunks (block‑size) → shape B × T<br>
+</li>
+<li><strong>Optimizer</strong> – Adam (often with weight‑decay)<br>
+</li>
+<li><strong>Learning rate</strong> – e.g., 3e‑4 (scaled down for larger models)<br>
+</li>
+<li><strong>Training loop</strong> – forward → loss → backward → optimizer step<br>
+</li>
+<li><strong>Evaluation</strong> – periodic “estimate_loss” over several batches (train &amp; val)</li>
+</ul>
+</section>
+<section id="scaling-experiments-results" class="level2">
+<h2 class="anchored" data-anchor-id="scaling-experiments-results">6. Scaling Experiments &amp; Results</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 10%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Experiment</th>
+<th>Model Size</th>
+<th>Block Size</th>
+<th>Heads</th>
+<th>Embed Dim</th>
+<th>Layers</th>
+<th>Validation Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BYR (char)</td>
+<td>~10 M params</td>
+<td>8</td>
+<td>1</td>
+<td>32</td>
+<td>1</td>
+<td>~4.8</td>
+</tr>
+<tr class="even">
+<td>Add Self‑Attention (1 head)</td>
+<td>~10 M</td>
+<td>8</td>
+<td>1</td>
+<td>32</td>
+<td>1</td>
+<td>~2.4</td>
+</tr>
+<tr class="odd">
+<td>Multi‑Head (4 heads)</td>
+<td>~10 M</td>
+<td>8</td>
+<td>4</td>
+<td>8 each</td>
+<td>1</td>
+<td>~2.28</td>
+</tr>
+<tr class="even">
+<td>+ Feed‑Forward (4×)</td>
+<td>~10 M</td>
+<td>8</td>
+<td>4</td>
+<td>8 each</td>
+<td>1</td>
+<td>~2.24</td>
+</tr>
+<tr class="odd">
+<td>Deep + Residual + LayerNorm</td>
+<td>~10 M</td>
+<td>256</td>
+<td>6</td>
+<td>384</td>
+<td>6</td>
+<td>~2.08</td>
+</tr>
+<tr class="even">
+<td>Deep + LayerNorm (pre‑norm)</td>
+<td>~10 M</td>
+<td>256</td>
+<td>6</td>
+<td>384</td>
+<td>6</td>
+<td>~2.06</td>
+</tr>
+<tr class="odd">
+<td>Full‑Scale (64‑batch, 256‑ctx, 6 heads, 6 layers, dropout 0.2)</td>
+<td>~10 M</td>
+<td>256</td>
+<td>6</td>
+<td>384</td>
+<td>6</td>
+<td><strong>1.48</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Observation:</strong> Adding attention, multi‑heads, FFN, residuals, layer‑norm, and scaling up context dramatically reduces loss.<br>
+</li>
+<li>Generated text becomes more “Shakespeare‑like” (still nonsensical at character level).</li>
+</ul>
+</section>
+<section id="decoderonly-vs-encoderdecoder" class="level2">
+<h2 class="anchored" data-anchor-id="decoderonly-vs-encoderdecoder">7. Decoder‑Only vs Encoder‑Decoder</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 21%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Decoder‑Only (GPT)</th>
+<th>Encoder‑Decoder (e.g., original “Attention is All You Need”)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Masking</td>
+<td>Causal (triangular) → autoregressive generation</td>
+<td>No causal mask in encoder; decoder still causal</td>
+</tr>
+<tr class="even">
+<td>Cross‑Attention</td>
+<td><strong>Absent</strong> (only self‑attention)</td>
+<td>Present – decoder attends to encoder outputs</td>
+</tr>
+<tr class="odd">
+<td>Use‑case</td>
+<td>Unconditioned language modeling / text generation</td>
+<td>Conditional generation (e.g., translation)</td>
+</tr>
+<tr class="even">
+<td>In this demo</td>
+<td>Only decoder block → generates Shakespeare‑style text</td>
+<td>Not implemented (no encoder, no cross‑attention)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="finetuning-alignment-chatgpt" class="level2">
+<h2 class="anchored" data-anchor-id="finetuning-alignment-chatgpt">8. Fine‑Tuning &amp; Alignment (ChatGPT)</h2>
+<ol type="1">
+<li><strong>Pre‑training</strong> – massive corpus (≈300 B tokens) → decoder‑only Transformer (e.g., GPT‑3 175 B params)<br>
+</li>
+<li><strong>Supervised fine‑tuning</strong> – small dataset of <em>question → answer</em> pairs (few‑k examples) to make the model an “assistant”<br>
+</li>
+<li><strong>Reward Modeling</strong> – collect multiple model outputs, rank them, train a reward model to predict human preference<br>
+</li>
+<li><strong>RLHF (Reinforcement Learning from Human Feedback)</strong> – use Proximal Policy Optimization (PPO) to fine‑tune the policy so generated answers score high on the reward model</li>
+</ol>
+<ul>
+<li>The fine‑tuning stages are <strong>not</strong> publicly released; they require large‑scale infrastructure.</li>
+</ul>
+</section>
+<section id="nanogpt-repository-by-the-presenter" class="level2">
+<h2 class="anchored" data-anchor-id="nanogpt-repository-by-the-presenter">9. nanogpt Repository (by the presenter)</h2>
+<ul>
+<li><strong>Two files</strong>: <code>model.py</code> (definition of the Transformer) and <code>train.py</code> (training loop, checkpointing, distributed support)<br>
+</li>
+<li>Mirrors the notebook implementation:
+<ul>
+<li>Tokenizer (character‑level)<br>
+</li>
+<li>Embedding + positional embedding<br>
+</li>
+<li>Multi‑head self‑attention (batched)<br>
+</li>
+<li>Feed‑forward, residuals, layer‑norm, dropout<br>
+</li>
+<li>Optimizer, learning‑rate schedule, evaluation utilities</li>
+</ul></li>
+</ul>
+</section>
+<section id="takeaways-next-steps-1" class="level2">
+<h2 class="anchored" data-anchor-id="takeaways-next-steps-1">10. Take‑aways &amp; Next Steps</h2>
+<ul>
+<li><strong>Core idea:</strong> “Attention is all you need” → a stack of self‑attention + feed‑forward blocks is enough for powerful language models.<br>
+</li>
+<li><strong>Building a GPT‑like model</strong> can be done in ~200 lines of PyTorch code when using a tiny dataset.<br>
+</li>
+<li><strong>Scaling</strong> (larger context, more heads, deeper stacks, regularization) yields dramatic loss improvements.<br>
+</li>
+<li><strong>Real‑world ChatGPT</strong> adds two major phases beyond pre‑training: supervised fine‑tuning and RLHF.<br>
+</li>
+<li><strong>Further work:</strong>
+<ul>
+<li>Experiment with sub‑word tokenizers (BPE, SentencePiece).<br>
+</li>
+<li>Train larger models on bigger corpora (e.g., Wikipedia, OpenWebText).<br>
+</li>
+<li>Implement encoder‑decoder architecture for conditional tasks (translation, summarization).<br>
+</li>
+<li>Explore RLHF pipelines to align models with human preferences.</li>
+</ul></li>
+</ul>
+<hr>
+<p><em>End of mind‑map.</em><br>
+# Lesson 8</p>
+</section>
+<section id="tokenization-mindmap-markdown-mermaid" class="level2">
+<h2 class="anchored" data-anchor-id="tokenization-mindmap-markdown-mermaid">🧠 Tokenization Mind‑Map (Markdown + Mermaid)</h2>
+<p>Below is a <strong>comprehensive mind‑map</strong> that captures every major idea, sub‑idea and detail from the transcript.<br>
+The map is written in <strong>Mermaid</strong> syntax (supported by most Markdown viewers) and is followed by a plain‑text outline for quick reference.</p>
+<hr>
+<section id="mermaid-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="mermaid-diagram">Mermaid Diagram</h3>
+<pre class="mermaid"><code>mindmap
+  root((Tokenization in Large Language Models))
+
+    subgraph Overview
+      Overview[What is tokenization?]
+      WhyItMatters[Why tokenization is the “atom” of LLMs]
+      HiddenIssues[Hidden foot‑guns &amp; odd behaviours]
+    end
+
+    subgraph Naive_Char_Level
+      CharTokenizer[Character‑level tokenizer (65 chars)]
+      EmbeddingTable[Embedding table = vocab size rows]
+      Limitations[Too coarse → real models use chunk‑level]
+    end
+
+    subgraph BPE_Concept
+      BPE[Byte‑Pair Encoding (BPE)]
+      InputEncoding[UTF‑8 → bytes (0‑255)]
+      InitialVocab[256 raw byte tokens]
+      MergeProcess[Iteratively merge most‑frequent byte pairs]
+      VocabularyGrowth[New token IDs appended (256,257,…)]
+      Example[Example: “AA” → token 256, then “AB” → token 257 …]
+    end
+
+    subgraph Tokenizer_Implementation
+      GetStats[Function: get_stats(list of ints)]
+      MergeStep[Function: replace_pair(ids, pair, new_id)]
+      YLoop[Iterate merges → target vocab size]
+      Compression[Sequence length shrinks, vocab grows]
+      CodeRepo[MBP repo – reference implementation]
+    end
+
+    subgraph Real_World_Tokenizers
+      Tiktoken[Tiktoken (OpenAI)]
+        TiktokenApp[Web UI – live tokenisation]
+        GPT2_Tokenizer[~50 k vocab, 1.24‑token context]
+        GPT4_Tokenizer[~100 k vocab, denser, better whitespace handling]
+        SpecialTokens[&lt;eos&gt;, &lt;pad&gt;, &lt;bos&gt;, &lt;fim&gt; prefixes]
+        TokenSizeEffect[More tokens → denser context, but larger embedding &amp; LM head]
+      SentencePiece[Google SentencePiece]
+        SP_Encoding[Can train &amp; infer]
+        SP_BPE[Runs BPE on Unicode code‑points]
+        ByteFallback[Rare code‑points → UTF‑8 bytes → extra tokens]
+        ConfigComplexity[Many hyper‑params, “shrink‑factor”, etc.]
+        RegexChunking[Regex rules to prevent bad merges (punctuation, numbers, etc.)]
+    end
+
+    subgraph Tokenization_Issues
+      Spelling[LLMs struggle with spelling (long tokens like “defaultstyle”)]
+      Arithmetic[Numbers split arbitrarily → poor arithmetic]
+      NonEnglish[More tokens for same sentence → context waste]
+      Python_Code[Spaces become separate tokens → context loss]
+      TrailingSpace[Warning: trailing space adds a token → hurts performance]
+      UnstableTokens[“unstable” token handling in tiktoken source]
+      SolidGoldMagikarp[Rare Reddit‑user token never seen in LM training → undefined behaviour]
+    end
+
+    subgraph Model_Surgery
+      ExtendVocab[Add new special tokens → resize embedding rows]
+      LMHeadResize[Resize final linear layer (logits) accordingly]
+      FreezeBase[Freeze original weights, train only new token embeddings]
+      GistTokens[Compress long prompts into a few learned tokens (distillation)]
+    end
+
+    subgraph Multimodal_Tokenization
+      VisionTokens[Image patches → tokens]
+      AudioTokens[Audio frames → tokens]
+      SoftTokens[Continuous embeddings (auto‑encoders) vs hard tokens]
+      UnifiedTransformer[Same architecture, different token vocabularies]
+    end
+
+    subgraph Efficiency_Considerations
+      ContextLength[Longer vocab → shorter sequences → more context per token]
+      EmbeddingCost[More rows → more parameters &amp; compute]
+      DataFormats[JSON vs YAML token count (JSON 116 tokens, YAML 99 tokens)]
+      TokenEconomy[Pay‑per‑token APIs → choose dense encodings]
+    end
+
+    subgraph Recommendations
+      UseGPT4_Tiktoken[Prefer GPT‑4 tokeniser (dense, good whitespace handling)]
+      IfTrainingNeeded[Use SentencePiece BPE (but copy‑paste Meta’s config)]
+      AvoidDIY[Don’t hand‑tune many SP hyper‑params – easy to mis‑configure]
+      WaitForM‑BPE[Future: a training‑ready version of tiktoken’s BPE]
+      BewareSpecialTokens[Know special‑token IDs when fine‑tuning]
+    end
+
+    %% Connections
+    Overview --&gt; WhyItMatters
+    Overview --&gt; HiddenIssues
+    Naive_Char_Level --&gt; CharTokenizer
+    Naive_Char_Level --&gt; EmbeddingTable
+    Naive_Char_Level --&gt; Limitations
+    BPE_Concept --&gt; InputEncoding
+    BPE_Concept --&gt; InitialVocab
+    BPE_Concept --&gt; MergeProcess
+    BPE_Concept --&gt; VocabularyGrowth
+    BPE_Concept --&gt; Example
+    Tokenizer_Implementation --&gt; GetStats
+    Tokenizer_Implementation --&gt; MergeStep
+    Tokenizer_Implementation --&gt; YLoop
+    Tokenizer_Implementation --&gt; Compression
+    Tokenizer_Implementation --&gt; CodeRepo
+    Real_World_Tokenizers --&gt; Tiktoken
+    Real_World_Tokenizers --&gt; SentencePiece
+    Tokenization_Issues --&gt; Spelling
+    Tokenization_Issues --&gt; Arithmetic
+    Tokenization_Issues --&gt; NonEnglish
+    Tokenization_Issues --&gt; Python_Code
+    Tokenization_Issues --&gt; TrailingSpace
+    Tokenization_Issues --&gt; UnstableTokens
+    Tokenization_Issues --&gt; SolidGoldMagikarp
+    Model_Surgery --&gt; ExtendVocab
+    Model_Surgery --&gt; LMHeadResize
+    Model_Surgery --&gt; FreezeBase
+    Model_Surgery --&gt; GistTokens
+    Multimodal_Tokenization --&gt; VisionTokens
+    Multimodal_Tokenization --&gt; AudioTokens
+    Multimodal_Tokenization --&gt; SoftTokens
+    Multimodal_Tokenization --&gt; UnifiedTransformer
+    Efficiency_Considerations --&gt; ContextLength
+    Efficiency_Considerations --&gt; EmbeddingCost
+    Efficiency_Considerations --&gt; DataFormats
+    Efficiency_Considerations --&gt; TokenEconomy
+    Recommendations --&gt; UseGPT4_Tiktoken
+    Recommendations --&gt; IfTrainingNeeded
+    Recommendations --&gt; AvoidDIY
+    Recommendations --&gt; WaitForM‑BPE
+    Recommendations --&gt; BewareSpecialTokens</code></pre>
+<hr>
+</section>
+<section id="plaintext-outline-for-quick-skim" class="level3">
+<h3 class="anchored" data-anchor-id="plaintext-outline-for-quick-skim">Plain‑Text Outline (for quick skim)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Section</strong></th>
+<th><strong>Key Points</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tokenization Overview</strong></td>
+<td>Converts raw text → sequence of integer tokens. Tokens are the atomic unit of LLMs; many hidden quirks stem from this step.</td>
+</tr>
+<tr class="even">
+<td><strong>Naïve Character‑Level Tokenizer</strong></td>
+<td>65‑character vocab from Shakespeare data; each char → token; embedding table size = vocab size. Works but far from state‑of‑the‑art.</td>
+</tr>
+<tr class="odd">
+<td><strong>Byte‑Pair Encoding (BPE)</strong></td>
+<td>Start with 256 byte tokens (UTF‑8). Repeatedly find most frequent adjacent byte pair, replace with a new token (ID 256, 257, …). Reduces sequence length while growing vocab.</td>
+</tr>
+<tr class="even">
+<td><strong>Implementation Details</strong></td>
+<td><code>get_stats</code> counts consecutive pairs; <code>merge</code> replaces a pair with a new ID; a Y‑loop repeats until target vocab size (e.g., 276 → 20 merges). Compression ratio ≈ 1.27 on example text.</td>
+</tr>
+<tr class="odd">
+<td><strong>Real‑World Tokenizers</strong></td>
+<td><strong>Tiktoken</strong> (OpenAI): fast inference, pre‑trained vocab (GPT‑2 ≈ 50 k, GPT‑4 ≈ 100 k). Handles special tokens (<code>&lt;eos&gt;</code>, <code>&lt;pad&gt;</code>, <code>&lt;fim&gt;</code>). <strong>SentencePiece</strong>: can train &amp; infer, runs BPE on Unicode code‑points, falls back to byte tokens for rare chars, many configurable options, regex‑based chunking to avoid bad merges.</td>
+</tr>
+<tr class="even">
+<td><strong>Tokenization Issues</strong></td>
+<td>• Spelling: long tokens (e.g., “defaultstyle”) make the model treat whole words as single atoms → poor spelling. <br>• Arithmetic: numbers split arbitrarily (e.g., “127” → two tokens) → bad math. <br>• Non‑English: same sentence uses many more tokens → context waste. <br>• Python code: each space becomes a token → huge context consumption. <br>• Trailing spaces add a token → API warns of degraded performance. <br>• “Unstable” tokens in tiktoken source cause edge‑case failures. <br>• “Solid Gold Magikarp” – a Reddit‑user token never seen during LM training → untrained embedding → undefined behaviour.</td>
+</tr>
+<tr class="odd">
+<td><strong>Model Surgery for New Tokens</strong></td>
+<td>To add special tokens: enlarge embedding matrix (new rows) and LM head (new columns). Usually freeze original weights, train only new token embeddings. “Gist tokens” compress long prompts into a few learned tokens via distillation.</td>
+</tr>
+<tr class="even">
+<td><strong>Multimodal Tokenization</strong></td>
+<td>Same Transformer can process image patches, audio frames, or soft continuous embeddings as tokens. No architectural change needed – just different vocabularies.</td>
+</tr>
+<tr class="odd">
+<td><strong>Efficiency &amp; Token Economy</strong></td>
+<td>Larger vocab → shorter sequences → more context per token, but larger embedding &amp; final linear layer → more compute. Choose dense data formats (YAML &lt; JSON) to save tokens; token cost matters for API pricing.</td>
+</tr>
+<tr class="even">
+<td><strong>Practical Recommendations</strong></td>
+<td>1. Use <strong>tiktoken (GPT‑4)</strong> for inference – most efficient. <br>2. If you must train a tokenizer, copy Meta’s SentencePiece config (avoid fiddling with many hyper‑params). <br>3. Don’t reinvent SentencePiece; it’s easy to mis‑configure. <br>4. Await a training‑ready version of tiktoken’s BPE (M‑BPE). <br>5. When fine‑tuning, remember to resize embeddings &amp; LM head for any new special tokens.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<section id="how-to-view-the-diagram" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-view-the-diagram">How to view the diagram</h4>
+<ul>
+<li>If you’re using <strong>GitHub</strong>, <strong>GitLab</strong>, <strong>VS Code</strong>, <strong>Obsidian</strong>, or any Markdown editor that supports Mermaid, simply copy the Mermaid block above into a <code>.md</code> file and it will render automatically.<br>
+</li>
+<li>For plain‑text viewers, refer to the outline table.</li>
+</ul>
+<p>Feel free to expand any node (e.g., dive deeper into the regex used by SentencePiece, or explore the exact token IDs for special tokens) by adding sub‑branches in the Mermaid code. Happy tokenizing! 🚀</p>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/Rahuketu86\.github\.io\/solveit_z2h");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Rahuketu86/solveit_z2h/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
